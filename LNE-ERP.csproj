@@ -8,4 +8,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="TECHCOOL" Version="1.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Customer\" />
+    <Folder Include="Products\" />
+    <Folder Include="Sales\" />
+  </ItemGroup>
+
 </Project>
