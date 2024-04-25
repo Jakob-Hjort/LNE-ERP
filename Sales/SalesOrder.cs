@@ -9,15 +9,15 @@ namespace LNE_ERP
 {
     public class SalesOrder
     {
-        public int salgsordrenummer { get; set; }
+        public int Salgsordrenummer { get; set; }
 
         public DateOnly dato {  get; set; }
 
-        public string kundeNummer { get; set; }
+        public string KundeNummer { get; set; }
 
-        public string fuldeNavn { get; set; }
+        public string FuldeNavn { get; set; }
 
-        public decimal beløb {  get; set; }
+        public decimal Beløb {  get; set; }
 
 
     }

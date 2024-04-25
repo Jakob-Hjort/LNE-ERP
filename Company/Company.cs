@@ -16,6 +16,7 @@ namespace LNE_ERP
         public string Husnummer { get; set; } = "";
 
         public string Postnummer { get; set; } = "";
+
         public string By { get; set; } = "";
 
         public string Land { get; set; } = "";
