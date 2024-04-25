@@ -34,7 +34,7 @@ namespace LNE_ERP
             }
             else
             {
-                Console.WriteLine($"You cannot add this {company}, because its alrdy made");
+                Console.WriteLine($"Du kan ikke tilføje dette {company}. Det findes allerede");
             }
         }
 
