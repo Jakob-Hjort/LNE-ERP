@@ -9,8 +9,10 @@ namespace LNE_ERP
 {
     public partial class Database
     {
-        static Database instance { get; set; } = new Database();
+        public static Database instance { get; set; } = new Database();
         List<Company> companyList = new List<Company>();
+        List<SalesOrder> salesorderliste = new List<SalesOrder>();
+   
 
     }
 

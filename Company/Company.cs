@@ -8,20 +8,16 @@ namespace LNE_ERP
 {
     public class Company
     {
-        public int Id;
-        public string CompanyName { get; set; } = "";
+        public int CompanyId { get; set; }
+        public string CompanyName { get; set; }
 
-        public string Vejnavn { get; set; } = "";
+        public string StreetName { get; set; }
 
-        public string Husnummer { get; set; } = "";
+        public string Number { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
 
-        public string Postnummer { get; set; } = "";
-        public string By { get; set; } = "";
-
-        public string Land { get; set; } = "";
-
-        public string Valuta { get; set; } = "";
-
+        public Currency Currency { get; set; }
 
     }
 }

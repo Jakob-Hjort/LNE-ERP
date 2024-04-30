@@ -9,6 +9,8 @@ namespace LNE_ERP
 {
     public class SalesOrder
     {
+        public int Id;
+
         public int salgsordrenummer { get; set; }
 
         public DateOnly dato {  get; set; }

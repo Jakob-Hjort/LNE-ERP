@@ -1,9 +1,15 @@
-﻿using LNE_ERP;
+﻿using TECHCOOL.UI;
+using System;
+using System.Data.Common;
 
-Console.WriteLine("Hello, World!");
-
-Currency valuta = Currency.EUR;
-if ( valuta == Currency.EUR)
+namespace LNE_ERP
 {
-    Console.WriteLine(100 * 7.43);
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Show main menu
+            Screen.Display(new MainMenu());
+        }
+    }
 }

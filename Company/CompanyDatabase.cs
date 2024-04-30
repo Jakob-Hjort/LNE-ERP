@@ -6,55 +6,67 @@ using System.Threading.Tasks;
 
 namespace LNE_ERP
 {
-    public partial class Database
-    {
-        public Company GetByID(int id)
+        public partial class Database
         {
-            foreach (var c in companyList)
+            List<Company> companies = new() {
+            new Company {CompanyId = 1, CompanyName = "Foderbrættet A/S", Country = "Danmark", Currency = Currency.DKK },
+            new Company {CompanyId = 2, CompanyName = "Foodboard Ltd", Country = "USA", Currency = Currency.USD }
+        };
+            public Company GetCompanyById(int id)
             {
-                if (c.Id == id)
+                foreach (var company in companies)
                 {
-                    return c;
+                    if (company.CompanyId == id)
+                    {
+                        return company;
+                    }
+                }
+                return null;
+            }
+
+            public List<Company> GetCompanies()
+            {
+                List<Company> companyCopy = new();
+                companyCopy.AddRange(companies);
+                return companyCopy;
+            }
+
+            public void InsertCompany(Company company)
+            {
+                if (company.CompanyId != 0)
+                {
+                    return;
+                }
+                company.CompanyId = companies.Count;
+                companies.Add(company);
+            }
+
+            public void UpdateCompany(Company company)
+            {
+                if (company.CompanyId == 0)
+                {
+                    return;
                 }
 
-            }
-            return null;
-        }
-
-        public List<Company> GetAllCompanies()
-        {
-            return new List<Company>(companyList); // Return a new list to avoid exposing the original list
-        }
-
-        public void InsertCompany(Company company)
-        {
-            if (company.Id == 0)
-            {
-                companyList.Add(company);
-            }
-            else
-            {
-                Console.WriteLine($"Du kan ikke tilføje dette {company}. Det findes allerede");
-            }
-        }
-
-        public void UpdateCompany(Company updatedCompany)
-        {
-            if (updatedCompany.Id != 0)
-            {
-                int index = companyList.FindIndex(c => c.Id == updatedCompany.Id);
-                if (index != -1)
+                for (var i = 0; i < companies.Count; i++)
                 {
-                    companyList[index] = updatedCompany;
+                    if (companies[i].CompanyId == company.CompanyId)
+                    {
+                        companies[i] = company;
+                    }
                 }
-                // Optionally, you could throw an exception or handle the case where company with given ID is not found
             }
-            // Optionally, you could throw an exception or handle the case where ID is 0
-        }
 
-        public void DeleteCompanyById(int id)
-        {
-            companyList.RemoveAll(c => c.Id == id);
+            public void DeleteCompany(Company company)
+            {
+                if (company.CompanyId == 0)
+                {
+                    return;
+                }
+                if (companies.Contains(company))
+                {
+                    companies.Remove(company);
+                }
+            }
         }
     }
-}

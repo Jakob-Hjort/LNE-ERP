@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <Folder Include="Customer\" />
-	<Folder Include="Sales\" />
   </ItemGroup>
 
 </Project>
