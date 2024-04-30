@@ -24,6 +24,9 @@ namespace LNE_ERP
             Form<Company> form = new();
 
             form.TextBox("Name", nameof(Company.CompanyName));
+            form.TextBox("Adresse", nameof(Company.StreetName));
+            form.TextBox("City", nameof(Company.City));
+            form.TextBox("Country", nameof(Company.Country));
             form.SelectBox("Currency", nameof(Company.Currency));
             form.AddOption("Currency", "DKK", Currency.DKK);
             form.AddOption("Currency", "EUR", Currency.EUR);
