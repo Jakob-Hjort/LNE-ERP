@@ -43,6 +43,7 @@ namespace LNE_ERP
             listPage.AddColumn("By", nameof(Company.City), 8);
             listPage.AddColumn("Land", nameof(Company.Country));
             listPage.AddColumn("Valuta", nameof(Company.Currency), 8);
+            listPage.AddColumn("ID", nameof(Company.CompanyId), 2);
 
             //Get companies from the database and add them to the list
             var companies = Database.instance.GetCompanies();

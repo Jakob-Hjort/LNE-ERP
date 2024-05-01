@@ -8,10 +8,11 @@ namespace LNE_ERP
 {
         public partial class Database
         {
-            List<Company> companies = new() {
-            new Company {CompanyId = 1, CompanyName = "Foderbrættet A/S",StreetName = "Øster Uttrup",HouseNumber = "2",ZipCode = "9000",City = "Aalborg",Country = "Danmark", Currency = Currency.DKK },
-            new Company {CompanyId = 2, CompanyName = "Foodboard Ltd", Country = "USA", Currency = Currency.USD }
-        };
+        List<Company> companies = new()
+            {
+            new Company {CompanyId = 1, CompanyName = "Foderbrættet A/S",StreetName = "Øster Uttrup",HouseNumber = "2",ZipCode = "9000",City = "Aalborg",Country = "Danmark", Currency = Currency.DKK},
+            //new Company {CompanyId = 2, CompanyName = "Foodboard Ltd", Country = "USA", Currency = Currency.USD}
+            };
             public Company GetCompanyById(int id)
             {
                 foreach (var company in companies)
@@ -37,7 +38,7 @@ namespace LNE_ERP
                 {
                     return;
                 }
-                company.CompanyId = companies.Count;
+                company.CompanyId = companies.Count+1;
                 companies.Add(company);
             }
 

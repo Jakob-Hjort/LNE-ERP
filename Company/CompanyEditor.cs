@@ -23,7 +23,7 @@ namespace LNE_ERP
             ExitOnEscape();
             Form<Company> form = new();
 
-            form.TextBox("CompanyId", nameof(Company.CompanyId)); //ny
+            //form.TextBox("CompanyId", nameof(Company.CompanyId));
             form.TextBox("Name", nameof(Company.CompanyName));
             form.TextBox("Gadenavn", nameof(Company.StreetName));
             form.TextBox("HusNummer", nameof(Company.HouseNumber));
