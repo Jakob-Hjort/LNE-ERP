@@ -8,7 +8,7 @@ namespace LNE_ERP
     {
         static void Main(string[] args)
         {
-
+            //Testdata udkommenter når vi 
             Database.instance.Testdata();
 
             //Show main menu
