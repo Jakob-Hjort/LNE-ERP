@@ -41,7 +41,7 @@ namespace LNE_ERP.Products
                 existingProduct.Description = product.Description;
                 existingProduct.Saleprice = product.Saleprice;
                 existingProduct.Quantity = product.Quantity;
-                existingProduct.Unit = product.Unit;
+                existingProduct.Units = product.Units;
                 existingProduct.Location = product.Location;
                 existingProduct.Itemnumber = product.Itemnumber;
             }
