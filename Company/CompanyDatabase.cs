@@ -9,7 +9,7 @@ namespace LNE_ERP
         public partial class Database
         {
             List<Company> companies = new() {
-            new Company {CompanyId = 1, CompanyName = "Foderbrættet A/S", Country = "Danmark", Currency = Currency.DKK },
+            new Company {CompanyId = 1, CompanyName = "Foderbrættet A/S",StreetName = "Øster Uttrup",HouseNumber = "2",ZipCode = "9000",City = "Aalborg",Country = "Danmark", Currency = Currency.DKK },
             new Company {CompanyId = 2, CompanyName = "Foodboard Ltd", Country = "USA", Currency = Currency.USD }
         };
             public Company GetCompanyById(int id)
