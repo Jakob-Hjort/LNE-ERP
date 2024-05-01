@@ -19,17 +19,15 @@ namespace LNE_ERP
         public string Fullname
         {
             get { return $"{Firstname}  {Lastname}"; }
-            set { }
         }
 
 
-        public Person(string firstname, string lastname, string address, string contactinfo, string fullname)
+        public Person(string firstname, string lastname, string address, string contactinfo)
         {
             Firstname = firstname;
             Lastname = lastname;
             Address = address;
             Contactinfo = contactinfo;
-            Fullname = fullname;
 
         }
 
