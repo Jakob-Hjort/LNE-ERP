@@ -10,19 +10,19 @@ namespace LNE_ERP
     {
         public string Varenummer { get; set; }
 
-        public string Navn { get; set; }
+        public string P_Navn { get; set; }
 
-        public string Beskrivelse { get; set; }
+        public string P_Beskrivelse { get; set; }
 
-        public decimal Salgspris { get; set; }
+        public decimal P_Salgspris { get; set; }
 
-        public decimal Indkøbspris { get; set; }
+        public decimal P_Indkøbspris { get; set; }
 
-        public string Lokation { get; set; } // Lokation er et nummer på 4 tal/bogstaver (Hvad er bedst og bruge?)
+        public string P_Lokation { get; set; } // Lokation er et nummer på 4 tal/bogstaver (Hvad er bedst og bruge?)
 
-        public decimal Antal { get; set; }
+        public decimal P_Antal { get; set; }
 
-        public string Enhed { get; set; } // Enhed er en begrænset muligt f.eks. styk, timer  eller meter.
+        public string P_Enhed { get; set; } // Enhed er en begrænset muligt f.eks. styk, timer  eller meter.
 
 
     }
