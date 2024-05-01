@@ -37,7 +37,7 @@ namespace LNE_ERP
             form.AddOption("Currency", "SEK", Currency.SEK);
             if (form.Edit(company))
             {
-                if (company.CompanyId != 1)
+                if (company.CompanyId != 0)
                 {
                     Database.instance.UpdateCompany(company);
                 }
