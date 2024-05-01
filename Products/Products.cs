@@ -8,21 +8,22 @@ namespace LNE_ERP.Products
 {
     public class Products
     {
-        public string Varenummer { get; set; }
+        public int ProductId { get; set; }
+        public string Itemnumber { get; set; }
 
-        public string P_Navn { get; set; }
+        public string Name { get; set; }
 
-        public string P_Beskrivelse { get; set; }
+        public string Description { get; set; }
 
-        public decimal P_Salgspris { get; set; }
+        public decimal Saleprice { get; set; }
 
-        public decimal P_Indkøbspris { get; set; }
+        public decimal Purchaseprice { get; set; }
 
-        public string P_Lokation { get; set; } // Lokation er et nummer på 4 tal/bogstaver (Hvad er bedst og bruge?)
+        public string Location { get; set; } // Lokation er et nummer på 4 tal/bogstaver (Hvad er bedst og bruge?)
 
-        public decimal P_Antal { get; set; }
+        public decimal Quantity { get; set; }
 
-        public string P_Enhed { get; set; } // Enhed er en begrænset muligt f.eks. styk, timer  eller meter.
+        public string Unit { get; set; } // Enhed er en begrænset muligt f.eks. styk, timer  eller meter.
 
 
     }

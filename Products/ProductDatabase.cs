@@ -12,16 +12,16 @@ namespace LNE_ERP.Products
         // Beregne Fortjeneste.
         public decimal CalculateProfit(Products product)
         {
-            return product.P_Salgspris - product.P_Indkøbspris;
+            return product.Saleprice - product.Purchaseprice;
         }
 
         // Beregne avance i procent.
         public decimal CalculateMarginPercentage(Products produkt)
         {
-            if (produkt.P_Indkøbspris == 0)
+            if (produkt.Saleprice == 0)
                 return 0; 
             else
-                return (CalculateProfit(produkt) / produkt.P_Indkøbspris) * 100;
+                return (CalculateProfit(produkt) / produkt.Saleprice) * 100;
         }
     }
 }
