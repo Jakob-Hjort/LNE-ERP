@@ -23,8 +23,11 @@ namespace LNE_ERP
             ExitOnEscape();
             Form<Company> form = new();
 
+            form.TextBox("CompanyId", nameof(Company.CompanyId)); //ny
             form.TextBox("Name", nameof(Company.CompanyName));
-            form.TextBox("Adresse", nameof(Company.StreetName));
+            form.TextBox("Gadenavn", nameof(Company.StreetName));
+            form.TextBox("HusNummer", nameof(Company.HouseNumber));
+            form.TextBox("Post Nummer", nameof(Company.ZipCode));
             form.TextBox("City", nameof(Company.City));
             form.TextBox("Country", nameof(Company.Country));
             form.SelectBox("Currency", nameof(Company.Currency));

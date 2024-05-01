@@ -24,7 +24,7 @@ namespace LNE_ERP;
 
         Console.WriteLine(company.CompanyName);
         Console.WriteLine("Adresse:");
-        Console.WriteLine("{0} {1}", company.StreetName, company.Number);
+        Console.WriteLine("{0} {1}", company.StreetName, company.HouseNumber);
         Console.WriteLine("{0} {1}", company.City, company.Country);
         Console.WriteLine("Valuta: {0}", company.Currency);
 
