@@ -9,14 +9,18 @@ namespace LNE_ERP
 {
     public partial class Database
     {
-
-        List<SalesOrder> salesorderslist = new() {
+        public void Testdata()
+        {
+       salesorderlist = new List<SalesOrder>()
+            {
             new SalesOrder {SalesOrderId = 1, SalesOrderName = "First Sales Order", SalesOrderDate = new DateOnly(2024, 4, 30), Prices = 30000 },
             new SalesOrder {SalesOrderId = 2, SalesOrderName = "Second Sales Order", SalesOrderDate = new DateOnly(2024, 5, 1), Prices = 60000 }
         };
+
+        }
         public SalesOrder GetSalesOrderById1(int id)
         {
-            foreach (var salesorder in salesorderliste)
+            foreach (var salesorder in salesorderlist)
             {
                 if (salesorder.SalesOrderId == id)
                 {
@@ -29,7 +33,7 @@ namespace LNE_ERP
         public List<SalesOrder> GetSalesOrders()
         {
             List<SalesOrder> salesOrderCopy = new();
-            salesOrderCopy.AddRange(salesorderliste);
+            salesOrderCopy.AddRange(salesorderlist);
             return salesOrderCopy;
         }
 
@@ -39,8 +43,8 @@ namespace LNE_ERP
             {
                 return;
             }
-            salesorder.SalesOrderId = salesorderliste.Count;
-            salesorderliste.Add(salesorder);
+            salesorder.SalesOrderId = salesorderlist.Count;
+            salesorderlist.Add(salesorder);
         }
 
         public void UpdateSalesOrder(SalesOrder salesorder)
@@ -50,11 +54,11 @@ namespace LNE_ERP
                 return;
             }
 
-            for (var i = 0; i < salesorderliste.Count; i++)
+            for (var i = 0; i < salesorderlist.Count; i++)
             {
-                if (salesorderliste[i].SalesOrderId == salesorder.SalesOrderId)
+                if (salesorderlist[i].SalesOrderId == salesorder.SalesOrderId)
                 {
-                    salesorderliste[i] = salesorder;
+                    salesorderlist[i] = salesorder;
                 }
             }
         }
@@ -65,9 +69,9 @@ namespace LNE_ERP
             {
                 return;
             }
-            if (salesorderliste.Contains(salesorder))
+            if (salesorderlist.Contains(salesorder))
             {
-                salesorderliste.Remove(salesorder);
+                salesorderlist.Remove(salesorder);
             }
         }
     }

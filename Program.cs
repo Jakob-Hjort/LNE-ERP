@@ -8,8 +8,12 @@ namespace LNE_ERP
     {
         static void Main(string[] args)
         {
+
+            Database.instance.Testdata();
+
             //Show main menu
             Screen.Display(new MainMenu());
+            
         }
     }
 }
