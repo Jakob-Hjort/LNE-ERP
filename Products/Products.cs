@@ -23,7 +23,7 @@ namespace LNE_ERP.Products
 
         public decimal Quantity { get; set; }
 
-        public string Unit { get; set; } // Enhed er en begrænset muligt f.eks. styk, timer  eller meter.
+        public ProductUnits Units { get; set; } // Enhed er en begrænset muligt f.eks. styk, timer  eller meter.
 
 
     }
