@@ -7,10 +7,10 @@ using TECHCOOL.UI;
 
 namespace LNE_ERP
 {
-    public class SalesOrderlistScreen : Screen
+    public class SalesOrderListPage : Screen
     {
         //Set the title of this page
-        public override string Title { get; set; } = "Selskaber";
+        public override string Title { get; set; } = "Sales Orders";
 
         protected override void Draw()
         {
@@ -19,59 +19,58 @@ namespace LNE_ERP
             Console.CursorVisible = false;
 
             //A ListPage draws columns and rows in a box
-            ListPage<Company> listPage = new();
+            ListPage<SalesOrder> listPage = new();
 
             //V4 - Add keys to create company
-            listPage.AddKey(ConsoleKey.F1, createNewCompany);
-            Console.WriteLine("Tryk F1 for at oprette virksomhed");
+            listPage.AddKey(ConsoleKey.F1, createNewSalesOrder);
+            Console.WriteLine("Press F1 to create sales order");
 
             //V5 - Add key to edit company
-            listPage.AddKey(ConsoleKey.F2, editCompany);
-            Console.WriteLine("Tryk F2 for at redigere virksomhed");
+            listPage.AddKey(ConsoleKey.F2, editSalesOrder);
+            Console.WriteLine("Press F2 to eidt sales order");
 
             //V6 - Add key to edit company
-            listPage.AddKey(ConsoleKey.F5, removeCompany);
-            Console.WriteLine("Tryk F5 for at slette virksomhed");
+            listPage.AddKey(ConsoleKey.F5, removeSalesOrder);
+            Console.WriteLine("Press F5 to delet sales order");
 
             //Add some columns
-            listPage.AddColumn("Selskab", nameof(Company.CompanyName), 40);
-            listPage.AddColumn("Land", nameof(Company.Country));
-            listPage.AddColumn("Valuta", nameof(Company.Currency), 8);
+            listPage.AddColumn("SalesOrderName", nameof(SalesOrder.SalesOrderName), 40);
+            listPage.AddColumn("SalesOrderID", nameof(SalesOrder.SalesOrderId));
+            listPage.AddColumn("Pris", nameof(SalesOrder.Prices), 8);
 
             //Get companies from the database and add them to the list
-            var companies = Database.instance.GetCompanies();
-            foreach (Company model in companies)
+            var salesorders = Database.instance.GetSalesOrders();
+            foreach (SalesOrder model in salesorders)
             {
                 listPage.Add(model);
             }
-       
+
 
             //Enable selection of a company by using arrow keys
-            var company = listPage.Select();
-            if (company != null)
+            var salesOrder = listPage.Select();
+            if (salesOrder != null)
             {
                 //Ask Screen class to display the CompanyDetails view
-                Screen.Display(new CompanyDetails(company));
+                Screen.Display(new SalesOrderDetails(salesOrder));
             }
         }
 
-        void createNewCompany(Company _)
+        void createNewSalesOrder(SalesOrder _)
         {
-            Company new_company = new();
-            Screen.Display(new CompanyEditor(new_company));
+            SalesOrder new_salesOrder = new();
+            Screen.Display(new SalesOrderEditor(new_salesOrder));
         }
 
-        void editCompany(Company company)
+        void editSalesOrder(SalesOrder salesOrder)
         {
-            Screen.Display(new CompanyEditor(company));
+            Screen.Display(new SalesOrderEditor(salesOrder));
         }
 
-        void removeCompany(Company company)
+        void removeSalesOrder(SalesOrder salesOrder)
         {
-            Database.instance.DeleteCompany(company);
+            Database.instance.DeleteSalesOrder(salesOrder);
             Screen.Clear(this);
             Draw();
         }
     }
-
 }

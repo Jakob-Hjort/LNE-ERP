@@ -19,7 +19,8 @@ namespace LNE_ERP
 
                 //
                 Menu menu = new();
-                menu.Add(new SalesOrderlistScreen());
+                menu.Add(new CompanyListPage());
+                menu.Add(new SalesOrderListPage());
                 menu.Start(this);
             }
         }
