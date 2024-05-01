@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LNE_ERP
+namespace LNE_ERP.Products
 {
     public class Products
     {
@@ -26,17 +26,5 @@ namespace LNE_ERP
 
 
     }
-
-    /* Metoden til at udskrive produktinformation
-    public void PrintProduktInfo()
-    {
-        Console.WriteLine($"Navn: {Navn}");
-        Console.WriteLine($"Beskrivelse: {Beskrivelse}");
-        Console.WriteLine($"Salgspris: {Salgspris:C}");
-        Console.WriteLine($"Indkøbspris: {Indkøbspris:C}");
-        Console.WriteLine($"Lokation: {Lokation}");
-        Console.WriteLine($"Antal: {Antal} {Enhed}");
-        Console.WriteLine($"Varenummer: {Varenummer}");
-    }*/
 }
 
