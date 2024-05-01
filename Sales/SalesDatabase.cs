@@ -13,8 +13,8 @@ namespace LNE_ERP
         {
        salesorderlist = new List<SalesOrder>()
             {
-            new SalesOrder {SalesOrderId = 1, SalesOrderName = "First Sales Order", SalesOrderDate = new DateOnly(2024, 4, 30), Prices = 30000 },
-            new SalesOrder {SalesOrderId = 2, SalesOrderName = "Second Sales Order", SalesOrderDate = new DateOnly(2024, 5, 1), Prices = 60000 }
+            new SalesOrder {SalesOrderId = 1, SalesOrderName = "First Sales Order", SalesOrderDate = new DateOnly(2024, 4, 30), Prices = 30000, CustomerId = "1" },
+            new SalesOrder {SalesOrderId = 2, SalesOrderName = "Second Sales Order", SalesOrderDate = new DateOnly(2024, 5, 1), Prices = 60000, CustomerId = "2" }
         };
 
         }
@@ -43,7 +43,7 @@ namespace LNE_ERP
             {
                 return;
             }
-            salesorder.SalesOrderId = salesorderlist.Count;
+            salesorder.SalesOrderId = salesorderlist.Count+1;
             salesorderlist.Add(salesorder);
         }
 

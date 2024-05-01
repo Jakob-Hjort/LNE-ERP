@@ -23,8 +23,9 @@ namespace LNE_ERP
             ExitOnEscape();
             Form<SalesOrder> form = new();
 
-            form.TextBox("Sales order ID", nameof(SalesOrder.SalesOrderId));
+            //form.TextBox("Sales order ID", nameof(SalesOrder.SalesOrderId));
             form.TextBox("Sales order Name", nameof(SalesOrder.SalesOrderName));
+            form.TextBox("CustomerID", nameof(SalesOrder.CustomerId));
             form.TextBox("Date", nameof(SalesOrder.SalesOrderDate));
             form.TextBox("Price", nameof(SalesOrder.Prices));
             if (form.Edit(salesorder))
