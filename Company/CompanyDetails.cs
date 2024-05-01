@@ -21,12 +21,13 @@ namespace LNE_ERP;
 
     protected override void Draw()
     {
-
-        Console.WriteLine(company.CompanyName);
-        Console.WriteLine("Adresse:");
-        Console.WriteLine("{0} {1}", company.StreetName, company.HouseNumber);
-        Console.WriteLine("{0} {1}", company.City, company.Country);
-        Console.WriteLine("Valuta: {0}", company.Currency);
+        Console.WriteLine($"ID:{company.CompanyId}");
+        Console.WriteLine($"Name:{company.CompanyName}");
+        Console.WriteLine($"Adresse:{company.StreetName}");
+        Console.WriteLine($"House Number:{company.HouseNumber}");
+        Console.WriteLine($"City:{company.City}");
+        Console.WriteLine($"Country:{company.Country}");
+        Console.WriteLine($"Valuta:{company.Currency}");
 
         Console.WriteLine("Tryk F2 for at redigere");
         AddKey(ConsoleKey.F2, () => {

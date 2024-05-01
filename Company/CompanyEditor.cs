@@ -23,7 +23,6 @@ namespace LNE_ERP
             ExitOnEscape();
             Form<Company> form = new();
 
-            //form.TextBox("CompanyId", nameof(Company.CompanyId));
             form.TextBox("Name", nameof(Company.CompanyName));
             form.TextBox("Gadenavn", nameof(Company.StreetName));
             form.TextBox("HusNummer", nameof(Company.HouseNumber));
@@ -31,10 +30,12 @@ namespace LNE_ERP
             form.TextBox("City", nameof(Company.City));
             form.TextBox("Country", nameof(Company.Country));
             form.SelectBox("Currency", nameof(Company.Currency));
+
             form.AddOption("Currency", "DKK", Currency.DKK);
             form.AddOption("Currency", "EUR", Currency.EUR);
             form.AddOption("Currency", "USD", Currency.USD);
             form.AddOption("Currency", "SEK", Currency.SEK);
+
             if (form.Edit(company))
             {
                 if (company.CompanyId != 0)
