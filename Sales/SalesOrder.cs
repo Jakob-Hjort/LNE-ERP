@@ -21,6 +21,8 @@ namespace LNE_ERP
 
         public decimal Prices {  get; set; }
 
+        public Person Customer { get; set; }
+
 
     }
 }
