@@ -11,6 +11,7 @@ namespace LNE_ERP
     {
         public override string Title { get; set; } = "Sales order";
         SalesOrder SalesOrder = new();
+        SalesOrderHeader SalesOrderHeader;
 
         public SalesOrderDetails(SalesOrder salesOrder)
         {
@@ -22,8 +23,8 @@ namespace LNE_ERP
         {
 
             Console.WriteLine(SalesOrder.SalesOrderId);
-            Console.WriteLine("Customer ID:");
-            Console.WriteLine("{0} {1}", SalesOrder.FullName, SalesOrder.CustomerID);
+            Console.WriteLine("Customer ID: {0}",SalesOrderHeader.CustomerId);
+            Console.WriteLine("{0} {1}", SalesOrder.FullName, SalesOrder.CustomerId);
             Console.WriteLine("Price: {0}", SalesOrder.Prices);
 
             Console.WriteLine("Tryk F2 for at redigere");

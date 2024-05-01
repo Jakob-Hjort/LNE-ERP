@@ -34,9 +34,11 @@ namespace LNE_ERP
             Console.WriteLine("Press F5 to delet sales order");
 
             //Add some columns
-            listPage.AddColumn("SalesOrderName", nameof(SalesOrder.SalesOrderName), 40);
+            listPage.AddColumn("SalesOrderName", nameof(SalesOrder.SalesOrderName), 30);
+            listPage.AddColumn("Customer", nameof(SalesOrderHeader.CustomerId), 8);
             listPage.AddColumn("SalesOrderID", nameof(SalesOrder.SalesOrderId));
             listPage.AddColumn("Pris", nameof(SalesOrder.Prices), 8);
+            
 
             //Get companies from the database and add them to the list
             var salesorders = Database.instance.GetSalesOrders();

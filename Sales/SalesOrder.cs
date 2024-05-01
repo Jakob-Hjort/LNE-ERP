@@ -15,7 +15,7 @@ namespace LNE_ERP
 
         public DateOnly SalesOrderDate {  get; set; }
 
-        public string CustomerID { get; set; }
+        public string CustomerId { get; set; }
 
         public string FullName { get; set; }
 
