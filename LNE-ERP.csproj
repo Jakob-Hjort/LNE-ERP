@@ -12,8 +12,4 @@
     <PackageReference Include="TECHCOOL" Version="1.4.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Customer\" />
-  </ItemGroup>
-
 </Project>
