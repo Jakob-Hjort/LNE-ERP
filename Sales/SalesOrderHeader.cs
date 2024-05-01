@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace LNE_ERP
 {
-    public class Salgsordrehoved
+    public class SalesOrderHeader
     {
-        public int Ordrenummer { get; set; }
-        public DateTime Oprettelsestidspunkt { get; set; }
+        public int OrderNumber { get; set; }
+        public DateTime Creationstime { get; set; }
         public DateTime Gennemførelsestidspunkt { get; set; }
         public int Kundenummer { get; set; }
         public OrderStatus Tilstand { get; set; }
-        public List<Ordrelinje> Ordrelinjer { get; set; }
+        public List<Orderline> Ordrelinjer { get; set; }
         public decimal Ordrebeløb => Ordrelinjer.Sum(ol => ol.Pris * ol.Antal);
 
-        public Salgsordrehoved(int ordrenummer, DateTime oprettelsestidspunkt, DateTime gennemførelsestidspunkt,
-            int kundenummer, OrderStatus tilstand, List<Ordrelinje> ordrelinjer)
+        public SalesOrderHeader(int ordrenummer, DateTime oprettelsestidspunkt, DateTime gennemførelsestidspunkt,
+            int kundenummer, OrderStatus tilstand, List<Orderline> ordrelinjer)
         {
-            Ordrenummer = ordrenummer;
-            Oprettelsestidspunkt = oprettelsestidspunkt;
+            OrderNumber = ordrenummer;
+            Creationstime = oprettelsestidspunkt;
             Gennemførelsestidspunkt = gennemførelsestidspunkt;
             Kundenummer = kundenummer;
             Tilstand = tilstand;
@@ -28,13 +28,13 @@ namespace LNE_ERP
         }
     }
 
-    public class Ordrelinje
+    public class Orderline
     {
         public string Vare { get; set; }
         public decimal Pris { get; set; }
         public int Antal { get; set; }
 
-        public Ordrelinje(string vare, decimal pris, int antal)
+        public Orderline(string vare, decimal pris, int antal)
         {
             Vare = vare;
             Pris = pris;
