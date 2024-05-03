@@ -23,8 +23,8 @@ namespace LNE_ERP
         {
 
             Console.WriteLine(SalesOrder.SalesOrderId);
-            Console.WriteLine("Customer ID: {0}",SalesOrderHeader.CustomerId);
-            Console.WriteLine("{0} {1}", SalesOrder.FullName, SalesOrder.CustomerId);
+            Console.WriteLine($"Kundenummer: {SalesOrder.CustomerId}");
+            Console.WriteLine($"Navn: {SalesOrder.FullName}");
             Console.WriteLine("Price: {0}", SalesOrder.Prices);
 
             Console.WriteLine("Tryk F2 for at redigere");
