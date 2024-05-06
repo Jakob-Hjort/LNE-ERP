@@ -28,6 +28,7 @@ namespace LNE_ERP
             form.TextBox("CustomerID", nameof(SalesOrder.CustomerId));
             form.TextBox("Date", nameof(SalesOrder.SalesOrderDate));
             form.TextBox("Price", nameof(SalesOrder.Prices));
+
             if (form.Edit(salesorder))
             {
                 if (salesorder.SalesOrderId != 0)
