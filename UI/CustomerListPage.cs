@@ -34,10 +34,10 @@ namespace LNE_ERP
             Console.WriteLine("Tryk F5 for at slette virksomhed");
 
             //Add some columns
-            listPage.AddColumn("Kunde id", nameof(Customer.CustomerNumber), 4);
-            listPage.AddColumn("Fulde navn", nameof(Customer.Fullname),10);
-            listPage.AddColumn("Tlf. nummer", nameof(Customer.PhoneNumber), 8);
-            listPage.AddColumn("Email", nameof(Customer.Email), 8);
+            listPage.AddColumn("Kunde id", nameof(Customer.CustomerNumber), 9);
+            listPage.AddColumn("Fulde navn", nameof(Customer.Fullname),20);
+            listPage.AddColumn("Tlf. nummer", nameof(Customer.PhoneNumber), 15);
+            listPage.AddColumn("Email", nameof(Customer.Email),30);
 
             //Get companies from the database and add them to the list
             var customers = Database.instance.GetCustomer();

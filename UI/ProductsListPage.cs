@@ -34,10 +34,12 @@ namespace LNE_ERP
             Console.WriteLine("Tryk F5 for at slette produkt");
 
             //Add some columns
-            listPage.AddColumn("produkt", nameof(Product.Name), 20);
-            listPage.AddColumn("Units", nameof(Product.Units));
-            listPage.AddColumn("Price", nameof(Product.Saleprice), 8);
-            listPage.AddColumn("%", nameof(Product.AvanceiProcent), 7);
+            listPage.AddColumn("VarNummer", nameof(Product.Itemnumber));
+            listPage.AddColumn("Navn", nameof(Product.Name));
+            listPage.AddColumn("LagerAntal", nameof(Product.Quantity));
+            listPage.AddColumn("IndkøbsPris", nameof(Product.Purchaseprice));
+            listPage.AddColumn("SalgsPris", nameof(Product.Saleprice));
+            listPage.AddColumn("Avance i %", nameof(Product.AvanceiProcent));
 
             //Get companies from the database and add them to the list
             var products = Database.instance.GetProducts();
