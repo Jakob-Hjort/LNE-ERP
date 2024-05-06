@@ -29,6 +29,15 @@ namespace LNE_ERP
         public decimal AvanceiProcent { get { 
                 if (Saleprice == 0)
                 { return 0; } else return 100 * (this.Purchaseprice / this.Saleprice); } }
+        public decimal AvanceiKr
+        {
+            get
+            {
+                if (Saleprice == 0)
+                { return 0; }
+                else return (this.Purchaseprice - this.Saleprice);
+            }
+        }
 
     }
 

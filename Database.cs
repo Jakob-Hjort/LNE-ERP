@@ -13,6 +13,7 @@ namespace LNE_ERP
         List<Company> companyList = new List<Company>();
         List<SalesOrder> salesorderlist = new List<SalesOrder>();
         List<Customer> customerlist = new List<Customer>();
+        List<Product> productlist = new List<Product>();
    
 
     }
