@@ -21,7 +21,8 @@ namespace LNE_ERP
                 Menu menu = new();
                 menu.Add(new CompanyListPage());
                 menu.Add(new SalesOrderListPage());
-                menu.Add(new ProductsListPage());
+                menu.Add(new CustomerListPage());
+                //menu.Add(new ProductsListPage());!!
                 menu.Start(this);
             }
         }

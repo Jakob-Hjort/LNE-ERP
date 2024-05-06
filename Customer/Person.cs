@@ -12,24 +12,32 @@ namespace LNE_ERP
 
         public string Lastname { get; set; }
 
-        public string Address { get; set; }
+        public string Streetname { get; set; }
 
-        public string Contactinfo { get; set; }
+        public string Housenumber { get; set; }
+
+        public int Postalcode {  get; set; } 
+        public string City { get; set; }
 
         public string Fullname
         {
             get { return $"{Firstname}  {Lastname}"; }
         }
+        public string Email { get; set; }
 
+        public int PhoneNumber { get; set; }
 
-        public Person(string firstname, string lastname, string address, string contactinfo)
+       /* public Person(string firstname, string lastname, string address, string contactinfo, string email,int phonenumber)
         {
             Firstname = firstname;
             Lastname = lastname;
             Address = address;
             Contactinfo = contactinfo;
+            Email = email;
+            PhoneNumber = phonenumber;
 
-        }
+
+        }*/
 
     }
 }

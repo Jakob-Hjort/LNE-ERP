@@ -11,11 +11,11 @@ namespace LNE_ERP
     {
         public void Testdata()
         {
-       salesorderlist = new List<SalesOrder>()
+            salesorderlist = new List<SalesOrder>()
             {
             new SalesOrder {SalesOrderId = 1, SalesOrderName = "First Sales Order", SalesOrderDate = new DateOnly(2024, 4, 30), Prices = 30000, CustomerId = "1" },
             new SalesOrder {SalesOrderId = 2, SalesOrderName = "Second Sales Order", SalesOrderDate = new DateOnly(2024, 5, 1), Prices = 60000, CustomerId = "2" }
-        };
+            };
 
         }
         public SalesOrder GetSalesOrderById1(int id)
