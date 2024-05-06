@@ -1,40 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TECHCOOL.UI;
 
 namespace LNE_ERP
 {
     public class SalesOrderDetails : Screen
     {
-        public override string Title { get; set; } = "Sales order";
-        SalesOrder SalesOrder = new();
-        SalesOrderHeader SalesOrderHeader;
+        public override string Title { get; set; } = "Sales Order Details";
+        private SalesOrder salesOrder;
 
         public SalesOrderDetails(SalesOrder salesOrder)
         {
-            Title = "Detaljer for " + salesOrder.SalesOrderName;
-            this.SalesOrder = salesOrder;
+            this.salesOrder = salesOrder;
+            Title = "Details for Order " + salesOrder.SalesOrderId;
         }
 
         protected override void Draw()
         {
 
             Console.WriteLine(SalesOrder.SalesOrderId);
-            Console.WriteLine($"Kundenummer: {SalesOrder.CustomerId}");
-            Console.WriteLine($"Navn: {SalesOrder.FullName}");
+            Console.WriteLine("Customer ID: {0}",SalesOrderHeader.CustomerId);
+            Console.WriteLine("{0} {1}", SalesOrder.FullName, SalesOrder.CustomerId);
             Console.WriteLine("Price: {0}", SalesOrder.Prices);
 
-            Console.WriteLine("Tryk F2 for at redigere");
-            AddKey(ConsoleKey.F2, () =>
+            Console.WriteLine("Press Enter to view Sales Order Header");
+            AddKey(ConsoleKey.Enter, () =>
             {
-                Screen.Display(new SalesOrderEditor(SalesOrder));
+                //Screen.Display(new SalesOrderHeader(salesOrder));
             });
+
             ExitOnEscape();
         }
     }
-
 }
-
