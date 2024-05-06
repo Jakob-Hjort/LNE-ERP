@@ -8,6 +8,11 @@ namespace LNE_ERP
 {
     public class Addresses
     {
-        public string Address { get; set; }
+        public string Streetname { get; set; }
+
+        public string Housenumber { get; set; }
+
+        public int Postalcode { get; set; }
+        public string City { get; set; }
     }
 }

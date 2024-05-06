@@ -12,12 +12,7 @@ namespace LNE_ERP
 
         public string Lastname { get; set; }
 
-        public string Streetname { get; set; }
-
-        public string Housenumber { get; set; }
-
-        public int Postalcode {  get; set; } 
-        public string City { get; set; }
+        public Addresses Addresses { get; set; }
 
         public string Fullname
         {

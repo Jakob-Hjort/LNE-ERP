@@ -25,10 +25,10 @@ namespace LNE_ERP
             Console.WriteLine($"Kunde ID:{customer.CustomerNumber}");
             Console.WriteLine($"Fuldenavn:{customer.Fullname}");
             Console.WriteLine($"-----------------------------");
-            Console.WriteLine($"Vejnavn:{customer.Streetname}");
-            Console.WriteLine($"Hus nummer:{customer.Housenumber}");
-            Console.WriteLine($"Postnummer:{customer.Postalcode}");
-            Console.WriteLine($"By:{customer.City}");
+            Console.WriteLine($"Vejnavn:{customer.Addresses.Streetname}");
+            Console.WriteLine($"Hus nummer:{customer.Addresses.Housenumber}");
+            Console.WriteLine($"Postnummer:{customer.Addresses.Postalcode}");
+            Console.WriteLine($"By:{customer.Addresses.City}");
             Console.WriteLine($"-----------------------------");
             Console.WriteLine($"Sidste Købs dato:{customer.LastPurchaseDate}");
             //Console.WriteLine($"Telefon nummer:{customer.PhoneNumber}");

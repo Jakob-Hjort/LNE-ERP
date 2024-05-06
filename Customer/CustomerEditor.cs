@@ -33,10 +33,10 @@ namespace LNE_ERP
             //form.TextBox("Sales order ID", nameof(SalesOrder.SalesOrderId));
             form.TextBox("Fornavn", nameof(Customer.Firstname));
             form.TextBox("Efternavn", nameof(Customer.Lastname));
-            form.TextBox("Vejnavn", nameof(Customer.Streetname));
-            form.TextBox("Husnummer", nameof(Customer.Housenumber));
-            form.TextBox("Postnummer", nameof(Customer.Postalcode));
-            form.TextBox("By", nameof(Customer.City));
+            form.TextBox("Vejnavn", nameof(Customer.Addresses.Streetname));
+            form.TextBox("Husnummer", nameof(Customer.Addresses.Housenumber));
+            form.TextBox("Postnummer", nameof(Customer.Addresses.Postalcode));
+            form.TextBox("By", nameof(Customer.Addresses.City));
             form.TextBox("Tlf. nummer", nameof(Customer.PhoneNumber));
             form.TextBox("Email", nameof(Customer.Email));
             if (form.Edit(customer))
