@@ -37,6 +37,7 @@ namespace LNE_ERP
             listPage.AddColumn("produkt", nameof(Product.Name), 20);
             listPage.AddColumn("Units", nameof(Product.Units));
             listPage.AddColumn("Price", nameof(Product.Saleprice), 8);
+            listPage.AddColumn("%", nameof(Product.AvanceiProcent), 7);
 
             //Get companies from the database and add them to the list
             var products = Database.instance.GetProducts();

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace LNE_ERP
 {
     public class Product
+
     {
         public int ProductId { get; set; }
         public string Itemnumber { get; set; }
@@ -25,7 +26,9 @@ namespace LNE_ERP
 
         public ProductUnits Units { get; set; } // Enhed er en begrænset muligt f.eks. styk, timer  eller meter.
 
+        public decimal AvanceiProcent { get { if (Saleprice == 0) { return 0; } else return 100 * (this.Purchaseprice / this.Saleprice); } }
 
     }
+
 }
 

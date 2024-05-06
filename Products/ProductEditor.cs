@@ -33,7 +33,7 @@ namespace LNE_ERP
             form.TextBox("lagerantal", nameof(Product.Quantity));
             form.TextBox("Indkøbsspris", nameof(Product.Purchaseprice));
             form.TextBox("Salgspris", nameof(Product.Saleprice));
-            form.TextBox("Salgspris", nameof(Product.Saleprice));
+            form.TextBox("avance", nameof(Product.AvanceiProcent));
 
             //form.AddOption("Currency", "DKK", Currency.DKK);
             //form.AddOption("Currency", "EUR", Currency.EUR);
