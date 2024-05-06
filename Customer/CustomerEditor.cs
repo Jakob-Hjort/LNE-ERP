@@ -19,6 +19,12 @@ namespace LNE_ERP
             this.customer = customer;
         }
 
+        public CustomerEditor()
+        {
+            Title = "Ny Kunde";
+            this.customer = new Customer();
+        }
+
         protected override void Draw()
         {
             ExitOnEscape();
@@ -30,6 +36,7 @@ namespace LNE_ERP
             form.TextBox("Vejnavn", nameof(Customer.Streetname));
             form.TextBox("Husnummer", nameof(Customer.Housenumber));
             form.TextBox("Postnummer", nameof(Customer.Postalcode));
+            form.TextBox("By", nameof(Customer.City));
             form.TextBox("Tlf. nummer", nameof(Customer.PhoneNumber));
             form.TextBox("Email", nameof(Customer.Email));
             if (form.Edit(customer))

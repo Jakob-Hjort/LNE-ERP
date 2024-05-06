@@ -24,17 +24,32 @@ namespace LNE_ERP
 
             Console.WriteLine($"Kunde ID:{customer.CustomerNumber}");
             Console.WriteLine($"Fuldenavn:{customer.Fullname}");
+            Console.WriteLine($"-----------------------------");
             Console.WriteLine($"Vejnavn:{customer.Streetname}");
             Console.WriteLine($"Hus nummer:{customer.Housenumber}");
             Console.WriteLine($"Postnummer:{customer.Postalcode}");
             Console.WriteLine($"By:{customer.City}");
-            Console.WriteLine($"Telefon nummer:{customer.PhoneNumber}");
-            Console.WriteLine($"Email:{customer.Email}");
-
+            Console.WriteLine($"-----------------------------");
+            Console.WriteLine($"Sidste Købs dato:{customer.LastPurchaseDate}");
+            //Console.WriteLine($"Telefon nummer:{customer.PhoneNumber}");
+            //Console.WriteLine($"Email:{customer.Email}");
+            Console.WriteLine($"");
             Console.WriteLine("Tryk F2 for at redigere");
             AddKey(ConsoleKey.F2, () =>
             {
                 Screen.Display(new CustomerEditor(customer));
+            });
+
+            Console.WriteLine("Tryk F1 for at oprette en ny kunde");
+            AddKey(ConsoleKey.F1, () =>
+            {
+                Screen.Display(new CustomerEditor());
+            });
+            Console.WriteLine("Tryk F3 for at slette denne kunde");
+            AddKey(ConsoleKey.F3, () =>
+            {
+
+                Screen.Display(new CustomerEditor());
             });
             ExitOnEscape();
         }

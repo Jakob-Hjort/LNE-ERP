@@ -22,7 +22,7 @@ namespace LNE_ERP
                 menu.Add(new CompanyListPage());
                 menu.Add(new SalesOrderListPage());
                 menu.Add(new CustomerListPage());
-                //menu.Add(new ProductsListPage());!!
+                menu.Add(new ProductsListPage());
                 menu.Start(this);
             }
         }
