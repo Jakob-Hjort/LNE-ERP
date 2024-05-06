@@ -16,11 +16,11 @@ namespace LNE_ERP
 
         protected override void Draw()
         {
-
-            Console.WriteLine(SalesOrder.SalesOrderId);
-            Console.WriteLine("Customer ID: {0}",SalesOrderHeader.CustomerId);
-            Console.WriteLine("{0} {1}", SalesOrder.FullName, SalesOrder.CustomerId);
-            Console.WriteLine("Price: {0}", SalesOrder.Prices);
+            Console.WriteLine($"Order Number: {salesOrder.SalesOrderId}");
+            Console.WriteLine($"Date: {salesOrder.SalesOrderDate}");
+            //Console.WriteLine($"Customer ID: {Customer.}");
+            //Console.WriteLine($"Customer Name: {Customer.CustomerFirstName} {salesOrder.CustomerLastName}");
+            //Console.WriteLine($"Amount: {salesOrder.Amount}");
 
             Console.WriteLine("Press Enter to view Sales Order Header");
             AddKey(ConsoleKey.Enter, () =>
