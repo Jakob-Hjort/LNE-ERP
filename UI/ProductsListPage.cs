@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TECHCOOL.UI;
 
-namespace LNE_ERP.UI
+namespace LNE_ERP
 {
-    public class CompanyListPage : Screen
+    public class ProductListPage : Screen
     {
         //Set the title of this page
         public override string Title { get; set; } = "Selskaber";
