@@ -34,10 +34,10 @@ namespace LNE_ERP
             Console.WriteLine("Tryk F5 for at slette virksomhed");
 
             //Add some columns
-            listPage.AddColumn("Kunde id", nameof(Customer.CustomerNumber), 10);
+            listPage.AddColumn("Kunde id", nameof(Customer.CustomerNumber), 9);
             listPage.AddColumn("Fulde navn", nameof(Customer.Fullname),20);
-            listPage.AddColumn("Tlf. nummer", nameof(Customer.PhoneNumber), 11);
-            listPage.AddColumn("Email", nameof(Customer.Email), 30);
+            listPage.AddColumn("Tlf. nummer", nameof(Customer.PhoneNumber), 15);
+            listPage.AddColumn("Email", nameof(Customer.Email),30);
 
             //Get companies from the database and add them to the list
             var customers = Database.instance.GetCustomer();
@@ -58,7 +58,8 @@ namespace LNE_ERP
 
         void createNewCustomer(Customer _)
         {
-            Screen.Display(new CustomerEditor());
+            Customer new_customer = new();
+            Screen.Display(new CustomerEditor(new_customer));
         }
 
         void editCustomer(Customer customer)

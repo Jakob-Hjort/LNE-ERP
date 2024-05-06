@@ -30,10 +30,12 @@ namespace LNE_ERP
 
             form.TextBox("VareNummer", nameof(Product.Itemnumber));
             form.TextBox("Navn", nameof(Product.Name));
-            form.TextBox("lagerantal", nameof(Product.Quantity));
-            form.TextBox("Indkøbsspris", nameof(Product.Purchaseprice));
+            form.TextBox("Beskrivelse", nameof(Product.Description));
             form.TextBox("Salgspris", nameof(Product.Saleprice));
-            form.TextBox("avance", nameof(Product.AvanceiProcent));
+            form.TextBox("Indkøbsspris", nameof(Product.Purchaseprice));
+            form.TextBox("Lokation", nameof(Product.Location));
+            form.TextBox("Antal på lager", nameof(Product.Quantity));
+            form.TextBox("Enhed", nameof(Product.Units));
 
             //form.AddOption("Currency", "DKK", Currency.DKK);
             //form.AddOption("Currency", "EUR", Currency.EUR);

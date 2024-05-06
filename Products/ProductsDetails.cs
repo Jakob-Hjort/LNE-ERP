@@ -19,11 +19,16 @@ namespace LNE_ERP
         }
         protected override void Draw()
         {
-            Console.WriteLine($"ID:{Product.ProductId}");
-            Console.WriteLine($"ID:{Product.Name}");
-            Console.WriteLine($"ID:{Product.Itemnumber}");
-            Console.WriteLine($"ID:{Product.Saleprice}");
-            Console.WriteLine($"ID:{Product.Quantity}");
+            Console.WriteLine($"VareNummer:{Product.Itemnumber}");
+            Console.WriteLine($"Navn:{Product.Name}");
+            Console.WriteLine($"Beskrivelse:{Product.Description}");
+            Console.WriteLine($"Salgspris:{Product.Saleprice}");
+            Console.WriteLine($"Indkøbspris:{Product.Purchaseprice}");
+            Console.WriteLine($"Lakation:{Product.Location}");
+            Console.WriteLine($"Antal på Lager:{Product.Quantity}");
+            Console.WriteLine($"Enhed:{Product.Units}");
+            Console.WriteLine($"Avance i Procent:{Product.AvanceiProcent}");
+            Console.WriteLine($"Avance i Kr:{Product.AvanceiKr}");
 
             Console.WriteLine("Tryk F2 for at redigere");
             AddKey(ConsoleKey.F2, () =>

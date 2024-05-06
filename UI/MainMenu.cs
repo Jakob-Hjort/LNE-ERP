@@ -17,7 +17,6 @@ namespace LNE_ERP
                 Console.WriteLine("Welcome to LNE_ERP");
                 Console.WriteLine("Please select a module to proceed");
 
-                //
                 Menu menu = new();
                 menu.Add(new CompanyListPage());
                 menu.Add(new SalesOrderListPage());
