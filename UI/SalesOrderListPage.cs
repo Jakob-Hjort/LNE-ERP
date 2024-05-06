@@ -18,42 +18,26 @@ namespace LNE_ERP
 
             Console.CursorVisible = false;
 
-            //A ListPage draws columns and rows in a box
-            ListPage<SalesOrder> listPage = new();
+            //ListPage<SalesOrder> listPage = new();
 
-            //V4 - Add keys to create company
-            listPage.AddKey(ConsoleKey.F1, createNewSalesOrder);
-            Console.WriteLine("Press F1 to create sales order");
+            ListPage<SalesOrderHeader>  listPage = new();
 
-            //V5 - Add key to edit company
-            listPage.AddKey(ConsoleKey.F2, editSalesOrder);
-            Console.WriteLine("Press F2 to eidt sales order");
+            listPage.AddColumn("Salgs Ordre Nummer", nameof(SalesOrderHeader.OrderNumber), 15);
+            listPage.AddColumn("Oprettelse", nameof(SalesOrderHeader.Creationstime), 15);
+            listPage.AddColumn("Kundenummer", nameof(Customer.CustomerNumber), 10);
+            listPage.AddColumn("Fornavn & Efternavn", nameof(Customer.Firstname) + nameof(Customer.Lastname), 30);
+            listPage.AddColumn("Beløb", nameof(SalesOrder.Prices), 20);
 
-            //V6 - Add key to edit company
-            listPage.AddKey(ConsoleKey.F5, removeSalesOrder);
-            Console.WriteLine("Press F5 to delet sales order");
-
-            //Add some columns
-            listPage.AddColumn("SalesOrderName", nameof(SalesOrder.SalesOrderName), 30);
-            listPage.AddColumn("Customer", nameof(SalesOrderHeader.CustomerId), 8);
-            listPage.AddColumn("SalesOrderID", nameof(SalesOrder.SalesOrderId));
-            listPage.AddColumn("Pris", nameof(SalesOrder.Prices), 8);
-            
-
-            //Get companies from the database and add them to the list
-            var salesorders = Database.instance.GetSalesOrders();
-            foreach (SalesOrder model in salesorders)
+            var salesOrders = Database.instance.GetSalesOrders();
+            foreach (SalesOrder model in salesOrders)
             {
                 listPage.Add(model);
             }
 
-
-            //Enable selection of a company by using arrow keys
-            var salesOrder = listPage.Select();
-            if (salesOrder != null)
+            var selectedSalesOrder = listPage.Select();
+            if (selectedSalesOrder != null)
             {
-                //Ask Screen class to display the CompanyDetails view
-                Screen.Display(new SalesOrderDetails(salesOrder));
+                Screen.Display(new SalesOrderDetails(selectedSalesOrder));
             }
         }
 
