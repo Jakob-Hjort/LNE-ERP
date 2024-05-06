@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LNE_ERP.Products
+namespace LNE_ERP
 {
-    public class Products
+    public class Product
     {
         public int ProductId { get; set; }
         public string Itemnumber { get; set; }

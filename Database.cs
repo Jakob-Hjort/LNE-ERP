@@ -12,6 +12,7 @@ namespace LNE_ERP
         public static Database instance { get; set; } = new Database();
         List<Company> companyList = new List<Company>();
         List<SalesOrder> salesorderlist = new List<SalesOrder>();
+        List<Product> productlist = new List<Product>();
    
 
     }
