@@ -4,69 +4,66 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LNE_ERP.Products
+namespace LNE_ERP
 {
     public partial class Database
     {
-        private List<Products> products = new List<Products>();
+        List<Product> products = new();
 
-         
-        public Products GetProductById(int id) //Hent produkt ud fra ID
+        public Product GetProductById(int id)
         {
-            return products.FirstOrDefault(p => p.ProductId == id);
+            foreach (var product in products)
+            {
+                if (product.ProductId == id)
+                {
+                    return product;
+                }
+            }
+            return null;
+        }
+        public List<Product> GetProducts()
+        {
+            List<Product> ProductCopy = new();
+            ProductCopy.AddRange(products);
+            return ProductCopy;
         }
 
-        public Database(List<Products> existingProducts) // Konstruktør der modtager en liste af produkter
+        public void InsertProduct(Product product)
         {
-            products = existingProducts;
-        }
-
-        public List<Products> GetAllProducts() // Hent alle produkter og retuner en liste
-        {
-            return products.ToList();   
-        }
-
-        
-        public void InsertProduct(Products product) // Indsæt produkter: Lægger produkter i databasen
-        {
+            if (product.ProductId != 0)
+            {
+                return;
+            }
+            product.ProductId = products.Count + 1;
             products.Add(product);
         }
 
-        public void UpdateProduct(Products product, int id) // Opdater et produkt i databasen
+        public void UpdateProduct(Product product)
         {
-            Products existingProduct = GetProductById(id);
-            if (existingProduct != null)
+            if (product.ProductId == 0)
             {
-                existingProduct.Name = product.Name;
-                existingProduct.Description = product.Description;
-                existingProduct.Saleprice = product.Saleprice;
-                existingProduct.Quantity = product.Quantity;
-                existingProduct.Units = product.Units;
-                existingProduct.Location = product.Location;
-                existingProduct.Itemnumber = product.Itemnumber;
+                return;
+            }
+
+            for (var i = 0; i < products.Count; i++)
+            {
+                if (products[i].ProductId == product.ProductId)
+                {
+                    products[i] = product;
+                }
             }
         }
 
-        public void DeleteProductById(int id) // Slet produkt ud fra id: Metode der tager et id som parameter og fjerner det fra databasen
+        public void DeleteProduct(Product product)
         {
-            Products productToRemove = GetProductById(id);
-            if (productToRemove != null)
+            if (product.ProductId == 0)
             {
-                products.Remove(productToRemove);
+                return;
             }
-        }
-
-        public decimal CalculateProfit(Products product) // Beregne Fortjeneste.
-        {
-            return product.Saleprice - product.Purchaseprice;
-        }
-
-        public decimal CalculateMarginPercentage(Products product) // Beregne avance i procent.
-        {
-            if (product.Saleprice == 0)
-                return 0; 
-            else
-                return (CalculateProfit(product) / product.Saleprice) * 100;
+            if (products.Contains(product))
+            {
+                products.Remove(product);
+            }
         }
     }
 }

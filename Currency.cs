@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LNE_ERP
 {
-    public enum Currency // test til ejnars repo
+    public enum Currency
     {
         DKK, SEK, USD, EUR
     }

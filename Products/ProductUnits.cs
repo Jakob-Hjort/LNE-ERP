@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LNE_ERP.Products
+namespace LNE_ERP
 {
     public enum ProductUnits
     {

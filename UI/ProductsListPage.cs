@@ -7,10 +7,10 @@ using TECHCOOL.UI;
 
 namespace LNE_ERP
 {
-    public class ProductListPage : Screen
+    public class ProductsListPage : Screen
     {
         //Set the title of this page
-        public override string Title { get; set; } = "Selskaber";
+        public override string Title { get; set; } = "Produkter";
 
         protected override void Draw()
         {
@@ -19,56 +19,56 @@ namespace LNE_ERP
             Console.CursorVisible = false;
 
             //A ListPage draws columns and rows in a box
-            ListPage<Company> listPage = new();
+            ListPage<Product> listPage = new();
 
             //V4 - Add keys to create company
-            listPage.AddKey(ConsoleKey.F1, createNewCompany);
-            Console.WriteLine("Tryk F1 for at oprette virksomhed");
+            listPage.AddKey(ConsoleKey.F1, createNewProduct);
+            Console.WriteLine("Tryk F1 for at oprette produkt");
 
             //V5 - Add key to edit company
-            listPage.AddKey(ConsoleKey.F2, editCompany);
-            Console.WriteLine("Tryk F2 for at redigere virksomhed");
+            listPage.AddKey(ConsoleKey.F2, editProduct);
+            Console.WriteLine("Tryk F2 for at redigere produkt");
 
             //V6 - Add key to edit company
-            listPage.AddKey(ConsoleKey.F5, removeCompany);
-            Console.WriteLine("Tryk F5 for at slette virksomhed");
+            listPage.AddKey(ConsoleKey.F5, deleteProduct);
+            Console.WriteLine("Tryk F5 for at slette produkt");
 
             //Add some columns
-            listPage.AddColumn("Selskab", nameof(Company.CompanyName), 20);
-            listPage.AddColumn("Land", nameof(Company.Country));
-            listPage.AddColumn("Valuta", nameof(Company.Currency), 8);
+            listPage.AddColumn("produkt", nameof(Product.Name), 20);
+            listPage.AddColumn("Units", nameof(Product.Units));
+            listPage.AddColumn("Price", nameof(Product.Saleprice), 8);
 
             //Get companies from the database and add them to the list
-            var companies = Database.instance.GetCompanies();
-            foreach (Company model in companies)
+            var products = Database.instance.GetProducts();
+            foreach (Product model in products)
             {
                 listPage.Add(model);
             }
 
 
             //Enable selection of a company by using arrow keys
-            var company = listPage.Select();
-            if (company != null)
+            var product = listPage.Select();
+            if (product != null)
             {
                 //Ask Screen class to display the CompanyDetails view
-                Screen.Display(new CompanyDetails(company));
+                Screen.Display(new ProductsDetails(product));
             }
         }
 
-        void createNewCompany(Company _)
+        void createNewProduct(Product _)
         {
-            Company new_company = new();
-            Screen.Display(new CompanyEditor(new_company));
+            Product new_product = new();
+            Screen.Display(new ProductEditor(new_product));
         }
 
-        void editCompany(Company company)
+        void editProduct(Product product)
         {
-            Screen.Display(new CompanyEditor(company));
+            Screen.Display(new ProductEditor(product));
         }
 
-        void removeCompany(Company company)
+        void deleteProduct(Product product)
         {
-            Database.instance.DeleteCompany(company);
+            Database.instance.DeleteProduct(product);
             Screen.Clear(this);
             Draw();
         }
