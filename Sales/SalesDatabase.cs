@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LNE_ERP
 {
-    public partial class Database
+    public partial class Database //hey
     {
         public void Testdata()
         {
