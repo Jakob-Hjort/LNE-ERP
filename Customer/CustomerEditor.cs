@@ -34,10 +34,10 @@ namespace LNE_ERP
 
             form.TextBox("Fornavn", nameof(Customer.Firstname));
             form.TextBox("Efternavn", nameof(Customer.Lastname));
-            form.TextBox("Vejnavn", nameof(customer.Street));
-            form.TextBox("Husnummer", nameof(customer.Housenumer));
-            form.TextBox("Postnummer", nameof(customer.postalcode));
-            form.TextBox("By", nameof(customer.city));
+            form.TextBox("Vejnavn", nameof(Customer.Street));
+            form.TextBox("Husnummer", nameof(Customer.Housenumer));
+            form.TextBox("Postnummer", nameof(Customer.postalcode));
+            form.TextBox("By", nameof(Customer.city));
             form.TextBox("Tlf. nummer", nameof(Customer.PhoneNumber));
             form.TextBox("Email", nameof(Customer.Email));
             if (form.Edit(customer))
