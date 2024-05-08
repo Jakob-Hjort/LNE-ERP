@@ -10,6 +10,7 @@ namespace LNE_ERP
 
     {
         public int ProductId { get; set; }
+
         public string Itemnumber { get; set; }
 
         public string Name { get; set; }
