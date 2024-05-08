@@ -32,9 +32,9 @@ namespace LNE_ERP
 
             listPage.AddColumn("Ordre Nummer", nameof(SalesOrderHeader.OrderNumber), 12);
             listPage.AddColumn("Kundenummer", nameof(Customer.CustomerNumber), 11);
-            listPage.AddColumn("Oprettelse", nameof(SalesOrderHeader.Creationstime), 25);
-            listPage.AddColumn("Produceret", nameof(SalesOrderHeader.ImplementationTime), 25);
-            listPage.AddColumn("Tilstand", nameof(SalesOrderHeader.Status), 25);
+            listPage.AddColumn("Oprettelse", nameof(SalesOrderHeader.Creationstime), 10);
+            listPage.AddColumn("Produceret", nameof(SalesOrderHeader.ImplementationTime), 10);
+            listPage.AddColumn("Tilstand", nameof(SalesOrderHeader.Status), 8);
 
             var salesOrders = Database.instance.GetSalesOrderHeaders();
             foreach (SalesOrderHeader model in salesOrders)
