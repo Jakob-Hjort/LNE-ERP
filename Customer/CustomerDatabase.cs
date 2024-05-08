@@ -16,7 +16,7 @@ namespace LNE_ERP
 
             {
         
-            new Customer {Firstname = "Ejnars", Lastname = "codingleaf", Addresses =, CustomerNumber = 1 ,LastPurchaseDate = new DateTime(2024, 4, 30), Email= "Thecodingleaf@actnow.dk", PhoneNumber = 88888888 },
+            new Customer {Firstname = "Ejnars", Lastname = "codingleaf", Addresses = CustomerNumber = 1 ,LastPurchaseDate = new DateTime(2024, 4, 30), Email= "Thecodingleaf@actnow.dk", PhoneNumber = 88888888 },
             new Customer {Firstname = "Emil", Lastname = "Hytting", Streetname = "Struervej", Housenumber = "68", Postalcode = 9220, City=  "Aalborg Ø", CustomerNumber = 2 ,LastPurchaseDate = new DateTime(2024, 5, 23), Email= "Hytting@actnow.dk", PhoneNumber = 26262626}
             };
         }

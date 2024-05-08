@@ -23,7 +23,6 @@ namespace LNE_ERP
             ExitOnEscape();
             Form<SalesOrderHeader> form = new();
 
-            //form.TextBox("Sales order ID", nameof(SalesOrder.SalesOrderId));
             form.TextBox("Ordrenummer", nameof(SalesOrderHeader.OrderNumber));
             form.TextBox("CustomerID", nameof(SalesOrderHeader.CustomerId));
             form.TextBox("Oprettelsestidspunkt", nameof(SalesOrderHeader.Creationstime));

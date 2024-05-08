@@ -15,59 +15,48 @@ namespace LNE_ERP
             {
                 new SalesOrderHeader() { OrderNumber = 1109}
             };
-            //salesorderlist = new List<SalesOrder>()
-            //{
-            //new SalesOrder {SalesOrderId = 1, SalesOrderName = "First Sales Order", SalesOrderDate = new DateOnly(2024, 4, 30), Prices = 30000, CustomerId = "1" },
-            //new SalesOrder {SalesOrderId = 2, SalesOrderName = "Second Sales Order", SalesOrderDate = new DateOnly(2024, 5, 1), Prices = 60000, CustomerId = "2" }
-            //};
         }
 
+        //List<SalesOrderHeader> salesOrderHeader = new();
 
         public SalesOrderHeader GetSalesOrderById1(int id)
         {
             foreach (var salesorder in salesOrderHeader)
             {
-                if (salesorder.CustomerId == id)
+                if (salesorder.OrderNumber == id)
                 {
                     return salesorder;
                 }
             }
             return null;
         }
-
-        public List<SalesOrderHeader> GetSalesOrders()
-        {
-            List<SalesOrderHeader> salesOrderCopy = new();
-            salesOrderCopy.AddRange(salesOrderHeader);
-            return salesOrderCopy;
-        }
         public List<SalesOrderHeader> GetSalesOrderHeaders()
         {
-            List<SalesOrderHeader> salesOrderHeaders = new();
-            salesOrderHeader.AddRange(salesOrderHeaders);
-            return salesOrderHeaders;
+            List<SalesOrderHeader> Ordercopy = new();
+            Ordercopy.AddRange(salesOrderHeader);
+            return Ordercopy;
         }
 
         public void InsertSalesOrder(SalesOrderHeader salesorder)
         {
-            if (salesorder.CustomerId != 0)
+            if (salesorder.OrderNumber != 0)
             {
                 return;
             }
-            salesorder.CustomerId = salesOrderHeader.Count+1;
+            salesorder.OrderNumber = salesOrderHeader.Count+1;
             salesOrderHeader.Add(salesorder);
         }
 
         public void UpdateSalesOrder(SalesOrderHeader salesorder)
         {
-            if (salesorder.CustomerId == 0)
+            if (salesorder.OrderNumber == 0)
             {
                 return;
             }
 
             for (var i = 0; i < salesOrderHeader.Count; i++)
             {
-                if (salesOrderHeader[i].CustomerId == salesorder.CustomerId)
+                if (salesOrderHeader[i].OrderNumber == salesorder.OrderNumber)
                 {
                     salesOrderHeader[i] = salesorder;
                 }
@@ -76,7 +65,7 @@ namespace LNE_ERP
 
         public void DeleteSalesOrder(SalesOrderHeader salesorder)
         {
-            if (salesorder.CustomerId == 0)
+            if (salesorder.OrderNumber == 0)
             {
                 return;
             }
