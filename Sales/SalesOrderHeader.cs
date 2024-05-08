@@ -15,7 +15,7 @@ namespace LNE_ERP
         public OrderStatus Tilstand { get; set; }
         public List<Orderline> Ordrelinjer { get; set; }
         public decimal Ordrebeløb => Ordrelinjer.Sum(ol => ol.Pris * ol.Antal);
-
+        public SalesOrderHeader() { }
         public SalesOrderHeader(int ordernumber, DateTime oprettelsestidspunkt, DateTime gennemførelsestidspunkt,
             int customerid, OrderStatus tilstand, List<Orderline> ordrelinjer)
         {

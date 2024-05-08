@@ -11,18 +11,23 @@ namespace LNE_ERP
     {
         public void Testdata()
         {
-            salesorderlist = new List<SalesOrder>()
+            salesOrderHeader = new List<SalesOrderHeader>()
             {
-            new SalesOrder {SalesOrderId = 1, SalesOrderName = "First Sales Order", SalesOrderDate = new DateOnly(2024, 4, 30), Prices = 30000, CustomerId = "1" },
-            new SalesOrder {SalesOrderId = 2, SalesOrderName = "Second Sales Order", SalesOrderDate = new DateOnly(2024, 5, 1), Prices = 60000, CustomerId = "2" }
+                new SalesOrderHeader() { OrderNumber = 1109}
             };
-
+            //salesorderlist = new List<SalesOrder>()
+            //{
+            //new SalesOrder {SalesOrderId = 1, SalesOrderName = "First Sales Order", SalesOrderDate = new DateOnly(2024, 4, 30), Prices = 30000, CustomerId = "1" },
+            //new SalesOrder {SalesOrderId = 2, SalesOrderName = "Second Sales Order", SalesOrderDate = new DateOnly(2024, 5, 1), Prices = 60000, CustomerId = "2" }
+            //};
         }
-        public SalesOrder GetSalesOrderById1(int id)
+
+
+        public SalesOrderHeader GetSalesOrderById1(int id)
         {
-            foreach (var salesorder in salesorderlist)
+            foreach (var salesorder in salesOrderHeader)
             {
-                if (salesorder.SalesOrderId == id)
+                if (salesorder.CustomerId == id)
                 {
                     return salesorder;
                 }
@@ -30,48 +35,54 @@ namespace LNE_ERP
             return null;
         }
 
-        public List<SalesOrder> GetSalesOrders()
+        public List<SalesOrderHeader> GetSalesOrders()
         {
-            List<SalesOrder> salesOrderCopy = new();
-            salesOrderCopy.AddRange(salesorderlist);
+            List<SalesOrderHeader> salesOrderCopy = new();
+            salesOrderCopy.AddRange(salesOrderHeader);
             return salesOrderCopy;
         }
-
-        public void InsertSalesOrder(SalesOrder salesorder)
+        public List<SalesOrderHeader> GetSalesOrderHeaders()
         {
-            if (salesorder.SalesOrderId != 0)
-            {
-                return;
-            }
-            salesorder.SalesOrderId = salesorderlist.Count+1;
-            salesorderlist.Add(salesorder);
+            List<SalesOrderHeader> salesOrderHeaders = new();
+            salesOrderHeader.AddRange(salesOrderHeaders);
+            return salesOrderHeaders;
         }
 
-        public void UpdateSalesOrder(SalesOrder salesorder)
+        public void InsertSalesOrder(SalesOrderHeader salesorder)
         {
-            if (salesorder.SalesOrderId == 0)
+            if (salesorder.CustomerId != 0)
+            {
+                return;
+            }
+            salesorder.CustomerId = salesOrderHeader.Count+1;
+            salesOrderHeader.Add(salesorder);
+        }
+
+        public void UpdateSalesOrder(SalesOrderHeader salesorder)
+        {
+            if (salesorder.CustomerId == 0)
             {
                 return;
             }
 
-            for (var i = 0; i < salesorderlist.Count; i++)
+            for (var i = 0; i < salesOrderHeader.Count; i++)
             {
-                if (salesorderlist[i].SalesOrderId == salesorder.SalesOrderId)
+                if (salesOrderHeader[i].CustomerId == salesorder.CustomerId)
                 {
-                    salesorderlist[i] = salesorder;
+                    salesOrderHeader[i] = salesorder;
                 }
             }
         }
 
-        public void DeleteSalesOrder(SalesOrder salesorder)
+        public void DeleteSalesOrder(SalesOrderHeader salesorder)
         {
-            if (salesorder.SalesOrderId == 0)
+            if (salesorder.CustomerId == 0)
             {
                 return;
             }
-            if (salesorderlist.Contains(salesorder))
+            if (salesOrderHeader.Contains(salesorder))
             {
-                salesorderlist.Remove(salesorder);
+                salesOrderHeader.Remove(salesorder);
             }
         }
     }

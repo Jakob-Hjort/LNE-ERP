@@ -6,21 +6,22 @@ namespace LNE_ERP
     public class SalesOrderDetails : Screen
     {
         public override string Title { get; set; } = "Sales order";
-        SalesOrder SalesOrder = new();
+        SalesOrderHeader SalesOrder = new();
 
-        public SalesOrderDetails(SalesOrder salesOrder)
+        public SalesOrderDetails(SalesOrderHeader salesOrder)
         {
-            Title = "Details for " + salesOrder.SalesOrderName;
+            Title = "Details for " + salesOrder.CustomerId;
             this.SalesOrder = salesOrder;
         }
 
         protected override void Draw()
         {
-            Console.WriteLine("Sales Order Number: {0}", SalesOrder.SalesOrderId);
-            Console.WriteLine("Date: {0}", SalesOrder.SalesOrderDate);
-            Console.WriteLine("Customer ID: {0}", SalesOrder.CustomerId);
-            Console.WriteLine("Customer: {0}", SalesOrder.FullName);
-            Console.WriteLine("Amount: {0}", SalesOrder.Prices);
+            SalesOrderHeader sales = new();
+            Console.WriteLine("OrdreNummber: {0}", SalesOrder.OrderNumber);
+            Console.WriteLine("Oprettelsestidspunkt: {0}", SalesOrder.Creationstime);
+            Console.WriteLine("Gennemførelsestidspunkt: {0}", SalesOrder.Gennemførelsestidspunkt);
+            Console.WriteLine("CustomerID: {0}", SalesOrder.CustomerId);
+            Console.WriteLine("Tilstand: {0}", SalesOrder.Tilstand);
 
             Console.WriteLine("Press F2 to edit");
             AddKey(ConsoleKey.F2, () =>

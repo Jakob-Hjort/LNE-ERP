@@ -10,28 +10,28 @@ namespace LNE_ERP
     public class SalesOrderEditor : Screen
     {
         public override string Title { get; set; } = "Sales Order";
-        SalesOrder salesorder = new();
+        SalesOrderHeader salesorder = new();
 
-        public SalesOrderEditor(SalesOrder salesOrder)
+        public SalesOrderEditor(SalesOrderHeader salesOrder)
         {
-            Title = "Redigerer for " + salesOrder.SalesOrderName;
+            Title = "Redigerer for " + salesOrder.CustomerId;
             this.salesorder = salesOrder;
         }
 
         protected override void Draw()
         {
             ExitOnEscape();
-            Form<SalesOrder> form = new();
+            Form<SalesOrderHeader> form = new();
 
             //form.TextBox("Sales order ID", nameof(SalesOrder.SalesOrderId));
-            form.TextBox("Sales order Name", nameof(SalesOrder.SalesOrderName));
-            form.TextBox("CustomerID", nameof(SalesOrder.CustomerId));
-            form.TextBox("Date", nameof(SalesOrder.SalesOrderDate));
-            form.TextBox("Price", nameof(SalesOrder.Prices));
+            form.TextBox("Ordrenummer", nameof(SalesOrderHeader.OrderNumber));
+            form.TextBox("CustomerID", nameof(SalesOrderHeader.CustomerId));
+            form.TextBox("Oprettelsestidspunkt", nameof(SalesOrderHeader.Creationstime));
+            form.TextBox("Gennemførelsestidspunkt", nameof(SalesOrderHeader.Gennemførelsestidspunkt));
 
             if (form.Edit(salesorder))
             {
-                if (salesorder.SalesOrderId != 0)
+                if (salesorder.CustomerId != 0)
                 {
                     Database.instance.UpdateSalesOrder(salesorder);
                 }
