@@ -10,21 +10,21 @@ namespace LNE_ERP
     {
         public int OrderNumber { get; set; }
         public DateTime Creationstime { get; set; }
-        public DateTime Gennemførelsestidspunkt { get; set; }
+        public DateTime ImplementationTime { get; set; }
         public int CustomerId { get; set; }
-        public OrderStatus Tilstand { get; set; }
-        public List<Orderline> Ordrelinjer { get; set; }
-        public decimal Ordrebeløb => Ordrelinjer.Sum(ol => ol.Pris * ol.Antal);
+        public OrderStatus Status { get; set; }
+        public List<Orderline> OrdreLines { get; set; }
+        public decimal OrderAmount => OrdreLines.Sum(ol => ol.Pris * ol.Antal);
         public SalesOrderHeader() { }
-        public SalesOrderHeader(int ordernumber, DateTime oprettelsestidspunkt, DateTime gennemførelsestidspunkt,
-            int customerid, OrderStatus tilstand, List<Orderline> ordrelinjer)
+        public SalesOrderHeader(int ordernumber, DateTime creationtime, DateTime implementationtime,
+            int customerid, OrderStatus status, List<Orderline> ordrelines)
         {
             OrderNumber = ordernumber;
-            Creationstime = oprettelsestidspunkt;
-            Gennemførelsestidspunkt = gennemførelsestidspunkt;
+            Creationstime = creationtime;
+            ImplementationTime = implementationtime;
             CustomerId = customerid;
-            Tilstand = tilstand;
-            Ordrelinjer = ordrelinjer;
+            Status = status;
+            OrdreLines = ordrelines;
         }
     }
 

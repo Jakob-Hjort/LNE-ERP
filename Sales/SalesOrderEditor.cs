@@ -25,9 +25,9 @@ namespace LNE_ERP
 
             form.TextBox("Ordrenummer", nameof(SalesOrderHeader.OrderNumber));
             form.TextBox("Oprettelsestidspunkt", nameof(SalesOrderHeader.Creationstime));
-            form.TextBox("Gennemførelsestidspunkt", nameof(SalesOrderHeader.Gennemførelsestidspunkt));
+            form.TextBox("Gennemførelsestidspunkt", nameof(SalesOrderHeader.ImplementationTime));
             form.TextBox("CustomerID", nameof(SalesOrderHeader.CustomerId));
-            form.TextBox("Tilstand", nameof(SalesOrderHeader.Tilstand));
+            form.TextBox("Tilstand", nameof(SalesOrderHeader.Status));
 
             if (form.Edit(salesorder))
             {

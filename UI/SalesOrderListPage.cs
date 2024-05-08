@@ -29,8 +29,12 @@ namespace LNE_ERP
             listPage.AddKey(ConsoleKey.F5, removeSalesOrder);
             Console.WriteLine("Tryk F5 for at slette ");
 
-            listPage.AddColumn("Salgs Ordre Nummer", nameof(SalesOrderHeader.OrderNumber), 15);
-            listPage.AddColumn("Oprettelse", nameof(SalesOrderHeader.Creationstime), 15);
+
+            listPage.AddColumn("Ordre Nummer", nameof(SalesOrderHeader.OrderNumber), 12);
+            listPage.AddColumn("Kundenummer", nameof(Customer.CustomerNumber), 11);
+            listPage.AddColumn("Oprettelse", nameof(SalesOrderHeader.Creationstime), 25);
+            listPage.AddColumn("Produceret", nameof(SalesOrderHeader.ImplementationTime), 25);
+            listPage.AddColumn("Tilstand", nameof(SalesOrderHeader.Status), 25);
 
             var salesOrders = Database.instance.GetSalesOrderHeaders();
             foreach (SalesOrderHeader model in salesOrders)
