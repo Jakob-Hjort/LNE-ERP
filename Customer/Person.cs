@@ -22,6 +22,9 @@ namespace LNE_ERP
 
         public int PhoneNumber { get; set; }
 
+        public int CSID { get; set; }
+
+
        /* public Person(string firstname, string lastname, string address, string contactinfo, string email,int phonenumber)
         {
             Firstname = firstname;

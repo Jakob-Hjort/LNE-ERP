@@ -25,6 +25,7 @@ namespace LNE_ERP
         {
             Title = "Ny Kunde";
             this.customer = new Customer();
+            this.customer.Addresses = new Addresses();
         }
 
         protected override void Draw()

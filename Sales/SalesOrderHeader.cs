@@ -26,6 +26,18 @@ namespace LNE_ERP
             Status = status;
             OrdreLines = ordrelines;
         }
+
+       /* public int Customertest
+        {
+            get
+            {
+                return customer.CustomNumber;
+            }
+            set
+            {
+                customer = value;
+            }
+        }*/
     }
 
     public class Orderline
@@ -41,4 +53,5 @@ namespace LNE_ERP
             Antal = antal;
         }
     }
+
 }
