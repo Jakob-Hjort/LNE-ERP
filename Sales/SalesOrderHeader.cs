@@ -13,8 +13,8 @@ namespace LNE_ERP
         public DateTime ImplementationTime { get; set; }
         public int CustomerId { get; set; }
         public OrderStatus Status { get; set; }
-        public List<Orderline> OrdreLines { get; set; }
-        public decimal OrderAmount => OrdreLines.Sum(ol => ol.Pris * ol.Antal);
+        public List<Orderline> OrderLines { get; set; }
+        public decimal OrderAmount => OrderLines.Sum(ol => ol.Pris * ol.Antal);
         public SalesOrderHeader() { }
         public SalesOrderHeader(int ordernumber, DateTime creationtime, DateTime implementationtime,
             int customerid, OrderStatus status, List<Orderline> ordrelines)
@@ -24,7 +24,7 @@ namespace LNE_ERP
             ImplementationTime = implementationtime;
             CustomerId = customerid;
             Status = status;
-            OrdreLines = ordrelines;
+            OrderLines = ordrelines;
         }
 
        /* public int Customertest
@@ -46,6 +46,7 @@ namespace LNE_ERP
         public decimal Pris { get; set; }
         public int Antal { get; set; }
 
+        public Orderline() { }
         public Orderline(string vare, decimal pris, int antal)
         {
             Vare = vare;

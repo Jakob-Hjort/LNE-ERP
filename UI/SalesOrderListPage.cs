@@ -26,6 +26,9 @@ namespace LNE_ERP
             listPage.AddKey(ConsoleKey.F2, editSalesOrder);
             Console.WriteLine("Tryk F2 for at redigere");
 
+            listPage.AddKey(ConsoleKey.F4, ShowSalesOrderLines);
+            Console.WriteLine("Tryk F4 for at vise listen af ordrer");
+
             listPage.AddKey(ConsoleKey.F5, removeSalesOrder);
             Console.WriteLine("Tryk F5 for at slette ");
 
@@ -65,6 +68,11 @@ namespace LNE_ERP
             Database.instance.DeleteSalesOrder(salesOrder);
             Screen.Clear(this);
             Draw();
+        }
+
+        void ShowSalesOrderLines(SalesOrderHeader salesOrder)
+        {
+            Screen.Display(new SalesOrderLines(salesOrder));
         }
     }
 }

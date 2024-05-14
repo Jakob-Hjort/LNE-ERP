@@ -40,14 +40,6 @@ namespace LNE_ERP
             set => Addresses.City = value;
         }
 
-
-        /* public Customer(string firstname, string lastname, string address, string contactinfo, int customernumber, DateTime lastpurchasedate, string email, int phonenumber)
-          : base(firstname, lastname, address, contactinfo, email, phonenumber)
-         {
-             CustomerNumber = customernumber;
-             LastPurchaseDate = lastpurchasedate;
-
-         }*/
     }
 }
 
