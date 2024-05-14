@@ -120,9 +120,24 @@ namespace LNE_ERP
             {
                 return;
             }
-            if (companies.Contains(company))
+            using (var conn = getConnection())
             {
-                companies.Remove(company);
+                conn.Open();
+                string sql = "DELETE FROM companies WHERE CompanyId = @CompanyId";
+                SqlCommand command = new SqlCommand(sql, conn);
+                command.Parameters.AddWithValue("@CompanyId", company.CompanyId);
+
+                // Fjern virksomheden fra databasen
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    // Fjern virksomheden fra listen, hvis den blev slettet fra databasen
+                    if (companies.Contains(company))
+                    {
+                        companies.Remove(company);
+                    }
+                }
             }
         }
     }
