@@ -9,11 +9,8 @@ namespace LNE_ERP
 {
     public partial class Database
     {
-        List<Company> companies = new()
-            {
-            new Company {CompanyId = 1, CompanyName = "Foderbrættet A/S",StreetName = "Øster Uttrup",HouseNumber = "2",ZipCode = "9000",City = "Aalborg",Country = "Danmark", Currency = Currency.DKK},
-            //new Company {CompanyId = 2, CompanyName = "Foodboard Ltd", Country = "USA", Currency = Currency.USD}
-            };
+        List<Company> companies = new();
+
         public Company GetCompanyById(int id)
         {
             foreach (var company in companies)
@@ -26,14 +23,6 @@ namespace LNE_ERP
             return null;
         }
 
-        //public List<Company> GetCompanies()
-        //{
-
-        //    List<Company> companyCopy = new();
-        //    companyCopy.AddRange(companies);
-        //    return companyCopy;
-        //}
-
         public List<Company> GetCompanies()
         {
 
@@ -41,7 +30,7 @@ namespace LNE_ERP
             using (SqlConnection conn = getConnection())
             {
                 conn.Open();
-                string sql = "Select CompanyId, CompanyName, CompanyStreet FROM companies";
+                string sql = "Select CompanyId, CompanyName, StreetName, HouseNumber, ZipCode, City, Country, Currency FROM companies";
                 SqlCommand command = conn.CreateCommand();
                 command.CommandText = sql;
 
@@ -53,7 +42,11 @@ namespace LNE_ERP
                         company.CompanyId = reader.GetInt32(0);
                         company.CompanyName = reader.GetString(1);
                         company.StreetName = reader.GetString(2);
-                        company.Currency = (Currency)reader.GetInt32(3);
+                        company.HouseNumber = reader.GetString(3);
+                        company.ZipCode = reader.GetString(4);
+                        company.City = reader.GetString(5);
+                        company.Country = reader.GetString(6);
+                        company.Currency = (Currency)reader.GetInt32(7);
                         companyList.Add(company);
 
                     }
@@ -74,17 +67,30 @@ namespace LNE_ERP
 
             using (var conn = getConnection())
             {
-                string sql = "INSERT INTO .....";
-                SqlCommand command = conn.CreateCommand();
-                command.CommandText = sql;
-                command.ExecuteNonQuery();
+                conn.Open();
+                string sql = "INSERT INTO companies (CompanyName, StreetName, HouseNumber, ZipCode, City, Country, Currency) VALUES (@CompanyName, @StreetName, @HouseNumber, @ZipCode, @City, @Country, @Currency)";
+                SqlCommand command = new SqlCommand(sql, conn);
+                command.Parameters.AddWithValue("@CompanyName", company.CompanyName);
+                command.Parameters.AddWithValue("@StreetName", company.StreetName);
+                command.Parameters.AddWithValue("@HouseNumber", company.HouseNumber);
+                command.Parameters.AddWithValue("@ZipCode", company.ZipCode);
+                command.Parameters.AddWithValue("@City", company.City);
+                command.Parameters.AddWithValue("@Country", company.Country);
+                command.Parameters.AddWithValue("@Currency", company.Currency);
+                try
+                {
+                    command.ExecuteNonQuery();
+                    //get id
+                    command = conn.CreateCommand();
+                    command.CommandText = "SELECT SCOPE_IDENTITY()";
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    company.CompanyId = reader.GetInt32(0);
 
-                //get id
-                command = conn.CreateCommand();
-                command.CommandText = "SELECT SCOPE_IDENTITY()";
-                SqlDataReader reader = command.ExecuteReader();
-                reader.Read();
-                company.CompanyId = reader.GetInt32(0);
+                }catch (Exception ex) { 
+                    Console.WriteLine(ex.Message);
+                }
+
             }
 
             company.CompanyId = companies.Count + 1;
