@@ -27,7 +27,13 @@ namespace LNE_ERP
             form.TextBox("Oprettelsestidspunkt", nameof(SalesOrderHeader.Creationstime));
             form.TextBox("Gennemførelsestidspunkt", nameof(SalesOrderHeader.ImplementationTime));
             form.TextBox("CustomerID", nameof(SalesOrderHeader.CustomerId));
-            form.TextBox("Tilstand", nameof(SalesOrderHeader.Status));
+            form.SelectBox("Tilstand", nameof(SalesOrderHeader.Status));
+
+            form.AddOption("Tilstand", "None", OrderStatus.None);
+            form.AddOption("Tilstand", "Created", OrderStatus.Created);
+            form.AddOption("Tilstand", "Confirmed", OrderStatus.Confirmed);
+            form.AddOption("Tilstand", "Packed", OrderStatus.Packed);
+            form.AddOption("Tilstand", "Done", OrderStatus.Done);
 
             if (form.Edit(salesorder))
             {

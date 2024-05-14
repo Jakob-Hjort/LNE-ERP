@@ -46,7 +46,7 @@ namespace LNE_ERP
             Console.WriteLine("Press F2 to edit");
             AddKey(ConsoleKey.F2, () =>
             {
-                
+                Screen.Display(new SalesOrderEditor(SalesOrder));
             });
             ExitOnEscape();
         }
