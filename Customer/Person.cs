@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,8 +21,6 @@ namespace LNE_ERP
         public string Email { get; set; }
 
         public int PhoneNumber { get; set; }
-
-        public int CSID { get; set; }
 
 
        /* public Person(string firstname, string lastname, string address, string contactinfo, string email,int phonenumber)
