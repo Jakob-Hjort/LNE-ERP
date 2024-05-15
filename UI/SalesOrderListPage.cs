@@ -39,7 +39,7 @@ namespace LNE_ERP
             listPage.AddColumn("Produceret", nameof(SalesOrderHeader.ImplementationTime), 20);
             listPage.AddColumn("Tilstand", nameof(SalesOrderHeader.Status), 8);
 
-            var salesOrders = Database.instance.GetSalesOrderHeaders();
+            var salesOrders = Database.instance.GetSalesOrderHeader();
             foreach (SalesOrderHeader model in salesOrders)
             {
                 listPage.Add(model);

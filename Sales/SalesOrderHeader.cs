@@ -42,10 +42,10 @@ namespace LNE_ERP
 
     public class Orderline
     {
+
         public string Vare { get; set; }
         public decimal Pris { get; set; }
         public int Antal { get; set; }
-
         public Orderline() { }
         public Orderline(string vare, decimal pris, int antal)
         {

@@ -32,11 +32,6 @@ namespace LNE_ERP
             form.TextBox("Antal på lager", nameof(Product.Quantity));
             form.TextBox("Enhed", nameof(Product.Units));
 
-            //form.AddOption("Currency", "DKK", Currency.DKK);
-            //form.AddOption("Currency", "EUR", Currency.EUR);
-            //form.AddOption("Currency", "USD", Currency.USD);
-            //form.AddOption("Currency", "SEK", Currency.SEK);
-
             if (form.Edit(Products))
             {
                 if (Products.ProductId != 0)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,24 +10,11 @@ namespace LNE_ERP
 {
     public partial class Database
     {
-       
-        public void Testdata()
+        List<SalesOrderHeader> Sales = new();
+
+        public SalesOrderHeader GetSalesOrderById(int id)
         {
-            Orderline Orderline1 = new Orderline { Vare = "Første licens til ERN systemet", Antal = 10, Pris = 1000 };
-            Orderline Orderline2 = new Orderline { Vare = "Anden licens til ERN systemet", Antal = 5, Pris = 5000 };
-            Orderline Orderline3 = new Orderline { Vare = "Tredje licens til ERN systemet", Antal = 2, Pris = 111000 };
-
-
-            salesOrderHeader = new List<SalesOrderHeader>()
-            {
-                new SalesOrderHeader() {OrderNumber = 1109,
-                OrderLines = new List<Orderline>() {Orderline1, Orderline2, Orderline3}}
-            };
-        }
-
-        public SalesOrderHeader GetSalesOrderById1(int id)
-        {
-            foreach (var salesorder in salesOrderHeader)
+            foreach (var salesorder in Sales)
             {
                 if (salesorder.OrderNumber == id)
                 {
@@ -35,29 +23,66 @@ namespace LNE_ERP
             }
             return null;
         }
-        public List<SalesOrderHeader> GetSalesOrderHeaders()
+        public List<SalesOrderHeader> GetSalesOrderHeader()
         {
-            List<SalesOrderHeader> Ordercopy = new();
-            Ordercopy.AddRange(salesOrderHeader);
-            return Ordercopy;
-        }
-
-        public List<Orderline> GetSalesOrderLines()
-        {
-            List<Orderline> orderLinesCopy = new List<Orderline>();
-
-            // Loop through each sales order header
-            foreach (var salesOrder in salesOrderHeader)
+            List<SalesOrderHeader> sales = new();
+            using (SqlConnection conn = getConnection())
             {
-                // Loop through each order line in the sales order header
-                foreach (var orderLine in salesOrder.OrderLines)
+                conn.Open();
+                string sql = "Select OrderNumber, Creationtime, ImplementationTime, CustomerId, Status FROM SalesOrderHeader";
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = sql;
+
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    // Add the order line to the copy list
-                    orderLinesCopy.Add(orderLine);
+                    while (reader.Read())
+                    {
+                        SalesOrderHeader header = new();
+                        header.OrderNumber = reader.GetInt32(0);
+                        header.Creationstime = reader.GetDateTime(1);
+                        header.ImplementationTime = reader.GetDateTime(2);
+                        header.CustomerId = reader.GetInt32(3);
+                        header.Status = (OrderStatus)reader.GetInt32(4);
+                        sales.Add(header);
+
+                    }
+
                 }
+
+            }
+            foreach (var s in sales)
+            {
+                LoadOrderLines(s);
             }
 
-            return orderLinesCopy;
+            return sales;
+        }
+        public void LoadOrderLines(SalesOrderHeader header)
+        {
+            header.OrderLines = new();
+            using (SqlConnection conn = getConnection())
+            {
+                conn.Open();
+                string sql = "Select Vare, Pris FROM Orderlines WHERE salesOrder = " + header.OrderNumber;
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = sql;
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Orderline line = new();
+                        line.Vare = reader.GetString(0);
+                        line.Pris = reader.GetDecimal(1);
+                        line.Antal = reader.GetInt32(2);
+                        header.OrderLines.Add(line);
+
+                    }
+
+                }
+
+            }
+
         }
 
         public void InsertSalesOrder(SalesOrderHeader salesorder)
@@ -66,9 +91,15 @@ namespace LNE_ERP
             {
                 return;
             }
-            salesorder.OrderNumber = salesOrderHeader.Count+1;
-            salesOrderHeader.Add(salesorder);
+            
+            using (var conn = getConnection())
+            {
+                conn.Open();
+                string sql = "INSERT INTO Sales (";
+            }
         }
+
+
 
         public void UpdateSalesOrder(SalesOrderHeader salesorder)
         {
@@ -155,6 +186,24 @@ namespace LNE_ERP
                 salesOrderHeader.Remove(salesorder);
             }
         }*/
+
+        //public List<Orderline> GetSalesOrderLines()
+        //{
+        //    List<Orderline> orderLinesCopy = new List<Orderline>();
+
+        //    // Loop through each sales order header
+        //    foreach (var salesOrder in salesOrderHeader)
+        //    {
+        //        // Loop through each order line in the sales order header
+        //        foreach (var orderLine in salesOrder.OrderLines)
+        //        {
+        //            // Add the order line to the copy list
+        //            orderLinesCopy.Add(orderLine);
+        //        }
+        //    }
+
+        //    return orderLinesCopy;
+        //}
     }
 }
     
