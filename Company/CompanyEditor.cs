@@ -23,11 +23,6 @@ namespace LNE_ERP
             ExitOnEscape();
             Form<Company> form = new();
 
-            Console.BackgroundColor = ConsoleColor.Red;
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("-Du SKAL gem ændringer efter hver linje-");
-            Console.ResetColor();
-
             form.TextBox("Name", nameof(Company.CompanyName));
             form.TextBox("Gadenavn", nameof(Company.StreetName));
             form.TextBox("HusNummer", nameof(Company.HouseNumber));
