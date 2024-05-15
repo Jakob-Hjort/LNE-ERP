@@ -95,24 +95,61 @@ namespace LNE_ERP
             using (var conn = getConnection())
             {
                 conn.Open();
-                string sql = "INSERT INTO Sales (";
+                string sql = "INSERT INTO SalesOrderHeader (Creationtime, ImplementationTime, CustomerId, Status) VALUES (@Creationtime, @ImplementationTime, @CustomerId, @Status)";
+                SqlCommand command = new SqlCommand(sql, conn);
+                command.Parameters.AddWithValue("@Creationtime", salesorder.Creationstime);
+                command.Parameters.AddWithValue("@ImplementationTime", salesorder.ImplementationTime);
+                command.Parameters.AddWithValue("@CustomerId", salesorder.CustomerId);
+                command.Parameters.AddWithValue("@Status", salesorder.Status);
+                try
+                {
+                    command.ExecuteNonQuery();
+                    command = conn.CreateCommand();
+                    command.CommandText = "SELECT SCOPE_IDENTITY();";
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    salesorder.OrderNumber = reader.GetInt32(0);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
+
+            salesorder.OrderNumber = Sales.Count + 1;
+            Sales.Add(salesorder);
+
         }
-
-
-
         public void UpdateSalesOrder(SalesOrderHeader salesorder)
         {
             if (salesorder.OrderNumber == 0)
             {
                 return;
             }
-
-            for (var i = 0; i < salesOrderHeader.Count; i++)
+            using (var conn = getConnection())
             {
-                if (salesOrderHeader[i].OrderNumber == salesorder.OrderNumber)
+                conn.Open();
+                string sql = "UPDATE SalesOrderHeader SET Creationtime = @Creationtime, ImplementationTime = @ImplementationTime, CustomerId = @CustomerId, Status = @Status WHERE OrderNumber = @OrderNumber";
+                SqlCommand command = new SqlCommand(sql, conn);
+                command.Parameters.AddWithValue("@Creationtime", salesorder.Creationstime);
+                command.Parameters.AddWithValue("@ImplementationTime", salesorder.ImplementationTime);
+                command.Parameters.AddWithValue("@CustomerId", salesorder.CustomerId);
+                command.Parameters.AddWithValue("@Status", salesorder.Status);
+                command.Parameters.AddWithValue("@OrderNumber", salesorder.OrderNumber);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
                 {
-                    salesOrderHeader[i] = salesorder;
+                   
+                    for (int i = 0; i < Sales.Count; i++)
+                    {
+                        if (Sales[i].OrderNumber == salesorder.OrderNumber)
+                        {
+                            Sales[i] = salesorder;
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -123,87 +160,8 @@ namespace LNE_ERP
             {
                 return;
             }
-            if (salesOrderHeader.Contains(salesorder))
-            {
-                salesOrderHeader.Remove(salesorder);
-            }
+
         }
-
-        //
-        //  ------------ SALES ORDER LINES -------------
-        /*
-
-        public void TESTDATAORDERLINES()
-        {
-            salesOrderLines = new List<Orderline>()
-            {
-                new Orderline() { Vare = "Første licens til ERN systemet",Antal= 10,Pris=1000}
-            };
-        }
-
-
-        public List<Orderline> GetSalesOrderLine()
-        {
-            List<Orderline> Ordercopy = new();
-            Ordercopy.AddRange(salesOrderLine);
-            return Ordercopy;
-        }
-
-        public void InsertSalesOrderLines(Orderline salesorderline)
-        {
-            if (salesorderline. != 0)
-            {
-                return;
-            }
-            salesorder.OrderNumber = salesOrderHeader.Count + 1;
-            salesOrderHeader.Add(salesorder);
-        }
-
-        public void UpdateSalesOrder(SalesOrderHeader salesorder)
-        {
-            if (salesorder.OrderNumber == 0)
-            {
-                return;
-            }
-
-            for (var i = 0; i < salesOrderHeader.Count; i++)
-            {
-                if (salesOrderHeader[i].OrderNumber == salesorder.OrderNumber)
-                {
-                    salesOrderHeader[i] = salesorder;
-                }
-            }
-        }
-
-        public void DeleteSalesOrder(SalesOrderHeader salesorder)
-        {
-            if (salesorder.OrderNumber == 0)
-            {
-                return;
-            }
-            if (salesOrderHeader.Contains(salesorder))
-            {
-                salesOrderHeader.Remove(salesorder);
-            }
-        }*/
-
-        //public List<Orderline> GetSalesOrderLines()
-        //{
-        //    List<Orderline> orderLinesCopy = new List<Orderline>();
-
-        //    // Loop through each sales order header
-        //    foreach (var salesOrder in salesOrderHeader)
-        //    {
-        //        // Loop through each order line in the sales order header
-        //        foreach (var orderLine in salesOrder.OrderLines)
-        //        {
-        //            // Add the order line to the copy list
-        //            orderLinesCopy.Add(orderLine);
-        //        }
-        //    }
-
-        //    return orderLinesCopy;
-        //}
     }
 }
     
