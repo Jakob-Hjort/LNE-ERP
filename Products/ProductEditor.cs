@@ -23,11 +23,6 @@ namespace LNE_ERP
             ExitOnEscape();
             Form<Product> form = new();
 
-            Console.BackgroundColor = ConsoleColor.Red;
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("-Du SKAL gem ændringer efter hver linje-");
-            Console.ResetColor();
-
             form.TextBox("VareNummer", nameof(Product.Itemnumber));
             form.TextBox("Navn", nameof(Product.Name));
             form.TextBox("Beskrivelse", nameof(Product.Description));
