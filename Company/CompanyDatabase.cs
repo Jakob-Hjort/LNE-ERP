@@ -105,11 +105,34 @@ namespace LNE_ERP
                 return;
             }
 
-            for (var i = 0; i < companies.Count; i++)
+            using (var conn = getConnection())
             {
-                if (companies[i].CompanyId == company.CompanyId)
+                conn.Open();
+                string sql = "UPDATE companies SET CompanyName = @CompanyName, StreetName = @StreetName, HouseNumber = @HouseNumber, ZipCode = @ZipCode, City = @City, Country = @Country, Currency = @Currency WHERE CompanyId = @CompanyId";
+                SqlCommand command = new SqlCommand(sql, conn);
+                command.Parameters.AddWithValue("@CompanyName", company.CompanyName);
+                command.Parameters.AddWithValue("@StreetName", company.StreetName);
+                command.Parameters.AddWithValue("@HouseNumber", company.HouseNumber);
+                command.Parameters.AddWithValue("@ZipCode", company.ZipCode);
+                command.Parameters.AddWithValue("@City", company.City);
+                command.Parameters.AddWithValue("@Country", company.Country);
+                command.Parameters.AddWithValue("@Currency", company.Currency);
+                command.Parameters.AddWithValue("@CompanyId", company.CompanyId);
+
+                // Opdater virksomheden i databasen
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
                 {
-                    companies[i] = company;
+                    // Opdater virksomheden i listen, hvis den blev opdateret i databasen
+                    for (int i = 0; i < companies.Count; i++)
+                    {
+                        if (companies[i].CompanyId == company.CompanyId)
+                        {
+                            companies[i] = company;
+                            break; // Vi har fundet og opdateret virksomheden, så vi kan afslutte løkken
+                        }
+                    }
                 }
             }
         }

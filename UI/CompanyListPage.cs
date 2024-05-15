@@ -36,8 +36,8 @@ namespace LNE_ERP
             Console.WriteLine("Tryk F5 for at slette virksomhed");
 
             //Add some columns
-            listPage.AddColumn("Selskab", nameof(Company.CompanyName), 20);
-            listPage.AddColumn("Land", nameof(Company.Country));
+            listPage.AddColumn("Selskab", nameof(Company.CompanyName), 30);
+            listPage.AddColumn("Land", nameof(Company.Country),20);
             listPage.AddColumn("Valuta", nameof(Company.Currency), 8);
 
             //Get companies from the database and add them to the list
