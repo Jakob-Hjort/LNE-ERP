@@ -43,7 +43,7 @@ namespace LNE_ERP
             form.TextBox("Email", nameof(Customer.Email));
             if (form.Edit(customer))
             {
-                if (customer.CustomerNumber != 0)
+                if (customer.CustomerID != 0)
                 {
                     Database.instance.UpdateCustomer(customer);
                 }

@@ -12,11 +12,11 @@ namespace LNE_ERP
     {
         List<Customer> customers = new();
 
-        public Customer GetCustomerrById(int id)
+        public Customer GetCustomerById(int id)
         {
             foreach (var customer in customerlist)
             {
-                if (customer.CustomerNumber == id)
+                if (customer.CustomerID == id)
                 {
                     return customer;
                 }
@@ -30,7 +30,7 @@ namespace LNE_ERP
             using (SqlConnection conn = getConnection())
             {
                 conn.Open();
-                string sql = "Select PersonID, FirstName, LastName, Email, PhoneNumber, Streetname, Housenumber, City, Postalcode FROM Person inner join Addresses on Person.AddressID = Addresses.AddressID";
+                string sql = "Select CustomerID, Person.PersonID, FirstName, LastName, Email, PhoneNumber, Streetname, Housenumber, City, Postalcode FROM Person inner join Addresses on Person.AddressID = Addresses.AddressID inner join Customer on Customer.PersonID = Person.PersonID ";
                 SqlCommand command = conn.CreateCommand();
                 command.CommandText = sql;
 
@@ -39,18 +39,19 @@ namespace LNE_ERP
                     while (reader.Read())
                     {
                         Addresses addresses = new();
-                        addresses.Streetname = reader.GetString(5);
-                        addresses.Housenumber = reader.GetString(6);
-                        addresses.City = reader.GetString(7);
-                        addresses.Postalcode = reader.GetInt32(8);
+                        addresses.Streetname = reader.GetString(6);
+                        addresses.Housenumber = reader.GetString(7);
+                        addresses.City = reader.GetString(8);
+                        addresses.Postalcode = reader.GetInt32(9);
 
 
                         Customer customer = new();
-                        customer.PersonID = reader.GetInt32(0);
-                        customer.FirstName = reader.GetString(1);
-                        customer.LastName = reader.GetString(2);
-                        customer.Email = reader.GetString(3);
-                        customer.PhoneNumber = reader.GetString(4);
+                        customer.CustomerID = reader.GetInt32(0);
+                        customer.PersonID = reader.GetInt32(1);
+                        customer.FirstName = reader.GetString(2);
+                        customer.LastName = reader.GetString(3);
+                        customer.Email = reader.GetString(4);
+                        customer.PhoneNumber = reader.GetString(5);
                         customer.Addresses = addresses;
                         customerList.Add(customer);
                     }
@@ -86,10 +87,12 @@ namespace LNE_ERP
                     command1.Parameters.AddWithValue("@Housenumber", customer.Addresses.Housenumber);
                     command1.Parameters.AddWithValue("@Postalcode", customer.Addresses.Postalcode);
                     command1.Parameters.AddWithValue("@City", customer.Addresses.City);
-                    //command.ExecuteNonQuery();
+ 
 
                     addresseId = Convert.ToInt32(command1.ExecuteScalar());
                 }
+
+                // inset person først og lad variable peje på PersonID i customer.
 
                 sql = "INSERT INTO Person (FirstName, LastName, Email, PhoneNumber, AddressID) VALUES (@FirstName, @LastName, @Email, @PhoneNumber, @AddressID); SELECT SCOPE_IDENTITY()";
                 SqlCommand command = new SqlCommand(sql, conn);
@@ -98,6 +101,7 @@ namespace LNE_ERP
                 command.Parameters.AddWithValue("@Email", customer.Email);
                 command.Parameters.AddWithValue("@PhoneNumber", customer.PhoneNumber);
                 command.Parameters.AddWithValue("@AddressID", addresseId);
+                //command.Parameters.AddWithValue("@Fullname")
                 try
                 {
                     
@@ -110,6 +114,8 @@ namespace LNE_ERP
                 {
                     Console.WriteLine(ex.Message);
                 }
+
+                sql = "INSERT INTO Customer (PersonID,"
             }
 
             customers.Add(customer);
@@ -119,14 +125,14 @@ namespace LNE_ERP
 
         public void UpdateCustomer(Customer customer)
         {
-            if (customer.CustomerNumber == 0)
+            if (customer.CustomerID == 0)
             {
                 return;
             }
 
             for (var i = 0; i < customerlist.Count; i++)
             {
-                if (customerlist[i].CustomerNumber == customer.CustomerNumber)
+                if (customerlist[i].CustomerID == customer.CustomerID)
                 {
                     customerlist[i] = customer;
                 }
@@ -135,7 +141,7 @@ namespace LNE_ERP
 
         public void DeleteCustomer(Customer customer)
         {
-            if (customer.CustomerNumber == 0)
+            if (customer.CustomerID == 0)
             {
                 return;
             }
