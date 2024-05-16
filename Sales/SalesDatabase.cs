@@ -59,9 +59,10 @@ namespace LNE_ERP
             using (SqlConnection conn = getConnection())
             {
                 conn.Open();
-                string sql = "Select Vare, Pris FROM Orderlines WHERE salesOrder = " + header.OrderNumber;
+                string sql = "SELECT Vare, Pris, Antal FROM OrderLines WHERE OrderNumber = " + header.OrderNumber; // Ændret af Emil
                 SqlCommand command = conn.CreateCommand();
                 command.CommandText = sql;
+                command.Parameters.AddWithValue("@OrderNumber", header.OrderNumber); // Tilføjet af Emil
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
