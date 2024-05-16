@@ -34,7 +34,7 @@ namespace LNE_ERP
             Console.WriteLine("Tryk F5 for at slette Person");
 
             //Add some columns
-            listPage.AddColumn("Kunde id", nameof(Customer.CustomerNumber), 10);
+            listPage.AddColumn("Kunde id", nameof(Customer.PersonID), 10);
             listPage.AddColumn("Fulde navn", nameof(Customer.FullName),20);
             listPage.AddColumn("Tlf. nummer", nameof(Customer.PhoneNumber), 11);
             listPage.AddColumn("Email", nameof(Customer.Email), 30);

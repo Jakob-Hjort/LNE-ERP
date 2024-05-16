@@ -22,23 +22,17 @@ namespace LNE_ERP
         protected override void Draw()
         {
 
-                Console.WriteLine($"Kunde ID:{customer.CustomerNumber}");
-                Console.WriteLine($"Fuldenavn:{customer.FullName}");
-                Console.WriteLine($"-----------------------------");
+            Console.WriteLine($"Kunde ID:{customer.PersonID}");
+            Console.WriteLine($"Fuldenavn:{customer.FullName}");
+            
+            Console.WriteLine($"-----------------------------");
+            Console.WriteLine($"Vejnavn:{customer.Addresses.Streetname}");
+            Console.WriteLine($"Hus nummer:{customer.Addresses.Housenumber}");
+            Console.WriteLine($"Postnummer:{customer.Addresses.Postalcode}");
+            Console.WriteLine($"By:{customer.Addresses.City}");
 
-            if (customer != null)
-            {
 
-                Console.WriteLine($"Vejnavn:{customer.Addresses.Streetname}");
-                Console.WriteLine($"Hus nummer:{customer.Addresses.Housenumber}");
-                Console.WriteLine($"Postnummer:{customer.Addresses.Postalcode}");
-                Console.WriteLine($"By:{customer.Addresses.City}");
 
-            }
-            else
-            {
-                Console.WriteLine("Ingen Adresse tilgænlig");
-            }
             Console.WriteLine($"-----------------------------");
             Console.WriteLine($"Sidste Købs dato:{customer.LastPurchaseDate}");
             //Console.WriteLine($"Telefon nummer:{customer.PhoneNumber}");

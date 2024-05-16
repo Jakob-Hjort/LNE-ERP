@@ -9,11 +9,6 @@ namespace LNE_ERP
     public class Customer : Person
     {
 
-        public Customer() 
-        { 
-            Addresses = new Addresses();
-        }
-
         public Addresses Addresses { get; set; }
         public int CustomerNumber { get; set; }
         public DateTime LastPurchaseDate { get; set; }

@@ -30,7 +30,7 @@ namespace LNE_ERP
             using (SqlConnection conn = getConnection())
             {
                 conn.Open();
-                string sql = "Select PersonID, FirstName, LastName, Email, PhoneNumber FROM Person";
+                string sql = "Select PersonID, FirstName, LastName, Email, PhoneNumber, Streetname, Housenumber, City, Postalcode FROM Person inner join Addresses on Person.AddressID = Addresses.AddressID";
                 SqlCommand command = conn.CreateCommand();
                 command.CommandText = sql;
 
@@ -38,12 +38,20 @@ namespace LNE_ERP
                 {
                     while (reader.Read())
                     {
+                        Addresses addresses = new();
+                        addresses.Streetname = reader.GetString(5);
+                        addresses.Housenumber = reader.GetString(6);
+                        addresses.City = reader.GetString(7);
+                        addresses.Postalcode = reader.GetInt32(8);
+
+
                         Customer customer = new();
                         customer.PersonID = reader.GetInt32(0);
                         customer.FirstName = reader.GetString(1);
                         customer.LastName = reader.GetString(2);
-                        customer.Email = reader.GetString(4);
-                        //customer.PhoneNumber = reader.GetString(5);
+                        customer.Email = reader.GetString(3);
+                        customer.PhoneNumber = reader.GetString(4);
+                        customer.Addresses = addresses;
                         customerList.Add(customer);
                     }
                 }
@@ -64,35 +72,39 @@ namespace LNE_ERP
             using (var conn = getConnection())
             {
                 conn.Open();
-                string sql = "INSERT INTO Person (FirstName, LastName, Email, PhoneNumber) VALUES (@FirstName, @LastName, @Email, @PhoneNumber)";
+                string sql;
+                int addresseId = 0;
+
+
+                if (customer.Addresses != null)
+                {
+                    sql = "INSERT INTO Addresses (Streetname, Housenumber, Postalcode, City) VALUES (@Streetname, @Housenumber, @Postalcode, @City); SELECT SCOPE_IDENTITY()";
+                    SqlCommand command1 = new SqlCommand(sql, conn);
+                    //command.CommandText = sql;
+                    command1.Parameters.Clear();
+                    command1.Parameters.AddWithValue("@Streetname", customer.Addresses.Streetname);
+                    command1.Parameters.AddWithValue("@Housenumber", customer.Addresses.Housenumber);
+                    command1.Parameters.AddWithValue("@Postalcode", customer.Addresses.Postalcode);
+                    command1.Parameters.AddWithValue("@City", customer.Addresses.City);
+                    //command.ExecuteNonQuery();
+
+                    addresseId = Convert.ToInt32(command1.ExecuteScalar());
+                }
+
+                sql = "INSERT INTO Person (FirstName, LastName, Email, PhoneNumber, AddressID) VALUES (@FirstName, @LastName, @Email, @PhoneNumber, @AddressID); SELECT SCOPE_IDENTITY()";
                 SqlCommand command = new SqlCommand(sql, conn);
                 command.Parameters.AddWithValue("@FirstName", customer.FirstName);
                 command.Parameters.AddWithValue("@LastName", customer.LastName);
                 command.Parameters.AddWithValue("@Email", customer.Email);
                 command.Parameters.AddWithValue("@PhoneNumber", customer.PhoneNumber);
+                command.Parameters.AddWithValue("@AddressID", addresseId);
                 try
                 {
-                    // Få Id.
-                    command.ExecuteNonQuery();
-                    command = conn.CreateCommand();
-                    command.CommandText = "SELECT SCOPE_IDENTITY()";
-                    SqlDataReader reader = command.ExecuteReader();
-                    reader.Read();
-                    customer.PersonID = reader.GetInt32(0);
-                    reader.Close();
+                    
+                    int personId = Convert.ToInt32(command.ExecuteScalar());
+                    customer.PersonID = personId;
 
-                    // Indsæt adresseoplysninger, hvis de er tilgængelige
-                    if (customer.Addresses != null)
-                    {
-                        sql = "INSERT INTO Addresses (Streetname, Housenumber, Postalcode, City) VALUES (@Streetname, @Housenumber, @Postalcode, @City)";
-                        command.CommandText = sql;
-                        command.Parameters.Clear();
-                        command.Parameters.AddWithValue("@Streetname", customer.Addresses.Streetname);
-                        command.Parameters.AddWithValue("@Housenumber", customer.Addresses.Housenumber);
-                        command.Parameters.AddWithValue("@Postalcode", customer.Addresses.Postalcode);
-                        command.Parameters.AddWithValue("@City", customer.Addresses.City);
-                        command.ExecuteNonQuery();
-                    }
+          
                 }
                 catch (Exception ex)
                 {
@@ -102,6 +114,7 @@ namespace LNE_ERP
 
             customers.Add(customer);
         }
+
 
 
         public void UpdateCustomer(Customer customer)
