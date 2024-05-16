@@ -23,15 +23,15 @@ namespace LNE_ERP
 
             //V4 - Add keys to create company
             listPage.AddKey(ConsoleKey.F1, createNewCustomer);
-            Console.WriteLine("Tryk F1 for at oprette en Person");
+            Console.WriteLine("Tryk F1 for at oprette en Kunde.");
 
             //V5 - Add key to edit company
             listPage.AddKey(ConsoleKey.F2, editCustomer);
-            Console.WriteLine("Tryk F2 for at redigere Person");
+            Console.WriteLine("Tryk F2 for at redigere Kunde.");
 
             //V6 - Add key to edit company
             listPage.AddKey(ConsoleKey.F5, removeCustomer);
-            Console.WriteLine("Tryk F5 for at slette Person");
+            Console.WriteLine("Tryk F5 for at slette Kunde.");
 
             //Add some columns
             listPage.AddColumn("Kunde id", nameof(Customer.PersonID), 10);
