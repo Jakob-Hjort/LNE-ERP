@@ -8,6 +8,13 @@ namespace LNE_ERP
 {
     public class Customer : Person
     {
+
+        public Customer() 
+        { 
+            Addresses = new Addresses();
+        }
+
+        public Addresses Addresses { get; set; }
         public int CustomerNumber { get; set; }
         public DateTime LastPurchaseDate { get; set; }
         public string Street
@@ -39,7 +46,6 @@ namespace LNE_ERP
             get => Addresses.City;
             set => Addresses.City = value;
         }
-
     }
 }
 

@@ -17,7 +17,7 @@ namespace LNE_ERP
 
         public CustomerEditor(Customer customer)
         {
-            Title = "Redigerer for " + customer.Fullname;
+            Title = "Redigerer for " + customer.FullName;
             this.customer = customer;
         }
 
@@ -33,8 +33,8 @@ namespace LNE_ERP
             ExitOnEscape();
             Form<Customer> form = new();
 
-            form.TextBox("Fornavn", nameof(Customer.Firstname));
-            form.TextBox("Efternavn", nameof(Customer.Lastname));
+            form.TextBox("Fornavn", nameof(Customer.FirstName));
+            form.TextBox("Efternavn", nameof(Customer.LastName));
             form.TextBox("Vejnavn", nameof(Customer.Street));
             form.TextBox("Husnummer", nameof(Customer.Housenumer));
             form.TextBox("Postnummer", nameof(Customer.postalcode));

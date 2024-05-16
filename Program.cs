@@ -11,7 +11,8 @@ namespace LNE_ERP
             //Testdata udkommenter når vi kobler database på
             //Database.instance.Testdata();
 
-            Database.instance.CustomerTestdata();
+            //Database.instance.CustomerTestdata();
+            //Database.instance.GetCustomer();
 
             //Show main menu
             Screen.Display(new MainMenu());

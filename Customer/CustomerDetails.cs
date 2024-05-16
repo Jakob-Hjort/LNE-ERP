@@ -15,20 +15,30 @@ namespace LNE_ERP
 
         public CustomerDetails(Customer customer)
         {
-            Title = "Detaljer for " + customer.Fullname;
+            Title = "Detaljer for " + customer.FullName;
             this.customer = customer;
         }
 
         protected override void Draw()
         {
 
-            Console.WriteLine($"Kunde ID:{customer.CustomerNumber}");
-            Console.WriteLine($"Fuldenavn:{customer.Fullname}");
-            Console.WriteLine($"-----------------------------");
-            Console.WriteLine($"Vejnavn:{customer.Addresses.Streetname}");
-            Console.WriteLine($"Hus nummer:{customer.Addresses.Housenumber}");
-            Console.WriteLine($"Postnummer:{customer.Addresses.Postalcode}");
-            Console.WriteLine($"By:{customer.Addresses.City}");
+                Console.WriteLine($"Kunde ID:{customer.CustomerNumber}");
+                Console.WriteLine($"Fuldenavn:{customer.FullName}");
+                Console.WriteLine($"-----------------------------");
+
+            if (customer != null)
+            {
+
+                Console.WriteLine($"Vejnavn:{customer.Addresses.Streetname}");
+                Console.WriteLine($"Hus nummer:{customer.Addresses.Housenumber}");
+                Console.WriteLine($"Postnummer:{customer.Addresses.Postalcode}");
+                Console.WriteLine($"By:{customer.Addresses.City}");
+
+            }
+            else
+            {
+                Console.WriteLine("Ingen Adresse tilgænlig");
+            }
             Console.WriteLine($"-----------------------------");
             Console.WriteLine($"Sidste Købs dato:{customer.LastPurchaseDate}");
             //Console.WriteLine($"Telefon nummer:{customer.PhoneNumber}");
