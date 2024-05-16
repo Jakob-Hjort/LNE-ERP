@@ -42,6 +42,8 @@ namespace LNE_ERP
             listPage.AddColumn("Avance i %", nameof(Product.AvanceiProcent));
             listPage.AddColumn("Avance i Kr", nameof(Product.AvanceiKr));
 
+
+
             //Get companies from the database and add them to the list
             var products = Database.instance.GetProducts();
             foreach (Product model in products)
