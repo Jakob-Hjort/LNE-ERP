@@ -115,7 +115,7 @@ namespace LNE_ERP
                     Console.WriteLine(ex.Message);
                 }
 
-                sql = "INSERT INTO Customer (PersonID,"
+                sql = "INSERT INTO Customer (PersonID,Fullname,LastBuy";
             }
 
             customers.Add(customer);
