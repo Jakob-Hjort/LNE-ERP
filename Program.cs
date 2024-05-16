@@ -9,7 +9,7 @@ namespace LNE_ERP
         static void Main(string[] args)
         {
             //Testdata udkommenter når vi kobler database på
-            Database.instance.Testdata();
+            //Database.instance.Testdata();
 
             Database.instance.CustomerTestdata();
 
