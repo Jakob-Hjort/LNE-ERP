@@ -17,11 +17,10 @@ namespace LNE_ERP
             Title = "Order Lines for " + salesOrder.OrderNumber;
             this.SalesOrder = salesOrder;
         }
-
         protected override void Draw()
         {
             Console.WriteLine($"OrdreNummber: {SalesOrder.OrderNumber}");
-            Console.WriteLine($"Oprettelsestidspunkt: {SalesOrder.Creationstime}");
+            //Console.WriteLine($"Oprettelsestidspunkt: {SalesOrder.Creationstime}");
             Console.WriteLine($"Gennemførelsestidspunkt: {SalesOrder.ImplementationTime}");
             Console.WriteLine($"CustomerID: {SalesOrder.CustomerId}");
             Console.WriteLine($"Tilstand: {SalesOrder.Status}");
@@ -41,11 +40,5 @@ namespace LNE_ERP
             });
             ExitOnEscape();
         }
-
-
-
     }
-
-
-
 }

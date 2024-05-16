@@ -14,8 +14,8 @@ namespace LNE_ERP
         {
             {
                 //Print som text
-                Console.WriteLine("Welcome to LNE_ERP");
-                Console.WriteLine("Please select a module to proceed");
+                Console.WriteLine("Velkommen til LNE_ERP");
+                Console.WriteLine("Vær venlig og vælge et modul for at fortsætte!");
 
                 Menu menu = new();
                 menu.Add(new CompanyListPage());

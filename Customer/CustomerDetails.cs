@@ -24,20 +24,17 @@ namespace LNE_ERP
 
             Console.WriteLine($"Kunde ID:{customer.PersonID}");
             Console.WriteLine($"Fuldenavn:{customer.FullName}");
-            
             Console.WriteLine($"-----------------------------");
             Console.WriteLine($"Vejnavn:{customer.Addresses.Streetname}");
             Console.WriteLine($"Hus nummer:{customer.Addresses.Housenumber}");
             Console.WriteLine($"Postnummer:{customer.Addresses.Postalcode}");
             Console.WriteLine($"By:{customer.Addresses.City}");
-
-
-
             Console.WriteLine($"-----------------------------");
             Console.WriteLine($"Sidste Købs dato:{customer.LastPurchaseDate}");
-            //Console.WriteLine($"Telefon nummer:{customer.PhoneNumber}");
-            //Console.WriteLine($"Email:{customer.Email}");
-            Console.WriteLine($"");
+            Console.WriteLine($"Telefon nummer:{customer.PhoneNumber}");
+            Console.WriteLine($"Email:{customer.Email}");
+            Console.WriteLine($"-----------------------------");
+            Console.WriteLine($" ");
             Console.WriteLine("Tryk F2 for at redigere");
             AddKey(ConsoleKey.F2, () =>
             {

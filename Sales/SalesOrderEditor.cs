@@ -23,9 +23,9 @@ namespace LNE_ERP
             ExitOnEscape();
             Form<SalesOrderHeader> form = new();
 
-            form.TextBox("Ordrenummer", nameof(SalesOrderHeader.OrderNumber));
-            form.TextBox("Oprettelsestidspunkt", nameof(SalesOrderHeader.Creationstime));
-            form.TextBox("Gennemførelsestidspunkt", nameof(SalesOrderHeader.ImplementationTime));
+            //form.TextBox("Ordrenummer", nameof(SalesOrderHeader.OrderNumber));
+            //form.TextBox("Oprettelsestidspunkt", nameof(SalesOrderHeader.Creationstime));
+            form.TextBox("Gennemførelse", nameof(SalesOrderHeader.ImplementationTime));
             form.TextBox("CustomerID", nameof(SalesOrderHeader.CustomerId));
             form.SelectBox("Tilstand", nameof(SalesOrderHeader.Status));
 
@@ -35,9 +35,11 @@ namespace LNE_ERP
             form.AddOption("Tilstand", "Packed", OrderStatus.Packed);
             form.AddOption("Tilstand", "Done", OrderStatus.Done);
 
+            salesorder.ImplementationTime = DateTime.Now;
+
             if (form.Edit(salesorder))
             {
-                if (salesorder.CustomerId != 0)
+                if (salesorder.OrderNumber != 0)
                 {
                     Database.instance.UpdateSalesOrder(salesorder);
                 }
@@ -51,8 +53,6 @@ namespace LNE_ERP
             {
                 Console.WriteLine("Ingen ændringer");
             }
-
-
         }
     }
 }
