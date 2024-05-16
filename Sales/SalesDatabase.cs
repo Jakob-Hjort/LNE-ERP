@@ -160,7 +160,23 @@ namespace LNE_ERP
             {
                 return;
             }
+            using (var conn = getConnection())
+            {
+                conn.Open();
+                string sql = "DELETE FROM SalesOrderHeader WHERE OrderNumber = @OrderNumber";
+                SqlCommand command = new SqlCommand(sql, conn);
+                command.Parameters.AddWithValue("@OrderNumber", salesorder.OrderNumber);
 
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    if (Sales.Contains(salesorder))
+                    {
+                        Sales.Remove(salesorder);
+                    }
+                }
+            }
         }
     }
 }
