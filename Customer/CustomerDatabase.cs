@@ -30,7 +30,7 @@ namespace LNE_ERP
             using (SqlConnection conn = getConnection())
             {
                 conn.Open();
-                string sql = "Select CustomerID, Person.PersonID, FirstName, LastName, Email, PhoneNumber, Streetname, Housenumber, City, Postalcode FROM Person inner join Addresses on Person.AddressID = Addresses.AddressID inner join Customer on Customer.PersonID = Person.PersonID ";
+                string sql = "Select CustomerID, Person.PersonID, FirstName, LastName, Email, PhoneNumber, Streetname, Housenumber, City, Postalcode, Person.AddressID ,LastBuy FROM Person inner join Addresses on Person.AddressID = Addresses.AddressID inner join Customer on Customer.PersonID = Person.PersonID ";
                 SqlCommand command = conn.CreateCommand();
                 command.CommandText = sql;
 
@@ -38,11 +38,13 @@ namespace LNE_ERP
                 {
                     while (reader.Read())
                     {
+                    
                         Addresses addresses = new();
                         addresses.Streetname = reader.GetString(6);
                         addresses.Housenumber = reader.GetString(7);
                         addresses.City = reader.GetString(8);
                         addresses.Postalcode = reader.GetInt32(9);
+                        addresses.AddressID = reader.GetInt32(10);
 
 
                         Customer customer = new();
@@ -54,6 +56,8 @@ namespace LNE_ERP
                         customer.PhoneNumber = reader.GetString(5);
                         customer.Addresses = addresses;
                         customerList.Add(customer);
+
+                        customer.LastPurchaseDate = reader.GetDateTime(11);
                     }
                 }
             }

@@ -106,7 +106,7 @@ namespace LNE_ERP
                 {
                     Console.WriteLine(ex.Message);
                 }
-                conn.Open();
+                conn.Close();
 
             }
             salesorder.OrderNumber = Sales.Count + 1;
