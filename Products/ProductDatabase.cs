@@ -58,15 +58,6 @@ namespace LNE_ERP
             return productList;
         }
 
-
-
-        //public List<Product> GetProducts()
-        //{
-        //    List<Product> ProductCopy = new();
-        //    ProductCopy.AddRange(products);
-        //    return ProductCopy;
-        //}
-
         public void InsertProduct(Product product)
         {
             if (product.ProductId != 0)
@@ -109,16 +100,6 @@ namespace LNE_ERP
             products.Add(product);
 
         }
-
-        //public void InsertProduct(Product product)
-        //{
-        //    if (product.ProductId != 0)
-        //    {
-        //        return;
-        //    }
-        //    product.ProductId = products.Count + 1;
-        //    products.Add(product);
-        //}
 
         public void UpdateProduct(Product product)
         {

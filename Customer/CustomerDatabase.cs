@@ -135,14 +135,67 @@ namespace LNE_ERP
                 return;
             }
 
-            for (var i = 0; i < customerlist.Count; i++)
+            using (var conn = getConnection())
             {
-                if (customerlist[i].CustomerID == customer.CustomerID)
+                conn.Open();
+                SqlTransaction transaction = conn.BeginTransaction();
+                try
                 {
-                    customerlist[i] = customer;
+                    // Update the address record
+                    string sql = "UPDATE Addresses SET Streetname = @Streetname, Housenumber = @Housenumber, Postalcode = @Postalcode, City = @City WHERE AddressID = @AddressID";
+                    using (SqlCommand command = new SqlCommand(sql, conn, transaction))
+                    {
+                        command.Parameters.AddWithValue("@Streetname", customer.Addresses.Streetname);
+                        command.Parameters.AddWithValue("@Housenumber", customer.Addresses.Housenumber);
+                        command.Parameters.AddWithValue("@Postalcode", customer.Addresses.Postalcode);
+                        command.Parameters.AddWithValue("@City", customer.Addresses.City);
+                        command.Parameters.AddWithValue("@AddressID", customer.Addresses.AddressID);
+                        command.ExecuteNonQuery();
+                    }
+
+                    // Update the person record
+                    sql = "UPDATE Person SET FirstName = @FirstName, LastName = @LastName, Email = @Email, PhoneNumber = @PhoneNumber WHERE PersonID = @PersonID";
+                    using (SqlCommand command = new SqlCommand(sql, conn, transaction))
+                    {
+                        command.Parameters.AddWithValue("@FirstName", customer.FirstName);
+                        command.Parameters.AddWithValue("@LastName", customer.LastName);
+                        command.Parameters.AddWithValue("@Email", customer.Email);
+                        command.Parameters.AddWithValue("@PhoneNumber", customer.PhoneNumber);
+                        command.Parameters.AddWithValue("@PersonID", customer.PersonID);
+                        command.ExecuteNonQuery();
+                    }
+
+                    // Update the customer record
+                    sql = "UPDATE Customer SET Fullname = @Fullname, LastBuy = @LastBuy WHERE CustomerID = @CustomerID";
+                    using (SqlCommand command = new SqlCommand(sql, conn, transaction))
+                    {
+                        command.Parameters.AddWithValue("@Fullname", customer.FullName);
+                        command.Parameters.AddWithValue("@LastBuy", customer.LastPurchaseDate);
+                        command.Parameters.AddWithValue("@CustomerID", customer.CustomerID);
+                        command.ExecuteNonQuery();
+                    }
+
+                    // Commit the transaction
+                    transaction.Commit();
+
+                    // Update the customer in the internal list
+                    for (var i = 0; i < customers.Count; i++)
+                    {
+                        if (customers[i].CustomerID == customer.CustomerID)
+                        {
+                            customers[i] = customer;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    Console.WriteLine("An error occurred: " + ex.Message);
+                    Console.ReadLine();  // Hold the console open to read the error message
                 }
             }
         }
+
 
         public void DeleteCustomer(Customer customer)
         {

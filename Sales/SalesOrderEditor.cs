@@ -22,7 +22,7 @@ namespace LNE_ERP
         {
             ExitOnEscape();
             Form<SalesOrderHeader> form = new();
-            Form<SalesOrderLines> form2 
+            Form<SalesOrderLines> form2; 
 
             //form.TextBox("Ordrenummer", nameof(SalesOrderHeader.OrderNumber));
             form.TextBox("Gennemførelse", nameof(SalesOrderHeader.ImplementationTime));
