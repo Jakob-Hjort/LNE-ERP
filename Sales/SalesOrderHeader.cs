@@ -31,7 +31,6 @@ namespace LNE_ERP
     {
 
         public string Vare { get; set; }
-        //public int CustomerId { get; set; }
         public decimal Pris { get; set; }
         public int Antal { get; set; }
         public Orderline() { }

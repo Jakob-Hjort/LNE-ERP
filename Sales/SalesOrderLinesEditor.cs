@@ -7,7 +7,7 @@ using TECHCOOL.UI;
 
 namespace LNE_ERP.Sales
 {
-    internal class SalesOrderLinesEditor : Screen
+    internal class SalesOrderLinesEditor : Screen //WORK IN PROGRESS
     {
         public override string Title { get; set; } = "Sale Order Editor";
         SalesOrderHeader SalesOrder {  get; set; }
