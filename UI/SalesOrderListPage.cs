@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LNE_ERP.Sales;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,8 +27,11 @@ namespace LNE_ERP
             listPage.AddKey(ConsoleKey.F2, editSalesOrder);
             Console.WriteLine("Tryk F2 for at redigere");
 
-            listPage.AddKey(ConsoleKey.F4, ShowSalesOrderLines);
-            Console.WriteLine("Tryk F4 for at vise listen af ordrer");
+            listPage.AddKey(ConsoleKey.F3, ShowSalesOrderLines);
+            Console.WriteLine("Tryk F3 for at vise listen af ordrer");
+
+            listPage.AddKey(ConsoleKey.F4, createNewSalesOrderLine);
+            Console.WriteLine("Tryk F4 for at oprette Line");
 
             listPage.AddKey(ConsoleKey.F5, removeSalesOrder);
             Console.WriteLine("Tryk F5 for at slette ");
@@ -72,7 +76,12 @@ namespace LNE_ERP
 
         void ShowSalesOrderLines(SalesOrderHeader salesOrder)
         {
-            Screen.Display(new SalesOrderLines(salesOrder));
+            Screen.Display(new SalesOrderLinesDetails(salesOrder));
+        }
+        void createNewSalesOrderLine(SalesOrderHeader _)
+        {
+            SalesOrderHeader new_salesOrder = new();
+            Screen.Display(new SalesOrderLinesEditor(new_salesOrder));
         }
     }
 }

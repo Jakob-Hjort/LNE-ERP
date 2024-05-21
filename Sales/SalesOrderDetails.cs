@@ -10,33 +10,29 @@ namespace LNE_ERP
 
         public SalesOrderDetails(SalesOrderHeader salesOrder)
         {
-            Title = "Details for " + salesOrder.CustomerId;
+            Title = "Details for " + salesOrder.OrderNumber;
             this.SalesOrder = salesOrder;
         }
 
         protected override void Draw()
         {
-            ListPage<Orderline> listline = new();
-            Orderline line = new();
-
             Console.WriteLine("OrdreNummber: {0}", SalesOrder.OrderNumber);
             Console.WriteLine("Gennemførelsestidspunkt: {0}", SalesOrder.ImplementationTime);
             Console.WriteLine("CustomerID: {0}", SalesOrder.CustomerId);
             Console.WriteLine("Tilstand: {0}", SalesOrder.Status);
 
-            Console.WriteLine("Vare: {0}", line.Vare);
-
-            //var salesOrderLines = SalesOrder.OrderLines;
-            //foreach (Orderline model in salesOrderLines)
-            //{
-            //    listline.Add(model);
-            //}
+            Console.WriteLine("OrderLines");
+            foreach (var orderLine in SalesOrder.OrderLines) //Der kommer ikke nogle op Fordi OrderLines er NULL! Skal lave en Method ind i SalesDatabase.cs!
+            {
+                Console.WriteLine($"Produkt: {orderLine.Vare}, Antal: {orderLine.Antal}");
+            }
 
             Console.WriteLine("Press F2 to edit");
             AddKey(ConsoleKey.F2, () =>
             {
                 Screen.Display(new SalesOrderEditor(SalesOrder));
             });
+
             ExitOnEscape();
         }
     }
