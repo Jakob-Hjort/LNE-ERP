@@ -74,52 +74,57 @@ namespace LNE_ERP
             {
                 conn.Open();
                 string sql;
-                int addresseId = 0;
+                int addressId = 0;
 
-
+                // Insert address if available and get AddressID
                 if (customer.Addresses != null)
                 {
-                    sql = "INSERT INTO Addresses (Streetname, Housenumber, Postalcode, City) VALUES (@Streetname, @Housenumber, @Postalcode, @City); SELECT SCOPE_IDENTITY()";
-                    SqlCommand command1 = new SqlCommand(sql, conn);
-                    //command.CommandText = sql;
-                    command1.Parameters.Clear();
-                    command1.Parameters.AddWithValue("@Streetname", customer.Addresses.Streetname);
-                    command1.Parameters.AddWithValue("@Housenumber", customer.Addresses.Housenumber);
-                    command1.Parameters.AddWithValue("@Postalcode", customer.Addresses.Postalcode);
-                    command1.Parameters.AddWithValue("@City", customer.Addresses.City);
- 
+                    sql = "INSERT INTO Addresses (Streetname, Housenumber, Postalcode, City) VALUES (@Streetname, @Housenumber, @Postalcode, @City); SELECT SCOPE_IDENTITY();";
+                    using (SqlCommand command = new SqlCommand(sql, conn))
+                    {
+                        command.Parameters.AddWithValue("@Streetname", customer.Addresses.Streetname);
+                        command.Parameters.AddWithValue("@Housenumber", customer.Addresses.Housenumber);
+                        command.Parameters.AddWithValue("@Postalcode", customer.Addresses.Postalcode);
+                        command.Parameters.AddWithValue("@City", customer.Addresses.City);
 
-                    addresseId = Convert.ToInt32(command1.ExecuteScalar());
+                        addressId = Convert.ToInt32(command.ExecuteScalar());
+                    }
                 }
 
-                // inset person først og lad variable peje på PersonID i customer.
-
-                sql = "INSERT INTO Person (FirstName, LastName, Email, PhoneNumber, AddressID) VALUES (@FirstName, @LastName, @Email, @PhoneNumber, @AddressID); SELECT SCOPE_IDENTITY()";
-                SqlCommand command = new SqlCommand(sql, conn);
-                command.Parameters.AddWithValue("@FirstName", customer.FirstName);
-                command.Parameters.AddWithValue("@LastName", customer.LastName);
-                command.Parameters.AddWithValue("@Email", customer.Email);
-                command.Parameters.AddWithValue("@PhoneNumber", customer.PhoneNumber);
-                command.Parameters.AddWithValue("@AddressID", addresseId);
-                //command.Parameters.AddWithValue("@Fullname")
-                try
+                // Insert person and get PersonID
+                sql = "INSERT INTO Person (FirstName, LastName, Email, PhoneNumber, AddressID) VALUES (@FirstName, @LastName, @Email, @PhoneNumber, @AddressID); SELECT SCOPE_IDENTITY();";
+                int personId;
+                using (SqlCommand command = new SqlCommand(sql, conn))
                 {
-                    
-                    int personId = Convert.ToInt32(command.ExecuteScalar());
+                    command.Parameters.AddWithValue("@FirstName", customer.FirstName);
+                    command.Parameters.AddWithValue("@LastName", customer.LastName);
+                    command.Parameters.AddWithValue("@Email", customer.Email);
+                    command.Parameters.AddWithValue("@PhoneNumber", customer.PhoneNumber);
+                    command.Parameters.AddWithValue("@AddressID", addressId);
+
+                    personId = Convert.ToInt32(command.ExecuteScalar());
                     customer.PersonID = personId;
-
-          
                 }
-                catch (Exception ex)
+
+                if (customer.LastPurchaseDate < new DateTime(1753, 1, 1) || customer.LastPurchaseDate > new DateTime(9999, 12, 31))
                 {
-                    Console.WriteLine(ex.Message);
+                    customer.LastPurchaseDate = DateTime.Now; // or any other default date within the valid range
                 }
 
-                sql = "INSERT INTO Customer (PersonID,Fullname,LastBuy";
+                // Insert customer using the obtained PersonID
+                sql = "INSERT INTO Customer (PersonID, Fullname, LastBuy) VALUES (@PersonID, @Fullname, @LastBuy)";
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    command.Parameters.AddWithValue("@PersonID", personId);
+                    command.Parameters.AddWithValue("@Fullname", customer.FullName);
+                    command.Parameters.AddWithValue("@LastBuy", customer.LastPurchaseDate);
+                    command.ExecuteNonQuery();
+                }
             }
 
             customers.Add(customer);
         }
+
 
 
 
@@ -145,11 +150,84 @@ namespace LNE_ERP
             {
                 return;
             }
-            if (customerlist.Contains(customer))
+
+            using (var conn = getConnection())
             {
-                customerlist.Remove(customer);
+                conn.Open();
+                SqlTransaction transaction = conn.BeginTransaction();
+                try
+                {
+                    // Delete the customer record
+                    string sql = "DELETE FROM Customer WHERE CustomerId = @CustomerId";
+                    using (SqlCommand command = new SqlCommand(sql, conn, transaction))
+                    {
+                        command.Parameters.AddWithValue("@CustomerId", customer.CustomerID);
+                        command.ExecuteNonQuery();
+                    }
+
+                    // Get PersonID related to the deleted customer
+                    int personId;
+                    sql = "SELECT PersonID FROM Customer WHERE CustomerId = @CustomerId";
+                    using (SqlCommand command = new SqlCommand(sql, conn, transaction))
+                    {
+                        command.Parameters.AddWithValue("@CustomerId", customer.CustomerID);
+                        personId = (int)command.ExecuteScalar();
+                    }
+
+                    // Delete the person record
+                    sql = "DELETE FROM Person WHERE PersonID = @PersonID";
+                    using (SqlCommand command = new SqlCommand(sql, conn, transaction))
+                    {
+                        command.Parameters.AddWithValue("@PersonID", personId);
+                        command.ExecuteNonQuery();
+                    }
+
+                    // Get AddressID related to the deleted person
+                    int addressId;
+                    sql = "SELECT AddressID FROM Person WHERE PersonID = @PersonID";
+                    using (SqlCommand command = new SqlCommand(sql, conn, transaction))
+                    {
+                        command.Parameters.AddWithValue("@PersonID", personId);
+                        addressId = (int)command.ExecuteScalar();
+                    }
+
+                    // Check if the address is used by any other person
+                    bool isAddressInUse;
+                    sql = "SELECT COUNT(*) FROM Person WHERE AddressID = @AddressID";
+                    using (SqlCommand command = new SqlCommand(sql, conn, transaction))
+                    {
+                        command.Parameters.AddWithValue("@AddressID", addressId);
+                        isAddressInUse = ((int)command.ExecuteScalar() > 0);
+                    }
+
+                    // Delete the address record if not in use
+                    if (!isAddressInUse)
+                    {
+                        sql = "DELETE FROM Addresses WHERE AddressID = @AddressID";
+                        using (SqlCommand command = new SqlCommand(sql, conn, transaction))
+                        {
+                            command.Parameters.AddWithValue("@AddressID", addressId);
+                            command.ExecuteNonQuery();
+                        }
+                    }
+
+                    // Commit the transaction
+                    transaction.Commit();
+
+                    // Remove the customer from the list if it was successfully deleted from the database
+                    if (customers.Contains(customer))
+                    {
+                        customers.Remove(customer);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
+
     }
 }
 
