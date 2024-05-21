@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Bcpg.OpenPgp;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
@@ -88,10 +89,45 @@ namespace LNE_ERP
                 conn.Open();
                 string sql = "INSERT INTO SalesOrderHeader (ImplementationTime, CustomerId, Status) VALUES (@ImplementationTime, @CustomerId, @Status)";
                 SqlCommand command = new SqlCommand(sql, conn);
-                //command.Parameters.AddWithValue("@Creationtime", salesorder.Creationstime);
                 command.Parameters.AddWithValue("@ImplementationTime", salesorder.ImplementationTime);
                 command.Parameters.AddWithValue("@CustomerId", salesorder.CustomerId);
                 command.Parameters.AddWithValue("@Status", salesorder.Status);
+                try
+                {
+                    command.ExecuteNonQuery();
+                    command = conn.CreateCommand();
+                    command.CommandText = "SELECT SCOPE_IDENTITY();";
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    salesorder.OrderNumber = reader.GetInt32(0);
+                    InserSalesOrderList(salesorder);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                conn.Open();
+
+            }
+            salesorder.OrderNumber = Sales.Count + 1;
+            Sales.Add(salesorder);
+        }
+        public void InserSalesOrderList(SalesOrderHeader salesorder)
+        {
+            salesorder.OrderLines = new();
+            if (salesorder.OrderNumber != 0)
+            {
+                return;
+            }
+            using (var conn = getConnection())
+            {
+                conn.Open();
+                string sql = "INSERT INTO SalesOrderHeader (Vare, Pris, Antal) VALUES (@Vare, @Pris, @Antal)";
+                SqlCommand command = new SqlCommand(@sql, conn);
+                Orderline line = new();
+                command.Parameters.AddWithValue("@vare", line.Vare);
+                command.Parameters.AddWithValue("@Pris", line.Pris);
+                command.Parameters.AddWithValue("@Antal", line.Antal);
                 try
                 {
                     command.ExecuteNonQuery();
@@ -105,9 +141,8 @@ namespace LNE_ERP
                 {
                     Console.WriteLine(ex.Message);
                 }
+                conn.Open();
             }
-            salesorder.OrderNumber = Sales.Count + 1;
-            Sales.Add(salesorder);
         }
         public void UpdateSalesOrder(SalesOrderHeader salesorder) //SalesOrderLine line, could be added here?!
         {

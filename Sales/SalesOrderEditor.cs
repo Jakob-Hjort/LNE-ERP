@@ -22,11 +22,12 @@ namespace LNE_ERP
         {
             ExitOnEscape();
             Form<SalesOrderHeader> form = new();
+            Form<SalesOrderLines> form2 
 
             //form.TextBox("Ordrenummer", nameof(SalesOrderHeader.OrderNumber));
-            //form.TextBox("Oprettelsestidspunkt", nameof(SalesOrderHeader.Creationstime));
             form.TextBox("Gennemførelse", nameof(SalesOrderHeader.ImplementationTime));
             form.TextBox("CustomerID", nameof(SalesOrderHeader.CustomerId));
+
             form.SelectBox("Tilstand", nameof(SalesOrderHeader.Status));
 
             form.AddOption("Tilstand", "None", OrderStatus.None);
