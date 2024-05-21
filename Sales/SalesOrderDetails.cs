@@ -17,31 +17,20 @@ namespace LNE_ERP
         protected override void Draw()
         {
             ListPage<Orderline> listline = new();
+            Orderline line = new();
 
-            SalesOrderHeader sales = new();
             Console.WriteLine("OrdreNummber: {0}", SalesOrder.OrderNumber);
-            //Console.WriteLine("Oprettelsestidspunkt: {0}", SalesOrder.Creationstime);
             Console.WriteLine("Gennemførelsestidspunkt: {0}", SalesOrder.ImplementationTime);
             Console.WriteLine("CustomerID: {0}", SalesOrder.CustomerId);
             Console.WriteLine("Tilstand: {0}", SalesOrder.Status);
 
-            listline.AddColumn("Varenavn", nameof(Orderline.Vare), 20);
-            listline.AddColumn("Antal", nameof(Orderline.Antal), 5);
-            listline.AddColumn("Pris", nameof(Orderline.Pris), 10);
+            Console.WriteLine("Vare: {0}", line.Vare);
 
-            var salesOrderLines = SalesOrder.OrderLines;
-            foreach (Orderline model in salesOrderLines)
-            {
-                listline.Add(model);
-            }
-
-
-            //var selectedSalesOrderLine = listline.Select();
-            //if (selectedSalesOrderLine != null)
+            //var salesOrderLines = SalesOrder.OrderLines;
+            //foreach (Orderline model in salesOrderLines)
             //{
-            //    Screen.Display(new SalesOrderDetails(selectedSalesOrderLine));
+            //    listline.Add(model);
             //}
-
 
             Console.WriteLine("Press F2 to edit");
             AddKey(ConsoleKey.F2, () =>
