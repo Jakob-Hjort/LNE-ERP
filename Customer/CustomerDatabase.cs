@@ -108,7 +108,7 @@ namespace LNE_ERP
 
                 if (customer.LastPurchaseDate < new DateTime(1753, 1, 1) || customer.LastPurchaseDate > new DateTime(9999, 12, 31))
                 {
-                    customer.LastPurchaseDate = DateTime.Now; // or any other default date within the valid range
+                    customer.LastPurchaseDate = DateTime.Now; 
                 }
 
                 // Insert customer using the obtained PersonID
@@ -165,30 +165,12 @@ namespace LNE_ERP
                         command.ExecuteNonQuery();
                     }
 
-                    // Get PersonID related to the deleted customer
-                    int personId;
-                    sql = "SELECT PersonID FROM Customer WHERE CustomerId = @CustomerId";
-                    using (SqlCommand command = new SqlCommand(sql, conn, transaction))
-                    {
-                        command.Parameters.AddWithValue("@CustomerId", customer.CustomerID);
-                        personId = (int)command.ExecuteScalar();
-                    }
-
                     // Delete the person record
                     sql = "DELETE FROM Person WHERE PersonID = @PersonID";
                     using (SqlCommand command = new SqlCommand(sql, conn, transaction))
                     {
-                        command.Parameters.AddWithValue("@PersonID", personId);
+                        command.Parameters.AddWithValue("@PersonID", customer.PersonID);
                         command.ExecuteNonQuery();
-                    }
-
-                    // Get AddressID related to the deleted person
-                    int addressId;
-                    sql = "SELECT AddressID FROM Person WHERE PersonID = @PersonID";
-                    using (SqlCommand command = new SqlCommand(sql, conn, transaction))
-                    {
-                        command.Parameters.AddWithValue("@PersonID", personId);
-                        addressId = (int)command.ExecuteScalar();
                     }
 
                     // Check if the address is used by any other person
@@ -196,7 +178,7 @@ namespace LNE_ERP
                     sql = "SELECT COUNT(*) FROM Person WHERE AddressID = @AddressID";
                     using (SqlCommand command = new SqlCommand(sql, conn, transaction))
                     {
-                        command.Parameters.AddWithValue("@AddressID", addressId);
+                        command.Parameters.AddWithValue("@AddressID", customer.Addresses.AddressID);
                         isAddressInUse = ((int)command.ExecuteScalar() > 0);
                     }
 
@@ -206,7 +188,7 @@ namespace LNE_ERP
                         sql = "DELETE FROM Addresses WHERE AddressID = @AddressID";
                         using (SqlCommand command = new SqlCommand(sql, conn, transaction))
                         {
-                            command.Parameters.AddWithValue("@AddressID", addressId);
+                            command.Parameters.AddWithValue("@AddressID", customer.Addresses.AddressID);
                             command.ExecuteNonQuery();
                         }
                     }
@@ -227,6 +209,7 @@ namespace LNE_ERP
                 }
             }
         }
+
 
     }
 }
