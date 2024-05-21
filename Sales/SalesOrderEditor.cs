@@ -26,10 +26,14 @@ namespace LNE_ERP
 
             //form.TextBox("Ordrenummer", nameof(SalesOrderHeader.OrderNumber));
             form.TextBox("Gennemførelse", nameof(SalesOrderHeader.ImplementationTime));
-            form.TextBox("CustomerID", nameof(SalesOrderHeader.CustomerId));
+            form.SelectBox("CustomerID", nameof(SalesOrderHeader.CustomerId));
+            var customers = Database.instance.GetCustomer();
+            foreach (var customer in customers)
+            {
+                form.AddOption("CustomerID", customer.FullName, customer.CustomerID);
+            }
 
             form.SelectBox("Tilstand", nameof(SalesOrderHeader.Status));
-
             form.AddOption("Tilstand", "None", OrderStatus.None);
             form.AddOption("Tilstand", "Created", OrderStatus.Created);
             form.AddOption("Tilstand", "Confirmed", OrderStatus.Confirmed);
