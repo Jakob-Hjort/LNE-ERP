@@ -10,26 +10,19 @@ namespace LNE_ERP
     public class SalesOrderLinesDetails : Screen
     {
         public override string Title { get; set; } = "Sale Order Details";
-        SalesOrderHeader SalesOrder { get; set; }
+        Orderline orderline { get; set; }
 
-        public SalesOrderLinesDetails(SalesOrderHeader salesOrder)
+        public SalesOrderLinesDetails(Orderline orderline)
         {
-            Title = "Order Lines for " + salesOrder.OrderNumber;
-            this.SalesOrder = salesOrder;
+            Title = "Order Lines for " + orderline.Vare;
+            this.orderline = orderline;
         }
         protected override void Draw()
         {
-            Console.WriteLine($"OrdreNummber: {SalesOrder.OrderNumber}");
-            Console.WriteLine($"Gennemførelsestidspunkt: {SalesOrder.ImplementationTime}");
-            Console.WriteLine($"CustomerID: {SalesOrder.CustomerId}");
-            Console.WriteLine($"Tilstand: {SalesOrder.Status}");
-
-
-            Console.WriteLine("Ordrelinjer:");
-            foreach (var orderLine in SalesOrder.OrderLines)
-            {
-                Console.WriteLine($"Produkt: {orderLine.Vare}, Antal: {orderLine.Antal}");
-            }
+            //Console.WriteLine($"OrdreNummber: {SalesOrder.OrderNumber}");
+            //Console.WriteLine($"Gennemførelsestidspunkt: {SalesOrder.ImplementationTime}");
+            //Console.WriteLine($"CustomerID: {SalesOrder.CustomerId}");
+            //Console.WriteLine($"Tilstand: {SalesOrder.Status}");
 
             Console.WriteLine("Press F3 to go back");
             AddKey(ConsoleKey.F3, () =>

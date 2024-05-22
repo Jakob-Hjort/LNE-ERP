@@ -27,8 +27,8 @@ namespace LNE_ERP
             listPage.AddKey(ConsoleKey.F2, editSalesOrder);
             Console.WriteLine("Tryk F2 for at redigere");
 
-            listPage.AddKey(ConsoleKey.F3, ShowSalesOrderLines);
-            Console.WriteLine("Tryk F3 for at vise listen af ordrer");
+            //listPage.AddKey(ConsoleKey.F3, ShowSalesOrderLines);
+            //Console.WriteLine("Tryk F3 for at vise listen af ordrer");
 
             listPage.AddKey(ConsoleKey.F5, removeSalesOrder);
             Console.WriteLine("Tryk F5 for at slette ");
@@ -49,7 +49,7 @@ namespace LNE_ERP
             var selectedSalesOrder = listPage.Select();
             if (selectedSalesOrder != null)
             {
-                Screen.Display(new SalesOrderDetails(selectedSalesOrder));
+                Screen.Display(new SalesOrderHeaderDetails(selectedSalesOrder));
             }
         }
 
@@ -71,10 +71,10 @@ namespace LNE_ERP
             Draw();
         }
 
-        void ShowSalesOrderLines(SalesOrderHeader salesOrder)
-        {
-            Screen.Display(new SalesOrderLinesDetails(salesOrder));
-        }
+        //void ShowSalesOrderLines(SalesOrderHeader salesOrder)
+        //{
+        //    Screen.Display(new SalesOrderLinesDetails(salesOrder));
+        //}
         //void createNewSalesOrderLine(SalesOrderHeader _)
         //{
         //    SalesOrderHeader new_salesOrder = new();

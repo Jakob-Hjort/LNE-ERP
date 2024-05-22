@@ -52,6 +52,9 @@ namespace LNE_ERP
                     Database.instance.InsertSalesOrder(salesorder);
                 }
                 Console.WriteLine("Ændringerne blev gemt");
+                Console.ReadKey();
+                Console.Clear();
+                Screen.Display(new SalesOrderHeaderDetails (salesorder));
             }
             else
             {
