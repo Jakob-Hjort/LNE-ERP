@@ -10,8 +10,8 @@ namespace LNE_ERP.Sales
     //internal class SalesOrderLinesEditor : Screen //WORK IN PROGRESS
     //{
     //    public override string Title { get; set; } = "Sale Order Editor";
-    //    SalesOrderHeader SalesOrder {  get; set; }
-    //   // SalesOrderHeader SalesOrderHeader { get;}
+    //    SalesOrderHeader SalesOrder { get; set; }
+    //    // SalesOrderHeader SalesOrderHeader { get;}
 
     //    public SalesOrderLinesEditor(SalesOrderHeader salesOrder)
     //    {

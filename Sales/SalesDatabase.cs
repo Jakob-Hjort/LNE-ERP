@@ -24,6 +24,11 @@ namespace LNE_ERP
             }
             return null;
         }
+
+
+        // --------------  SALES ORDER HEADER -------------------------//
+
+
         public List<SalesOrderHeader> GetSalesOrderHeader()
         {
             List<SalesOrderHeader> sales = new();
@@ -54,30 +59,41 @@ namespace LNE_ERP
             }
             return sales;
         }
-        public void LoadOrderLines(SalesOrderHeader header)
+
+        public void UpdateSalesOrder(SalesOrderHeader salesorder)
         {
-            header.OrderLines = new();
-            using (SqlConnection conn = getConnection())
+            if (salesorder.OrderNumber == 0)
+            {
+                return;
+            }
+            using (var conn = getConnection())
             {
                 conn.Open();
-                string sql = "SELECT Vare, Pris, Antal FROM OrderLines WHERE OrderNumber = " + header.OrderNumber; 
-                SqlCommand command = conn.CreateCommand();
-                command.CommandText = sql;
-                command.Parameters.AddWithValue("@OrderNumber", header.OrderNumber);
+                string sql = "UPDATE SalesOrderHeader SET ImplementationTime = @ImplementationTime, CustomerId = @CustomerId, Status = @Status WHERE OrderNumber = @OrderNumber";
+                SqlCommand command = new SqlCommand(sql, conn);
+                //command.Parameters.AddWithValue("@Creationtime", salesorder.Creationstime);
+                command.Parameters.AddWithValue("@ImplementationTime", salesorder.ImplementationTime);
+                command.Parameters.AddWithValue("@CustomerId", salesorder.CustomerId);
+                command.Parameters.AddWithValue("@Status", salesorder.Status);
+                command.Parameters.AddWithValue("@OrderNumber", salesorder.OrderNumber);
 
-                using (SqlDataReader reader = command.ExecuteReader())
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
                 {
-                    while (reader.Read())
+                    for (int i = 0; i < Sales.Count; i++)
                     {
-                        Orderline line = new();
-                        line.Vare = reader.GetString(0);
-                        line.Pris = reader.GetDecimal(1);
-                        line.Antal = reader.GetInt32(2);
-                        header.OrderLines.Add(line);
+                        if (Sales[i].OrderNumber == salesorder.OrderNumber)
+                        {
+                            Sales[i] = salesorder;
+                            break;
+                        }
                     }
                 }
             }
         }
+
         public void InsertSalesOrder(SalesOrderHeader salesorder)
         {
             if (salesorder.OrderNumber != 0)
@@ -112,7 +128,62 @@ namespace LNE_ERP
             salesorder.OrderNumber = Sales.Count + 1;
             Sales.Add(salesorder);
         }
-        public void InserSalesOrderList(SalesOrderHeader salesorder)
+
+
+        public void DeleteSalesOrder(SalesOrderHeader salesorder)
+        {
+            if (salesorder.OrderNumber == 0)
+            {
+                return;
+            }
+            using (var conn = getConnection())
+            {
+                conn.Open();
+                string sql = "DELETE FROM OrderLines WHERE OrderNumber = @OrderNumber; DELETE FROM SalesOrderHeader WHERE OrderNumber = @OrderNumber";
+                SqlCommand command = new SqlCommand(sql, conn);
+                command.Parameters.AddWithValue("@OrderNumber", salesorder.OrderNumber);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    if (Sales.Contains(salesorder))
+                    {
+                        Sales.Remove(salesorder);
+                    }
+                }
+            }
+        }
+
+
+        // -------------------- SALES ORDER LINES ----------------------------- //
+
+        public void LoadOrderLines(SalesOrderHeader header)
+        {
+            header.OrderLines = new();
+            using (SqlConnection conn = getConnection())
+            {
+                conn.Open();
+                string sql = "SELECT Vare, Pris, Antal FROM OrderLines WHERE OrderNumber = " + header.OrderNumber; 
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = sql;
+                command.Parameters.AddWithValue("@OrderNumber", header.OrderNumber);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Orderline line = new();
+                        line.Vare = reader.GetString(0);
+                        line.Pris = reader.GetDecimal(1);
+                        line.Antal = reader.GetInt32(2);
+                        header.OrderLines.Add(line);
+                    }
+                }
+            }
+        }
+        
+        public void InsertSalesOrderList(SalesOrderHeader salesorder)
         {
             salesorder.OrderLines = new();
             if (salesorder.OrderNumber != 0)
@@ -144,41 +215,9 @@ namespace LNE_ERP
                 conn.Open();
             }
         }
-        public void UpdateSalesOrder(SalesOrderHeader salesorder) //SalesOrderLine line, could be added here?!
-        {
-            if (salesorder.OrderNumber == 0)
-            {
-                return;
-            }
-            using (var conn = getConnection())
-            {
-                conn.Open();
-                string sql = "UPDATE SalesOrderHeader SET ImplementationTime = @ImplementationTime, CustomerId = @CustomerId, Status = @Status WHERE OrderNumber = @OrderNumber";
-                SqlCommand command = new SqlCommand(sql, conn);
-                //command.Parameters.AddWithValue("@Creationtime", salesorder.Creationstime);
-                command.Parameters.AddWithValue("@ImplementationTime", salesorder.ImplementationTime);
-                command.Parameters.AddWithValue("@CustomerId", salesorder.CustomerId);
-                command.Parameters.AddWithValue("@Status", salesorder.Status);
-                command.Parameters.AddWithValue("@OrderNumber", salesorder.OrderNumber);
+        
 
-                
-                int rowsAffected = command.ExecuteNonQuery();
-
-                if (rowsAffected > 0)
-                {
-                    for (int i = 0; i < Sales.Count; i++)
-                    {
-                        if (Sales[i].OrderNumber == salesorder.OrderNumber)
-                        {
-                            Sales[i] = salesorder;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        public void UpdateSalesOrderLines(SalesOrderHeader salesorder) //SalesOrderLine line, could be added here?!
+        public void UpdateSalesOrderLines(SalesOrderHeader salesorder) 
         {
             if (salesorder.OrderNumber == 0)
             {
@@ -212,30 +251,7 @@ namespace LNE_ERP
             }
         }
 
-        public void DeleteSalesOrder(SalesOrderHeader salesorder)
-        {
-            if (salesorder.OrderNumber == 0)
-            {
-                return;
-            }
-            using (var conn = getConnection())
-            {
-                conn.Open();
-                string sql = "DELETE FROM OrderLines WHERE OrderNumber = @OrderNumber; DELETE FROM SalesOrderHeader WHERE OrderNumber = @OrderNumber";
-                SqlCommand command = new SqlCommand(sql, conn);
-                command.Parameters.AddWithValue("@OrderNumber", salesorder.OrderNumber);
-
-                int rowsAffected = command.ExecuteNonQuery();
-
-                if (rowsAffected > 0)
-                {
-                    if (Sales.Contains(salesorder))
-                    {
-                        Sales.Remove(salesorder);
-                    }
-                }
-            }
-        }
+        
     }
 }
     

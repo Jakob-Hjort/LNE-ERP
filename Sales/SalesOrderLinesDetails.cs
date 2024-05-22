@@ -24,15 +24,7 @@ namespace LNE_ERP
             Console.WriteLine($"CustomerID: {SalesOrder.CustomerId}");
             Console.WriteLine($"Tilstand: {SalesOrder.Status}");
 
-<<<<<<< Updated upstream
-            //Console.WriteLine("Press F3 to go back");
-            //AddKey(ConsoleKey.F3, () =>
-            //{
-            //    // Gå tilbage til hovedsiden for salgsordre
-            //    //Screen.GoBack();
-            //});
-=======
-            //Vis hver ordrelinje
+
             Console.WriteLine("Ordrelinjer:");
             foreach (var orderLine in SalesOrder.OrderLines)
             {
@@ -45,7 +37,6 @@ namespace LNE_ERP
                 // Gå tilbage til hovedsiden for salgsordre
                 //Screen.GoBack();
             });
->>>>>>> Stashed changes
             ExitOnEscape();
         }
     }
