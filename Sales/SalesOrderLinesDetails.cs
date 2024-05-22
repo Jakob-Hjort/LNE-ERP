@@ -24,13 +24,6 @@ namespace LNE_ERP
             Console.WriteLine($"CustomerID: {SalesOrder.CustomerId}");
             Console.WriteLine($"Tilstand: {SalesOrder.Status}");
 
-            // Vis hver ordrelinje
-            //Console.WriteLine("Ordrelinjer:");
-            //foreach (var orderLine in SalesOrder.OrderLines) //Der kommer ikke nogle op Fordi OrderLines er NULL! Skal lave en Method ind i SalesDatabase.cs!
-            //{   
-            //    Console.WriteLine($"Produkt: {orderLine.Vare}, Antal: {orderLine.Antal}");
-            //}
-
             //Console.WriteLine("Press F3 to go back");
             //AddKey(ConsoleKey.F3, () =>
             //{

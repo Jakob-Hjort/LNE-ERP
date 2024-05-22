@@ -20,8 +20,9 @@ namespace LNE_ERP
             Console.WriteLine("Gennemførelsestidspunkt: {0}", SalesOrder.ImplementationTime);
             Console.WriteLine("CustomerID: {0}", SalesOrder.CustomerId);
             Console.WriteLine("Tilstand: {0}", SalesOrder.Status);
+            Console.WriteLine(""); //Keeps this Empty for UI!
 
-            Console.WriteLine("OrderLines");
+            Console.WriteLine("---OrderLines---");
             foreach (var orderLine in SalesOrder.OrderLines) //Der kommer ikke nogle op Fordi OrderLines er NULL! Skal lave en Method ind i SalesDatabase.cs!
             {
                 Console.WriteLine($"Produkt: {orderLine.Vare}, Antal: {orderLine.Antal}");
