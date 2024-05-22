@@ -1,4 +1,4 @@
-﻿using LNE_ERP.Sales;
+﻿using LNE_ERP;
 using System;
 using System.Collections.Generic;
 using System.Linq;

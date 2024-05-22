@@ -5,37 +5,47 @@ using System.Text;
 using System.Threading.Tasks;
 using TECHCOOL.UI;
 
-namespace LNE_ERP.Sales
+namespace LNE_ERP
 {
-    //internal class SalesOrderLinesEditor : Screen //WORK IN PROGRESS
-    //{
-    //    public override string Title { get; set; } = "Sale Order Editor";
-    //    SalesOrderHeader SalesOrder { get; set; }
-    //    // SalesOrderHeader SalesOrderHeader { get;}
+    internal class SalesOrderLinesEditor : Screen 
+    {
 
-    //    public SalesOrderLinesEditor(SalesOrderHeader salesOrder)
-    //    {
-    //        Title = "Create for " + salesOrder.CustomerId;
-    //        this.SalesOrder = salesOrder;
-    //    }
-    //    protected override void Draw()
-    //    {
-    //        ExitOnEscape();
-    //        Form<Orderline> form = new();
+        //Properties
+        public override string Title { get; set; } = "Salgs ordrer linje";
 
-    //        form.TextBox("Gennemførelse", nameof(Orderline.Vare));
+        Orderline orderline = new();
 
-    //        if (form.Edit(SalesOrder))
-    //        {
-    //            if (SalesOrder.OrderNumber != 0)
-    //            {
-    //                Database.instance.UpdateSalesOrderLines(SalesOrder);
-    //            }
-    //            else
-    //            {
-    //                Database.instance.InserSalesOrderList(SalesOrder);
-    //            }
-    //        }
-    //    }
-    //}
+        //Konstruktor
+        public SalesOrderLinesEditor(Orderline line)
+        {
+            Title = "linje for salgsorder" + line.Vare;
+            this.orderline = line;
+        }
+        protected override void Draw()
+        {
+            ExitOnEscape();
+            Form<Orderline> form = new();
+
+            form.SelectBox("Produkt", nameof(Orderline.Vare));
+            var products = Database.instance.GetProducts();
+            foreach (var product in products)
+            {
+                form.AddOption("Produkt", product.Name , product.Name);
+            }
+
+            form.TextBox("Antal", nameof(Orderline.Antal));
+
+            if (form.Edit(orderline))
+            {
+                if (orderline.OrderLineID != 0)
+                {
+                    Database.instance.UpdateSalesOrderLines(orderline);
+                }
+                else
+                {
+                    Database.instance.InsertSalesOrderList(orderline);
+                }
+            }
+        }
+    }
 }

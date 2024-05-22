@@ -217,9 +217,9 @@ namespace LNE_ERP
         }
         
 
-        public void UpdateSalesOrderLines(SalesOrderHeader salesorder) 
+        public void UpdateSalesOrderLines(Orderline orderline) 
         {
-            if (salesorder.OrderNumber == 0)
+            if (orderline.OrderLineID == 0)
             {
                 return;
             }

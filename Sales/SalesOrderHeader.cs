@@ -29,7 +29,7 @@ namespace LNE_ERP
     }
     public class Orderline
     {
-
+        public int OrderLineID { get; set; }
         public string Vare { get; set; }
         public decimal Pris { get; set; }
         public int Antal { get; set; }

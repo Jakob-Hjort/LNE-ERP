@@ -20,18 +20,18 @@ namespace LNE_ERP
             Console.WriteLine("Gennemførelsestidspunkt: {0}", SalesOrder.ImplementationTime);
             Console.WriteLine("CustomerID: {0}", SalesOrder.CustomerId);
             Console.WriteLine("Tilstand: {0}", SalesOrder.Status);
-            Console.WriteLine(""); //Keeps this Empty for UI!
+            Console.WriteLine(""); 
 
             ListPage<Orderline> listPagelines = new();
 
             listPagelines.AddKey(ConsoleKey.F1, createNewOrderLine);
-            Console.WriteLine("Tryk F1 for at oprette produkt");
+            Console.WriteLine("Tryk F1 for at oprette en linje");
 
             listPagelines.AddKey(ConsoleKey.F2, editOrderLine);
-            Console.WriteLine("Tryk F2 for at redigere produkt");
+            Console.WriteLine("Tryk F2 for at redigere en linje");
 
             listPagelines.AddKey(ConsoleKey.F3, deleteOrderLine);
-            Console.WriteLine("Tryk F3 for at slette produkt");
+            Console.WriteLine("Tryk F3 for at slette en linje");
 
             //add other keys!!
 
@@ -45,7 +45,6 @@ namespace LNE_ERP
             Database.instance.LoadOrderLines(SalesOrder);
             foreach (var orderLine in SalesOrder.OrderLines)
             {
-                Console.WriteLine($"Produkt: {orderLine.Vare}, Antal: {orderLine.Antal}");
                 listPagelines.Add(orderLine);
             }
 
@@ -69,7 +68,11 @@ namespace LNE_ERP
         }
         void editOrderLine(Orderline orderLine)
         {
-
+            Console.WriteLine("Press F3 to edit");
+            AddKey(ConsoleKey.F3, () =>
+            {
+               // Screen.Display(new SalesOrderLinesEditor());
+            });
         }
         void deleteOrderLine(Orderline orderLine)
         {
