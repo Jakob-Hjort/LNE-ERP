@@ -1,5 +1,5 @@
 # LNE-ERP - Gruppe3 TECHCOLLEGE 
-Jakob hjort, Emil Hytting, Ejnars - 
+Jakob hjort, Emil Hytting, Ejnars Leaf
 
 -----------------------------------------------------------------------------
 
