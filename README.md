@@ -1,5 +1,6 @@
-# ** LNE-ERP - Gruppe3 TECHCOLLEGE ** 
+# ** LNE-ERP - Gruppe3 TECHCOLLEGE 
 Jakob hjort, Emil Hytting, Ejnars - 
+
 -----------------------------------------------------------------------------
 
 ## Velkommen til LNE-ERP README 
