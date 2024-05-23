@@ -11,7 +11,7 @@ namespace LNE_ERP
     public class SalesOrderListPage : Screen
     {
         //Set the title of this page
-        public override string Title { get; set; } = "Sales Orders";
+        public override string Title { get; set; } = "Salgs ordrer";
 
         protected override void Draw()
         {
@@ -26,9 +26,6 @@ namespace LNE_ERP
 
             listPage.AddKey(ConsoleKey.F2, editSalesOrder);
             Console.WriteLine("Tryk F2 for at redigere");
-
-            //listPage.AddKey(ConsoleKey.F3, ShowSalesOrderLines);
-            //Console.WriteLine("Tryk F3 for at vise listen af ordrer");
 
             listPage.AddKey(ConsoleKey.F5, removeSalesOrder);
             Console.WriteLine("Tryk F5 for at slette ");

@@ -71,7 +71,6 @@ namespace LNE_ERP
                 conn.Open();
                 string sql = "UPDATE SalesOrderHeader SET ImplementationTime = @ImplementationTime, CustomerId = @CustomerId, Status = @Status WHERE OrderNumber = @OrderNumber";
                 SqlCommand command = new SqlCommand(sql, conn);
-                //command.Parameters.AddWithValue("@Creationtime", salesorder.Creationstime);
                 command.Parameters.AddWithValue("@ImplementationTime", salesorder.ImplementationTime);
                 command.Parameters.AddWithValue("@CustomerId", salesorder.CustomerId);
                 command.Parameters.AddWithValue("@Status", salesorder.Status);
@@ -103,25 +102,30 @@ namespace LNE_ERP
             using (var conn = getConnection())
             {
                 conn.Open();
-                string sql = "INSERT INTO SalesOrderHeader (ImplementationTime, CustomerId, Status) VALUES (@ImplementationTime, @CustomerId, @Status)";
+                string sql = "INSERT INTO SalesOrderHeader (ImplementationTime, CustomerId, Status) VALUES (@ImplementationTime, @CustomerId, @Status);SELECT SCOPE_IDENTITY()";
                 SqlCommand command = new SqlCommand(sql, conn);
                 command.Parameters.AddWithValue("@ImplementationTime", salesorder.ImplementationTime);
                 command.Parameters.AddWithValue("@CustomerId", salesorder.CustomerId);
                 command.Parameters.AddWithValue("@Status", salesorder.Status);
-                try
-                {
-                    command.ExecuteNonQuery();
-                    command = conn.CreateCommand();
-                    command.CommandText = "SELECT SCOPE_IDENTITY();";
-                    SqlDataReader reader = command.ExecuteReader();
-                    reader.Read();
-                    salesorder.OrderNumber = reader.GetInt32(0);
-                    //InserSalesOrderList(salesorder);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+
+                salesorder.OrderNumber = Convert.ToInt32(command.ExecuteScalar());
+
+
+
+                //try
+                //{
+                //    command.ExecuteNonQuery();
+                //    command = conn.CreateCommand();
+                //    command.CommandText = ";";
+                //    SqlDataReader reader = command.ExecuteReader();
+                //    reader.Read();
+                //    salesorder.OrderNumber = reader.GetInt32(0);
+                //    //InserSalesOrderList(salesorder);
+                //}
+                //catch (Exception ex)
+                //{
+                //    Console.WriteLine(ex.Message);
+                //}
                 conn.Close();
 
             }
@@ -183,71 +187,59 @@ namespace LNE_ERP
             }
         }
         
-        public void InsertSalesOrderList(SalesOrderHeader salesorder)
+        public void InsertSalesOrderLine(Orderline line, int OrderNumber)
         {
-            salesorder.OrderLines = new();
-            if (salesorder.OrderNumber != 0)
+            if (line.OrderLineID != 0)
             {
                 return;
             }
             using (var conn = getConnection())
             {
                 conn.Open();
-                string sql = "INSERT INTO SalesOrderHeader (Vare, Pris, Antal) VALUES (@Vare, @Pris, @Antal)";
+                string sql = "INSERT INTO OrderLines (Vare, Pris, Antal, OrderNumber) VALUES (@Vare, @Pris, @Antal, @OrderNumber); SELECT SCOPE_IDENTITY()";
                 SqlCommand command = new SqlCommand(@sql, conn);
-                Orderline line = new();
                 command.Parameters.AddWithValue("@vare", line.Vare);
                 command.Parameters.AddWithValue("@Pris", line.Pris);
                 command.Parameters.AddWithValue("@Antal", line.Antal);
-                try
-                {
-                    command.ExecuteNonQuery();
-                    command = conn.CreateCommand();
-                    command.CommandText = "SELECT SCOPE_IDENTITY();";
-                    SqlDataReader reader = command.ExecuteReader();
-                    reader.Read();
-                    salesorder.OrderNumber = reader.GetInt32(0);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                conn.Open();
+                command.Parameters.AddWithValue("@OrderNumber", OrderNumber);
+
+                line.OrderLineID = Convert.ToInt32(command.ExecuteScalar());
+
+
+                //try
+                //{
+                //    command.ExecuteNonQuery();
+                //    command = conn.CreateCommand();
+                //    command.CommandText = "SELECT SCOPE_IDENTITY();";
+                //    SqlDataReader reader = command.ExecuteReader();
+                //    reader.Read();
+                //    line.OrderLineID = reader.GetInt32(0);
+                //}
+                //catch (Exception ex)
+                //{
+                //    Console.WriteLine(ex.Message);
+                //}
+                conn.Close();
             }
         }
         
 
-        public void UpdateSalesOrderLines(Orderline orderline) 
+        public void UpdateSalesOrderLine(Orderline line) 
         {
-            if (orderline.OrderLineID == 0)
+            if (line.OrderLineID == 0)
             {
                 return;
             }
             using (var conn = getConnection())
             {
                 conn.Open();
-                string sql = "UPDATE SalesOrderHeader SET ImplementationTime = @ImplementationTime, CustomerId = @CustomerId, Status = @Status WHERE OrderNumber = @OrderNumber";
+                string sql = "UPDATE OrderLines SET Vare = @Vare, Pris = @Pris , Antal = @Antal WHERE OrderLineID = @OrderLineID";
                 SqlCommand command = new SqlCommand(sql, conn);
-                //command.Parameters.AddWithValue("@Creationtime", salesorder.Creationstime);
-                command.Parameters.AddWithValue("@ImplementationTime", salesorder.ImplementationTime);
-                command.Parameters.AddWithValue("@CustomerId", salesorder.CustomerId);
-                command.Parameters.AddWithValue("@Status", salesorder.Status);
-                command.Parameters.AddWithValue("@OrderNumber", salesorder.OrderNumber);
-
-
-                int rowsAffected = command.ExecuteNonQuery();
-
-                if (rowsAffected > 0)
-                {
-                    for (int i = 0; i < Sales.Count; i++)
-                    {
-                        if (Sales[i].OrderNumber == salesorder.OrderNumber)
-                        {
-                            Sales[i] = salesorder;
-                            break;
-                        }
-                    }
-                }
+                command.Parameters.AddWithValue("@ImplementationTime", line.Vare);
+                command.Parameters.AddWithValue("@CustomerId", line.Antal);
+                command.Parameters.AddWithValue("@Status", line.Pris);
+                command.Parameters.AddWithValue("@OrderLineID", line.OrderLineID);
+          
             }
         }
 

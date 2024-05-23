@@ -9,11 +9,9 @@ namespace LNE_ERP
 {
     public partial class Database
     {
-        List<Company> companies = new();
-
         public Company GetCompanyById(int id)
         {
-            foreach (var company in companies)
+            foreach (var company in companyList)
             {
                 if (company.CompanyId == id)
                 {
@@ -25,8 +23,7 @@ namespace LNE_ERP
 
         public List<Company> GetCompanies()
         {
-
-            List<Company> companyList = new();
+            companyList = new();
             using (SqlConnection conn = getConnection())
             {
                 conn.Open();
@@ -68,7 +65,7 @@ namespace LNE_ERP
             using (var conn = getConnection())
             {
                 conn.Open();
-                string sql = "INSERT INTO companies (CompanyName, StreetName, HouseNumber, ZipCode, City, Country, Currency) VALUES (@CompanyName, @StreetName, @HouseNumber, @ZipCode, @City, @Country, @Currency)";
+                string sql = "INSERT INTO companies (CompanyName, StreetName, HouseNumber, ZipCode, City, Country, Currency) VALUES (@CompanyName, @StreetName, @HouseNumber, @ZipCode, @City, @Country, @Currency); SELECT SCOPE_IDENTITY()";
                 SqlCommand command = new SqlCommand(sql, conn);
                 command.Parameters.AddWithValue("@CompanyName", company.CompanyName);
                 command.Parameters.AddWithValue("@StreetName", company.StreetName);
@@ -77,24 +74,27 @@ namespace LNE_ERP
                 command.Parameters.AddWithValue("@City", company.City);
                 command.Parameters.AddWithValue("@Country", company.Country);
                 command.Parameters.AddWithValue("@Currency", company.Currency);
-                try
-                {
-                    command.ExecuteNonQuery();
-                    //get id
-                    command = conn.CreateCommand();
-                    command.CommandText = "SELECT SCOPE_IDENTITY()";
-                    SqlDataReader reader = command.ExecuteReader();
-                    reader.Read();
-                    company.CompanyId = reader.GetInt32(0);
+                
+                company.CompanyId = Convert.ToInt32(command.ExecuteScalar());
 
-                }catch (Exception ex) { 
-                    Console.WriteLine(ex.Message);
-                }
+                //try
+                //{
+                //    command.ExecuteNonQuery();
+                //    //get id
+                //    command = conn.CreateCommand();
+                //    command.CommandText = "";
+                //    SqlDataReader reader = command.ExecuteReader();
+                //    reader.Read();
+                //    company.CompanyId = reader.GetInt32(0);
+
+                //}catch (Exception ex) { 
+                //    Console.WriteLine(ex.Message);
+                //}
 
             }
 
-            company.CompanyId = companies.Count + 1;
-            companies.Add(company);
+            company.CompanyId = companyList.Count + 1;
+            companyList.Add(company);
 
         }
 
@@ -125,11 +125,11 @@ namespace LNE_ERP
                 if (rowsAffected > 0)
                 {
                     // Opdater virksomheden i listen, hvis den blev opdateret i databasen
-                    for (int i = 0; i < companies.Count; i++)
+                    for (int i = 0; i < companyList.Count; i++)
                     {
-                        if (companies[i].CompanyId == company.CompanyId)
+                        if (companyList[i].CompanyId == company.CompanyId)
                         {
-                            companies[i] = company;
+                            companyList[i] = company;
                             break; // Vi har fundet og opdateret virksomheden, så vi kan afslutte løkken
                         }
                     }
@@ -156,9 +156,9 @@ namespace LNE_ERP
                 if (rowsAffected > 0)
                 {
                     // Fjern virksomheden fra listen, hvis den blev slettet fra databasen
-                    if (companies.Contains(company))
+                    if (companyList.Contains(company))
                     {
-                        companies.Remove(company);
+                        companyList.Remove(company);
                     }
                 }
             }

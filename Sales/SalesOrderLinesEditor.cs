@@ -14,12 +14,15 @@ namespace LNE_ERP
         public override string Title { get; set; } = "Salgs ordrer linje";
 
         Orderline orderline = new();
+        int OrderNumber;
 
         //Konstruktor
-        public SalesOrderLinesEditor(Orderline line)
+        public SalesOrderLinesEditor(Orderline line, int OrderNumber)
         {
             Title = "linje for salgsorder" + line.Vare;
             this.orderline = line;
+            this.OrderNumber = OrderNumber;
+            
         }
         protected override void Draw()
         {
@@ -34,16 +37,17 @@ namespace LNE_ERP
             }
 
             form.TextBox("Antal", nameof(Orderline.Antal));
+            form.TextBox("Pris", nameof(Orderline.Pris));
 
             if (form.Edit(orderline))
             {
                 if (orderline.OrderLineID != 0)
                 {
-                    Database.instance.UpdateSalesOrderLines(orderline);
+                    Database.instance.UpdateSalesOrderLine(orderline);
                 }
                 else
                 {
-                    Database.instance.InsertSalesOrderList(orderline);
+                    Database.instance.InsertSalesOrderLine(orderline, OrderNumber);
                 }
             }
         }

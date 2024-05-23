@@ -26,13 +26,13 @@ namespace LNE_ERP
 
             ListPage<Orderline> listPage = new();
 
-           // listPage.AddKey(ConsoleKey.F1, createNewSalesOrderLine);
+            listPage.AddKey(ConsoleKey.F1, createNewSalesOrderLine);
             Console.WriteLine("Tryk F1 for at oprette");
 
-           //  listPage.AddKey(ConsoleKey.F2, editSalesOrderLine);
+            //listPage.AddKey(ConsoleKey.F2, editSalesOrderLine);
             Console.WriteLine("Tryk F2 for at redigere");
 
-           //  listPage.AddKey(ConsoleKey.F5, removeSalesOrderLine);
+           // listPage.AddKey(ConsoleKey.F5, removeSalesOrderLine);
             Console.WriteLine("Tryk F5 for at slette ");
 
 
@@ -54,11 +54,12 @@ namespace LNE_ERP
             }
         }
 
-        //void createNewSalesOrderLine(Orderline _)
-        //{
-        //    Orderline new_salesOrderLine = new();
-        //    Screen.Display(new SalesOrderLineEditor(new_salesOrderLine));
-        //}
+        void createNewSalesOrderLine(Orderline _)
+        {
+            Console.WriteLine("VI er her");
+            Orderline new_salesOrderLine = new();
+            Screen.Display(new SalesOrderLinesEditor(new_salesOrderLine, header.OrderNumber));
+        }
 
         //void editSalesOrderLine(Orderline salesOrderLine)
         //{
