@@ -27,5 +27,6 @@ Programmet har en brugergrænseflade hvor vi bruger TECHCOOL lavet af @Hoxer (In
 UI'en er en simpel konsol app med nogen metoder som "listPage.AddCoulmn" ved at få sin liste vist laver man en ListPage, hvor vi så har kaldt den listPage i metoden. 
 Derfra kan vi så kalde hvad vi gerne vil have vist på programmets UI. Det kunne for eksempel se sådan her ud `listPage.AddColumn("Fulde navn", nameof(Customer.FullName),20);`
 
+-----------------------------------------------------------------------------
 
 
