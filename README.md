@@ -15,12 +15,14 @@ Et ERP eller Enterprise Resource Planning, er et system der kan overvåge en vir
 **Kunder** , **Kunde Detajler**, **Produkter**, **Produkt Detaljer**, **Virksomheder**, **Virksomheds Detajler**, **Salg**, og **Salgs Detajler**. 
 
 -----------------------------------------------------------------------------
+
 ## Projektet 
 Vores opgave lød på at programmere et ERP- System til en fiktiv virksomhed som skal indholde nogen forskellige ting såsom - 
 Kunder, Produkter, Virksomheder og Salg. Vores interface skal tilknyttetes til en database, hvor der skal laves nogen forskellige tabeller til de rigtige menuer i programmet. 
 
+-----------------------------------------------------------------------------
 
-
+## TECHCOOL
 
 
 
