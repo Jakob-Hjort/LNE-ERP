@@ -47,7 +47,7 @@ namespace LNE_ERP
                 {
                     Database.instance.InsertCompany(company);
                 }
-                Console.WriteLine("A Ændringerne blev gemt");
+                Console.WriteLine("Alle Ændringerne blev gemt");
             }
             else
             {

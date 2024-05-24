@@ -68,7 +68,17 @@ namespace LNE_ERP
 
         void removeCustomer(Customer customer)
         {
-            Database.instance.DeleteCustomer(customer);
+            try
+            {
+                Database.instance.DeleteCustomer(customer);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine("Tryk på en tast for at fortsætte...");
+                Console.ReadKey();
+            }
+
             Screen.Clear(this);
             Draw();
         }

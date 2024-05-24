@@ -69,6 +69,7 @@ namespace LNE_ERP
             Screen.Display(new SalesOrderLinesEditor(new_salesOrderLine, SalesOrder.OrderNumber));
 
         }
+
         //void editOrderLine(Orderline orderLine)
         //{
         //    Console.WriteLine("Press F3 to edit");

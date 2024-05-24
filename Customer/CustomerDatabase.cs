@@ -80,7 +80,7 @@ namespace LNE_ERP
                 string sql;
                 int addressId = 0;
 
-                // Insert address if available and get AddressID
+                // Indsæt adresse, hvis tilgængelig, og få AddressID
                 if (customer.Addresses != null)
                 {
                     sql = "INSERT INTO Addresses (Streetname, Housenumber, Postalcode, City) VALUES (@Streetname, @Housenumber, @Postalcode, @City); SELECT SCOPE_IDENTITY();";
@@ -95,7 +95,7 @@ namespace LNE_ERP
                     }
                 }
 
-                // Insert person and get PersonID
+                // Indsæt person og få PersonID
                 sql = "INSERT INTO Person (FirstName, LastName, Email, PhoneNumber, AddressID) VALUES (@FirstName, @LastName, @Email, @PhoneNumber, @AddressID); SELECT SCOPE_IDENTITY();";
                 int personId;
                 using (SqlCommand command = new SqlCommand(sql, conn))
@@ -115,7 +115,7 @@ namespace LNE_ERP
                     customer.LastPurchaseDate = DateTime.Now; 
                 }
 
-                // Insert customer using the obtained PersonID
+                // Indsæt kunde ved hjælp af det opnåede PersonID
                 sql = "INSERT INTO Customer (PersonID, Fullname, LastBuy) VALUES (@PersonID, @Fullname, @LastBuy)";
                 using (SqlCommand command = new SqlCommand(sql, conn))
                 {
@@ -145,7 +145,7 @@ namespace LNE_ERP
                 SqlTransaction transaction = conn.BeginTransaction();
                 try
                 {
-                    // Update the address record
+                    // Opdater Addresse tabellen
                     string sql = "UPDATE Addresses SET Streetname = @Streetname, Housenumber = @Housenumber, Postalcode = @Postalcode, City = @City WHERE AddressID = @AddressID";
                     using (SqlCommand command = new SqlCommand(sql, conn, transaction))
                     {
@@ -157,7 +157,7 @@ namespace LNE_ERP
                         command.ExecuteNonQuery();
                     }
 
-                    // Update the person record
+                    // Opdater Person tabellen
                     sql = "UPDATE Person SET FirstName = @FirstName, LastName = @LastName, Email = @Email, PhoneNumber = @PhoneNumber WHERE PersonID = @PersonID";
                     using (SqlCommand command = new SqlCommand(sql, conn, transaction))
                     {
@@ -169,7 +169,7 @@ namespace LNE_ERP
                         command.ExecuteNonQuery();
                     }
 
-                    // Update the customer record
+                    // Opdater kunde tabellen
                     sql = "UPDATE Customer SET Fullname = @Fullname, LastBuy = @LastBuy WHERE CustomerID = @CustomerID";
                     using (SqlCommand command = new SqlCommand(sql, conn, transaction))
                     {
@@ -179,10 +179,10 @@ namespace LNE_ERP
                         command.ExecuteNonQuery();
                     }
 
-                    // Commit the transaction
+                    
                     transaction.Commit();
 
-                    // Update the customer in the internal list
+                    // Opdater kunden i den interne liste
                     for (var i = 0; i < customers.Count; i++)
                     {
                         if (customers[i].CustomerID == customer.CustomerID)
@@ -195,7 +195,7 @@ namespace LNE_ERP
                 {
                     transaction.Rollback();
                     Console.WriteLine("An error occurred: " + ex.Message);
-                    Console.ReadLine();  // Hold the console open to read the error message
+                    Console.ReadLine();  // Hold konsollen åben for at læse fejlmeddelelsen
                 }
             }
         }
@@ -205,7 +205,7 @@ namespace LNE_ERP
         {
             if (customer.CustomerID == 0)
             {
-                return;
+                throw new ArgumentException("CustomerID is 0, nothing to delete.");
             }
 
             using (var conn = getConnection())
@@ -214,46 +214,73 @@ namespace LNE_ERP
                 SqlTransaction transaction = conn.BeginTransaction();
                 try
                 {
-                    // Delete the customer record
-                    string sql = "DELETE FROM Customer WHERE CustomerId = @CustomerId";
+                    // Slet Ordrelinjer knyttet til kundens ordrer
+                    string sql = @"
+                            DELETE OL
+                            FROM OrderLines OL
+                            INNER JOIN SalesOrderHeader O ON OL.OrderNumber = O.OrderNumber
+                            WHERE O.CustomerID = @CustomerID";
+                    using (SqlCommand command = new SqlCommand(sql, conn, transaction))
+                    {
+                        command.Parameters.AddWithValue("@CustomerID", customer.CustomerID);
+                        int rowsAffected = command.ExecuteNonQuery();
+                        Console.WriteLine($"Deleted {rowsAffected} rows from OrderLines table for CustomerID: {customer.CustomerID}");
+                    }
+
+                    // Slet ordrer tilknyttet kunden
+                    sql = "DELETE FROM SalesOrderHeader WHERE CustomerID = @CustomerID";
+                    using (SqlCommand command = new SqlCommand(sql, conn, transaction))
+                    {
+                        command.Parameters.AddWithValue("@CustomerID", customer.CustomerID);
+                        int rowsAffected = command.ExecuteNonQuery();
+                        
+                    }
+
+                    // Slet kunde tabellen
+                    sql = "DELETE FROM Customer WHERE CustomerId = @CustomerId";
                     using (SqlCommand command = new SqlCommand(sql, conn, transaction))
                     {
                         command.Parameters.AddWithValue("@CustomerId", customer.CustomerID);
-                        command.ExecuteNonQuery();
+                        int rowsAffected = command.ExecuteNonQuery();
+                        
                     }
 
-                    // Delete the person record
+                    // Slet person tabellen
                     sql = "DELETE FROM Person WHERE PersonID = @PersonID";
                     using (SqlCommand command = new SqlCommand(sql, conn, transaction))
                     {
                         command.Parameters.AddWithValue("@PersonID", customer.PersonID);
-                        command.ExecuteNonQuery();
+                        int rowsAffected = command.ExecuteNonQuery();
+                        
                     }
 
-                    // Check if the address is used by any other person
+                    // Tjek om adressen bruges af en anden person
                     bool isAddressInUse;
                     sql = "SELECT COUNT(*) FROM Person WHERE AddressID = @AddressID";
                     using (SqlCommand command = new SqlCommand(sql, conn, transaction))
                     {
                         command.Parameters.AddWithValue("@AddressID", customer.Addresses.AddressID);
                         isAddressInUse = ((int)command.ExecuteScalar() > 0);
+                        
                     }
 
-                    // Delete the address record if not in use
+                    // Slet adresseposten, hvis den ikke er i brug
                     if (!isAddressInUse)
                     {
                         sql = "DELETE FROM Addresses WHERE AddressID = @AddressID";
                         using (SqlCommand command = new SqlCommand(sql, conn, transaction))
                         {
                             command.Parameters.AddWithValue("@AddressID", customer.Addresses.AddressID);
-                            command.ExecuteNonQuery();
+                            int rowsAffected = command.ExecuteNonQuery();
+                            
                         }
                     }
 
-                    // Commit the transaction
+                   
                     transaction.Commit();
 
-                    // Remove the customer from the list if it was successfully deleted from the database
+
+                    // Fjern kunden fra listen, hvis den blev slettet fra databasen
                     if (customers.Contains(customer))
                     {
                         customers.Remove(customer);
@@ -262,12 +289,9 @@ namespace LNE_ERP
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    Console.WriteLine(ex.Message);
                 }
             }
         }
-
-
     }
 }
 
