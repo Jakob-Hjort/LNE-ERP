@@ -23,7 +23,10 @@ namespace LNE_ERP
             ExitOnEscape();
             Form<Product> form = new();
 
-            form.TextBox("VareNummer", nameof(Product.ProductId));
+            //form.TextBox("VareNummer", nameof(Product.ProductId));
+            Console.WriteLine(" ");
+            Console.WriteLine("             VareNummer - " + Products.ProductId);
+            Console.WriteLine(" ");
             form.TextBox("Navn", nameof(Product.Name));
             form.TextBox("Beskrivelse", nameof(Product.Description));
             form.TextBox("Salgspris", nameof(Product.Saleprice));
