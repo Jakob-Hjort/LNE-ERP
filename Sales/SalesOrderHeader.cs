@@ -15,31 +15,35 @@ namespace LNE_ERP
         public OrderStatus Status { get; set; }
         public List<Orderline> OrderLines { get; set; }
         public decimal OrderAmount => OrderLines.Sum(ol => ol.Pris * ol.Antal);
-        public SalesOrderHeader() { }
-        public SalesOrderHeader(int ordernumber, DateOnly creationtime, DateTime implementationtime,
-            int customerid, OrderStatus status, List<Orderline> ordrelines)
+        public SalesOrderHeader()
         {
-            OrderNumber = ordernumber;
-            Creationstime = creationtime;
-            ImplementationTime = implementationtime;
-            CustomerId = customerid;
-            Status = status;
-            OrderLines = ordrelines;
+            OrderLines = new List<Orderline>();
         }
+        //public SalesOrderHeader(int ordernumber, DateOnly creationtime, DateTime implementationtime,
+        //    int customerid, OrderStatus status, List<Orderline> ordrelines)
+        //{
+        //    OrderNumber = ordernumber;
+        //    Creationstime = creationtime;
+        //    ImplementationTime = implementationtime;
+        //    CustomerId = customerid;
+        //    Status = status;
+        //    OrderLines = ordrelines;
+        //}
     }
     public class Orderline
     {
         public int OrderLineID { get; set; }
-        public string Vare { get; set; }
+        public string Vare { get; set; } = string.Empty;
         public decimal Pris { get; set; }
         public int Antal { get; set; }
-        public Orderline() { }
-        public Orderline(string vare, decimal pris, int antal)
-        {
-            Vare = vare;
-            Pris = pris;
-            Antal = antal;
-        }
+        public Orderline() {}
+
+        //public Orderline(string vare, decimal pris, int antal)
+        //{
+        //    Vare = vare;
+        //    Pris = pris;
+        //    Antal = antal;
+        //}
     }
 
 }

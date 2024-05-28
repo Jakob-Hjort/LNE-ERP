@@ -10,19 +10,19 @@ namespace LNE_ERP
     {
         public int CompanyId { get; set; }
 
-        public string CompanyName { get; set; }
+        public string CompanyName { get; set; } = string.Empty;
 
-        public string StreetName { get; set; }
+        public string StreetName { get; set; } = string.Empty;
 
-        public string StreetNumber { get; set; }
+        public string StreetNumber { get; set; } = string.Empty;
 
-        public string HouseNumber { get; set; }
+        public string HouseNumber { get; set; } = string.Empty;
 
-        public string ZipCode { get; set; }
+        public string ZipCode { get; set; } = string.Empty;
 
-        public string City { get; set; }
+        public string City { get; set; } = string.Empty;
 
-        public string Country { get; set; }
+        public string Country { get; set; } = string.Empty;
 
         public Currency Currency { get; set; }
     }

@@ -9,12 +9,17 @@ namespace LNE_ERP
     public class Person
     {
 
+        public Person()
+        {
+            Addresses = new Addresses();
+        }
+
         public int PersonID { get; set; }
         public string? FirstName { get; set; }
 
         public string? LastName { get; set; }
 
-        public Addresses? Addresses { get; set; }
+        public Addresses Addresses { get; set; }
 
         public string FullName
         {
