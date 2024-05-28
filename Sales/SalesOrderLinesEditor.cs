@@ -37,7 +37,6 @@ namespace LNE_ERP
             }
 
             form.TextBox("Antal", nameof(Orderline.Antal));
-            form.TextBox("Pris", nameof(Orderline.Pris));
 
             if (form.Edit(orderline))
             {
