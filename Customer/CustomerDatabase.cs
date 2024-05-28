@@ -240,7 +240,7 @@ namespace LNE_ERP
                     {
                         command.Parameters.AddWithValue("@CustomerID", customer.CustomerID);
                         int rowsAffected = command.ExecuteNonQuery();
-                        
+
                     }
 
                     // Slet kunde tabellen
@@ -249,7 +249,7 @@ namespace LNE_ERP
                     {
                         command.Parameters.AddWithValue("@CustomerId", customer.CustomerID);
                         int rowsAffected = command.ExecuteNonQuery();
-                        
+
                     }
 
                     // Slet person tabellen
@@ -258,7 +258,7 @@ namespace LNE_ERP
                     {
                         command.Parameters.AddWithValue("@PersonID", customer.PersonID);
                         int rowsAffected = command.ExecuteNonQuery();
-                        
+
                     }
 
                     // Tjek om adressen bruges af en anden person
@@ -268,7 +268,7 @@ namespace LNE_ERP
                     {
                         command.Parameters.AddWithValue("@AddressID", customer.Addresses.AddressID);
                         isAddressInUse = ((int)command.ExecuteScalar() > 0);
-                        
+
                     }
 
                     // Slet adresseposten, hvis den ikke er i brug
@@ -279,11 +279,11 @@ namespace LNE_ERP
                         {
                             command.Parameters.AddWithValue("@AddressID", customer.Addresses.AddressID);
                             int rowsAffected = command.ExecuteNonQuery();
-                            
+
                         }
                     }
 
-                   
+
                     transaction.Commit();
 
 
@@ -293,7 +293,7 @@ namespace LNE_ERP
                         customers.Remove(customer);
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
                     transaction.Rollback();
                 }
