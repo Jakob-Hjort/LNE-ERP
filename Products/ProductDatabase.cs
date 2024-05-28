@@ -123,12 +123,12 @@ namespace LNE_ERP
                 command.Parameters.AddWithValue("@ProductSalesPrice", product.Saleprice);
                 command.Parameters.AddWithValue("@ProductPurchasePrice", product.Purchaseprice);
 
-                // Opdater virksomheden i databasen
+                // Opdater Produktet i databasen
                 int rowsAffected = command.ExecuteNonQuery();
 
                 if (rowsAffected > 0)
                 {
-                    // Opdater virksomheden i listen, hvis den blev opdateret i databasen
+                    // Opdater Produktet i listen, hvis den blev opdateret i databasen
                     for (int i = 0; i < products.Count; i++)
                     {
                         if (products[i].ProductId == product.ProductId)
