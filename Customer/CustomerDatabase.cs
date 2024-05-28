@@ -38,14 +38,16 @@ namespace LNE_ERP
                 {
                     while (reader.Read())
                     {
-                    
-                        Addresses addresses = new();
-                        addresses.Streetname = reader.GetString(6);
-                        addresses.Housenumber = reader.GetString(7);
-                        addresses.City = reader.GetString(8);
-                        addresses.Postalcode = reader.GetInt32(9);
-                        addresses.AddressID = reader.GetInt32(10);
 
+                        Addresses addresses = new()
+                        {
+                            Streetname = reader.GetString(6),
+                            Housenumber = reader.GetString(7),
+                            City = reader.GetString(8),
+                            Postalcode = reader.GetInt32(9),
+                            AddressID = reader.GetInt32(10)
+
+                        };
 
                         Customer customer = new()
                         {
