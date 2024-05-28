@@ -34,7 +34,7 @@ namespace LNE_ERP
             Console.WriteLine("Tryk F5 for at slette produkt");
 
             //Add some columns
-            listPage.AddColumn("VarNummer", nameof(Product.ProductId));
+            listPage.AddColumn("VareNummer", nameof(Product.ProductId));
             listPage.AddColumn("Navn", nameof(Product.Name));
             listPage.AddColumn("LagerAntal", nameof(Product.Quantity));
             listPage.AddColumn("IndkøbsPris", nameof(Product.Purchaseprice));
