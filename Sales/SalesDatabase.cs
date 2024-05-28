@@ -14,7 +14,7 @@ namespace LNE_ERP
         List<SalesOrderHeader> Sales = new();
         List<Orderline> Orderlines = new();
 
-        public SalesOrderHeader GetSalesOrderById(int id)
+        public SalesOrderHeader? GetSalesOrderById(int id)
         {
             foreach (var salesorder in Sales)
             {
@@ -25,7 +25,7 @@ namespace LNE_ERP
             }
             return null;
         }
-        public Orderline GetOrderLineByID(int id)
+        public Orderline? GetOrderLineByID(int id)
         {
             foreach (var orderline in Orderlines)
             {

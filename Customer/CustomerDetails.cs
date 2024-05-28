@@ -11,7 +11,7 @@ namespace LNE_ERP
     {
 
         public override string Title { get; set; } = "Kunder";
-        Customer customer = new();
+        Customer customer;
 
         public CustomerDetails(Customer customer)
         {

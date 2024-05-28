@@ -9,7 +9,7 @@ namespace LNE_ERP
     public class Customer : Person
     {
 
-        public Addresses Addresses { get; set; }
+        //public required Addresses Addresses { get; set; }
         public int CustomerID { get; set; }
         public DateTime LastPurchaseDate { get; set; }
         public string Street
