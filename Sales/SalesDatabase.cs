@@ -12,6 +12,7 @@ namespace LNE_ERP
     public partial class Database
     {
         List<SalesOrderHeader> Sales = new();
+        List<Orderline> Orderlines = new();
 
         public SalesOrderHeader GetSalesOrderById(int id)
         {
@@ -24,7 +25,17 @@ namespace LNE_ERP
             }
             return null;
         }
-
+        public Orderline GetOrderLineByID(int id)
+        {
+            foreach (var orderline in Orderlines)
+            {
+                if (orderline.OrderLineID == id)
+                {
+                    return orderline;
+                }
+            }
+            return null;
+        }
 
         // --------------  SALES ORDER HEADER -------------------------//
 
@@ -109,27 +120,10 @@ namespace LNE_ERP
                 command.Parameters.AddWithValue("@Status", salesorder.Status);
 
                 salesorder.OrderNumber = Convert.ToInt32(command.ExecuteScalar());
-
-
-
-                //try
-                //{
-                //    command.ExecuteNonQuery();
-                //    command = conn.CreateCommand();
-                //    command.CommandText = ";";
-                //    SqlDataReader reader = command.ExecuteReader();
-                //    reader.Read();
-                //    salesorder.OrderNumber = reader.GetInt32(0);
-                //    //InserSalesOrderList(salesorder);
-                //}
-                //catch (Exception ex)
-                //{
-                //    Console.WriteLine(ex.Message);
-                //}
                 conn.Close();
 
             }
-            salesorder.OrderNumber = Sales.Count + 1;
+            //salesorder.OrderNumber = Sales.Count + 1;
             Sales.Add(salesorder);
         }
 
@@ -168,7 +162,7 @@ namespace LNE_ERP
             using (SqlConnection conn = getConnection())
             {
                 conn.Open();
-                string sql = "SELECT Vare, Pris, Antal FROM OrderLines WHERE OrderNumber = " + header.OrderNumber; 
+                string sql = "SELECT Vare, Pris, Antal, OrderLineID FROM OrderLines WHERE OrderNumber = " + header.OrderNumber; 
                 SqlCommand command = conn.CreateCommand();
                 command.CommandText = sql;
                 command.Parameters.AddWithValue("@OrderNumber", header.OrderNumber);
@@ -181,6 +175,7 @@ namespace LNE_ERP
                         line.Vare = reader.GetString(0);
                         line.Pris = reader.GetDecimal(1);
                         line.Antal = reader.GetInt32(2);
+                        line.OrderLineID = reader.GetInt32(3);
                         header.OrderLines.Add(line);
                     }
                 }
@@ -204,21 +199,6 @@ namespace LNE_ERP
                 command.Parameters.AddWithValue("@OrderNumber", OrderNumber);
 
                 line.OrderLineID = Convert.ToInt32(command.ExecuteScalar());
-
-
-                //try
-                //{
-                //    command.ExecuteNonQuery();
-                //    command = conn.CreateCommand();
-                //    command.CommandText = "SELECT SCOPE_IDENTITY();";
-                //    SqlDataReader reader = command.ExecuteReader();
-                //    reader.Read();
-                //    line.OrderLineID = reader.GetInt32(0);
-                //}
-                //catch (Exception ex)
-                //{
-                //    Console.WriteLine(ex.Message);
-                //}
                 conn.Close();
             }
         }
@@ -242,8 +222,30 @@ namespace LNE_ERP
           
             }
         }
+        public void DeleteSalesOrderLine (Orderline line)
+        {
+            if (line.OrderLineID == 0)
+            {
+                return;
+            }
+            using (var conn = getConnection())
+            {
+                conn.Open();
+                string sql = "DELETE FROM OrderLines WHERE OrderLineID = @OrderLineID";
+                SqlCommand command = new SqlCommand (sql, conn);
+                command.Parameters.AddWithValue("@OrderLineID", line.OrderLineID);
 
-        
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    if (Orderlines.Contains(line))
+                    {
+                        Orderlines.Remove(line);
+                    }
+                }
+            }
+        }
     }
 }
     

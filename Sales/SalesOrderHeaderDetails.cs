@@ -27,7 +27,7 @@ namespace LNE_ERP
             listPagelines.AddKey(ConsoleKey.F1, createNewOrderLine);
             Console.WriteLine("Tryk F1 for at oprette en linje");
 
-            //listPagelines.AddKey(ConsoleKey.F2, editOrderLine);
+            listPagelines.AddKey(ConsoleKey.F2, editOrderLine);
             Console.WriteLine("Tryk F2 for at redigere en linje");
 
             listPagelines.AddKey(ConsoleKey.F3, deleteOrderLine);
@@ -53,34 +53,23 @@ namespace LNE_ERP
             {
                 Screen.Display(new SalesOrderLinesDetails(orderlines));
             }
-
-            Console.WriteLine("Press F2 to edit");
-            AddKey(ConsoleKey.F2, () =>
-            {
-                Screen.Display(new SalesOrderEditor(SalesOrder));
-            });
-
             ExitOnEscape();
         }
         void createNewOrderLine(Orderline orderLine)
         {
-            Console.WriteLine("VI er her");
             Orderline new_salesOrderLine = new();
             Screen.Display(new SalesOrderLinesEditor(new_salesOrderLine, SalesOrder.OrderNumber));
-
         }
 
-        //void editOrderLine(Orderline orderLine)
-        //{
-        //    Console.WriteLine("Press F3 to edit");
-        //    AddKey(ConsoleKey.F3, () =>
-        //    {
-        //       // Screen.Display(new SalesOrderLinesEditor());
-        //    });
-        //}
+        void editOrderLine(Orderline orderLine)
+        {
+            Screen.Display(new SalesOrderLinesEditor(orderLine, SalesOrder.OrderNumber));
+        }
         void deleteOrderLine(Orderline orderLine)
         {
-
+            Database.instance.DeleteSalesOrderLine(orderLine);
+            Screen.Clear(this);
+            Draw();
         }
     }
 }
