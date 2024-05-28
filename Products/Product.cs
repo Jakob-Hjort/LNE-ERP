@@ -15,8 +15,6 @@ namespace LNE_ERP
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductId { get; set; }
 
-        public required string Itemnumber { get; set; }
-
         public string? Name { get; set; }
 
         public string? Description { get; set; }
