@@ -14,7 +14,7 @@ namespace LNE_ERP
 
         public string? LastName { get; set; }
 
-        public required Addresses Addresses { get; set; }
+        public Addresses? Addresses { get; set; }
 
         public string FullName
         {
