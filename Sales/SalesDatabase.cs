@@ -13,7 +13,7 @@ namespace LNE_ERP
     {
         List<SalesOrderHeader> Sales = new();
 
-        public SalesOrderHeader GetSalesOrderById(int id)
+        public SalesOrderHeader? GetSalesOrderById(int id)
         {
             foreach (var salesorder in Sales)
             {

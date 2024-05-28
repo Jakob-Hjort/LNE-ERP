@@ -11,7 +11,7 @@ namespace LNE_ERP
     {
         List<Product> products = new();
 
-        public Product GetProductById(int id)
+        public Product? GetProductById(int id)
         {
             foreach (var product in products)
             {
@@ -38,14 +38,17 @@ namespace LNE_ERP
                 {
                     while (reader.Read())
                     {
-                        Product product = new();
-                        product.ProductId = reader.GetInt32(0);
-                        product.Name = reader.GetString(1);
-                        product.Description = reader.GetString(2);
-                        product.Quantity = reader.GetInt32(3);
-                        product.Units = (ProductUnits)reader.GetInt32(4);
-                        product.Saleprice = reader.GetDecimal(5);
-                        product.Purchaseprice = reader.GetDecimal(6);
+                        Product product = new()
+                        {
+                            ProductId = reader.GetInt32(0),
+                            Name = reader.GetString(1),
+                            Description = reader.GetString(2),
+                            Quantity = reader.GetInt32(3),
+                            Units = (ProductUnits)reader.GetInt32(4),
+                            Saleprice = reader.GetDecimal(5),
+                            Purchaseprice = reader.GetDecimal(6)
+
+                        };
 
 
                         productList.Add(product);

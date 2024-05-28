@@ -9,7 +9,7 @@ namespace LNE_ERP
 {
     public partial class Database
     {
-        public Company GetCompanyById(int id)
+        public Company? GetCompanyById(int id)
         {
             foreach (var company in companyList)
             {

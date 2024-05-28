@@ -12,7 +12,7 @@ namespace LNE_ERP
     {
         List<Customer> customers = new();
 
-        public Customer GetCustomerById(int id)
+        public Customer? GetCustomerById(int id)
         {
             foreach (var customer in customerlist)
             {
@@ -47,14 +47,19 @@ namespace LNE_ERP
                         addresses.AddressID = reader.GetInt32(10);
 
 
-                        Customer customer = new();
+                        Customer customer = new()
+                        {
+                            Addresses = addresses
+                        };
+
+                        // Customer customer = new();
                         customer.CustomerID = reader.GetInt32(0);
                         customer.PersonID = reader.GetInt32(1);
                         customer.FirstName = reader.GetString(2);
                         customer.LastName = reader.GetString(3);
                         customer.Email = reader.GetString(4);
                         customer.PhoneNumber = reader.GetString(5);
-                        customer.Addresses = addresses;
+                        // customer.Addresses = addresses;
                         customerList.Add(customer);
 
                         customer.LastPurchaseDate = reader.GetDateTime(11);

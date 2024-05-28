@@ -10,19 +10,19 @@ namespace LNE_ERP
     {
 
         public int PersonID { get; set; }
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
-        public Addresses Addresses { get; set; }
+        public required Addresses Addresses { get; set; }
 
         public string FullName
         {
             get { return $"{FirstName}  {LastName}"; }
         }
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
     }
 }
