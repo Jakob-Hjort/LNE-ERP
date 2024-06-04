@@ -8,18 +8,18 @@ using TECHCOOL.UI;
 namespace LNE_ERP;
 
 
-    public class CompanyDetails : Screen
+    public class CompanyDetails : Screen // CompanyDetails Arver fra Screen
 {
     public override string Title { get; set; } = "Selskab";
     Company company = new();
 
-    public CompanyDetails(Company company)
+    public CompanyDetails(Company company) // Constructor
     {
         Title = "Detaljer for " + company.CompanyName;
         this.company = company;
     }
 
-    protected override void Draw()
+    protected override void Draw() // Metode 
     {
         Console.WriteLine($"ID:{company.CompanyId}");
         Console.WriteLine($"Name:{company.CompanyName}");

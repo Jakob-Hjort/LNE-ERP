@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 
 namespace LNE_ERP
 {
@@ -64,7 +59,7 @@ namespace LNE_ERP
                 return;
             }
 
-            // Opretter og åbner en forbindelse til databasen
+            
             using (var conn = getConnection())
             {
                 conn.Open();
@@ -81,20 +76,6 @@ namespace LNE_ERP
                 
                 company.CompanyId = Convert.ToInt32(command.ExecuteScalar());
 
-                //try
-                //{
-                //    command.ExecuteNonQuery();
-                //    //get id
-                //    command = conn.CreateCommand();
-                //    command.CommandText = "";
-                //    SqlDataReader reader = command.ExecuteReader();
-                //    reader.Read();
-                //    company.CompanyId = reader.GetInt32(0);
-
-                //}catch (Exception ex) { 
-                //    Console.WriteLine(ex.Message);
-                //}
-
             }
 
             company.CompanyId = companyList.Count + 1;
@@ -110,10 +91,11 @@ namespace LNE_ERP
                 return;
             }
 
-            // Opretter og åbner en forbindelse til databasen
+            
             using (var conn = getConnection())
             {
                 conn.Open();
+
                 // SQL-opdateringsforespørgsel
                 string sql = "UPDATE companies SET CompanyName = @CompanyName, StreetName = @StreetName, HouseNumber = @HouseNumber, ZipCode = @ZipCode, City = @City, Country = @Country, Currency = @Currency WHERE CompanyId = @CompanyId";
                 SqlCommand command = new SqlCommand(sql, conn);
@@ -139,14 +121,14 @@ namespace LNE_ERP
                         if (companyList[i].CompanyId == company.CompanyId)
                         {
                             companyList[i] = company;
-                            break; // Vi har fundet og opdateret virksomheden, så vi kan afslutte løkken
+                            break;
                         }
                     }
                 }
             }
         }
 
-        public void DeleteCompany(Company company) //Metode til at slette en virksomged
+        public void DeleteCompany(Company company) //Metode til at slette en Virksomhed
         {
             // Returnerer, hvis virksomhedens id er 0 (dvs. den ikke findes)
             if (company.CompanyId == 0)
@@ -158,6 +140,7 @@ namespace LNE_ERP
             using (var conn = getConnection())
             {
                 conn.Open();
+
                 // SQL-sletningsforespørgsel
                 string sql = "DELETE FROM companies WHERE CompanyId = @CompanyId";
                 SqlCommand command = new SqlCommand(sql, conn);

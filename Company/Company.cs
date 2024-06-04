@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LNE_ERP
+﻿namespace LNE_ERP
 {
     public class Company
     {
+        // Properties
         public int CompanyId { get; set; }
 
         public string CompanyName { get; set; } = string.Empty;

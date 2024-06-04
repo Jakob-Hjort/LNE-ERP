@@ -7,10 +7,10 @@ using TECHCOOL.UI;
 
 namespace LNE_ERP
 {
-    public class CustomerDetails : Screen
+    public class CustomerDetails : Screen // Arver fra screen
     {
 
-        public override string Title { get; set; } = "Kunder";
+        public override string Title { get; set; } = "Kunder"; // Properties
         Customer customer;
 
         public CustomerDetails(Customer customer)
@@ -19,7 +19,7 @@ namespace LNE_ERP
             this.customer = customer;
         }
 
-        protected override void Draw()
+        protected override void Draw() // Metode til at hente Customer Detaljer
         {
 
             Console.WriteLine($"Kunde ID:{customer.PersonID}");
