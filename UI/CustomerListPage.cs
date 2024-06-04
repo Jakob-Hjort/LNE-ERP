@@ -65,7 +65,6 @@ namespace LNE_ERP
             Console.Write("Input: ");
             string searchValue = Console.ReadLine();
             List<Customer> customers = Database.instance.SearchCustomer(searchValue);
-            Console.WriteLine($"{customers.Count}");
 
             if (customers.Count == 0)
             {
@@ -77,14 +76,14 @@ namespace LNE_ERP
             }
             else
             {
-                Console.WriteLine("Flere Kunder Fundet");
+                Console.WriteLine($"Der er blevet fundet {customers.Count} Kunder");
                 foreach (var cust in customers)
                 {
                    
                     Console.WriteLine($"\nCustomer: {cust.FirstName} {cust.LastName}");
 
                 }
-                Console.WriteLine("Tryk Enter For at kom Videre");
+                Console.WriteLine("\nTryk Enter For at kom Videre");
                 Console.ReadLine();
                 Screen.Clear();
             }
