@@ -8,27 +8,27 @@ using TECHCOOL.UI;
 
 namespace LNE_ERP
 {
-    public class CustomerEditor : Screen
+    public class CustomerEditor : Screen 
     {
 
-        public override string Title { get; set; } = "Kunder";
+        public override string Title { get; set; } = "Kunder"; // Properties
         Customer customer = new();
 
 
-        public CustomerEditor(Customer customer)
+        public CustomerEditor(Customer customer) // Constructor
         {
             Title = "Redigerer for " + customer.FullName;
             this.customer = customer;
         }
 
-        public CustomerEditor()
+        public CustomerEditor() // Constructor
         {
             Title = "Ny Kunde";
             this.customer = new Customer();
             this.customer.Addresses = new Addresses();
         }
 
-        protected override void Draw()
+        protected override void Draw() // Metode
         {
             ExitOnEscape();
             Form<Customer> form = new();

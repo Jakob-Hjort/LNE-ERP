@@ -9,16 +9,16 @@ namespace LNE_ERP
 {
     public class CompanyEditor : Screen
     {
-        public override string Title { get; set; } = "Selskab";
+        public override string Title { get; set; } = "Selskab"; //Properties
         Company company = new();
 
-        public CompanyEditor(Company company)
+        public CompanyEditor(Company company) // Constructor
         {
             Title = "Redigerer for " + company.CompanyName;
             this.company = company;
         }
 
-        protected override void Draw()
+        protected override void Draw() // Metode
         {
             ExitOnEscape();
             Form<Company> form = new();

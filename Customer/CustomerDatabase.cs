@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 
 namespace LNE_ERP
 {
@@ -12,7 +6,7 @@ namespace LNE_ERP
     {
         List<Customer> customers = new();
 
-        public Customer? GetCustomerById(int id)
+        public Customer? GetCustomerById(int id) // Metode til at hente Customer med CustomerID. 
         {
             foreach (var customer in customerlist)
             {
@@ -24,7 +18,7 @@ namespace LNE_ERP
             return null;
         }
 
-        public List<Customer> GetCustomer()
+        public List<Customer> GetCustomer() // Metode til at indhente Customer fra databasen.
         {
             List<Customer> customerList = new();
             using (SqlConnection conn = getConnection())
@@ -74,7 +68,7 @@ namespace LNE_ERP
 
         }
 
-        public void InsertCustomer(Customer customer)
+        public void InsertCustomer(Customer customer) // Metode til at tilføje Customer.
         {
             if (customer.PersonID != 0)
             {
@@ -139,7 +133,7 @@ namespace LNE_ERP
 
 
 
-        public void UpdateCustomer(Customer customer)
+        public void UpdateCustomer(Customer customer) // Metode til at opdatere Customer.
         {
             if (customer.CustomerID == 0)
             {

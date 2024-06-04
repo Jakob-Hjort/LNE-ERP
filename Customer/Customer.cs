@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace LNE_ERP
 {
-    public class Customer : Person
+    public class Customer : Person // Arver fra Person
     {
-        
-        //public required Addresses Addresses { get; set; }
-        public int CustomerID { get; set; }
-        public DateTime LastPurchaseDate { get; set; }
-        public string Street
+        public int CustomerID { get; set; } // Properties
+        public DateTime LastPurchaseDate { get; set; } // Properties
+        public string Street 
         {
             get
             {
@@ -24,19 +22,19 @@ namespace LNE_ERP
             }
         }
 
-        public string Housenumer
+        public string Housenumer 
         {
             get => Addresses.Housenumber;
             set => Addresses.Housenumber = value;
         }
 
-        public int postalcode
+        public int postalcode 
         {
             get => Addresses.Postalcode;
             set => Addresses.Postalcode = value;
         }
 
-        public string city
+        public string city 
         {
             get => Addresses.City;
             set => Addresses.City = value;

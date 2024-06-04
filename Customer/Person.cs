@@ -9,7 +9,7 @@ namespace LNE_ERP
     public class Person
     {
 
-        public Person()
+        public Person() // Constructor
         {
             Addresses = new Addresses();
         }
@@ -19,9 +19,9 @@ namespace LNE_ERP
 
         public string? LastName { get; set; }
 
-        public Addresses Addresses { get; set; }
+        public Addresses Addresses { get; set; } // Henter Addresses fra Listen Adresses
 
-        public string FullName
+        public string FullName 
         {
             get { return $"{FirstName}  {LastName}"; }
         }
