@@ -63,9 +63,53 @@ namespace LNE_ERP
                 }
             }
             return customerList;
+        }
+        public List<Customer> SearchCustomer(string searchValue)
+        {
+            List<Customer> customerList = new();
+            using (SqlConnection conn = getConnection())
+            {
+                conn.Open();
+                string sql = "Select CustomerID, Person.PersonID, FirstName, LastName, Email, PhoneNumber, Streetname, Housenumber, City, Postalcode, Person.AddressID ,LastBuy FROM Person inner join Addresses on Person.AddressID = Addresses.AddressID inner join Customer on Customer.PersonID = Person.PersonID WHERE Firstname like @value";
+                SqlCommand command = conn.CreateCommand();
+                command.Parameters.AddWithValue("@value", searchValue + "%");
+                command.CommandText = sql;
 
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
 
+                        Addresses addresses = new()
+                        {
+                            Streetname = reader.GetString(6),
+                            Housenumber = reader.GetString(7),
+                            City = reader.GetString(8),
+                            Postalcode = reader.GetInt32(9),
+                            AddressID = reader.GetInt32(10)
 
+                        };
+
+                        Customer customer = new()
+                        {
+                            Addresses = addresses
+                        };
+
+                        // Customer customer = new();
+                        customer.CustomerID = reader.GetInt32(0);
+                        customer.PersonID = reader.GetInt32(1);
+                        customer.FirstName = reader.GetString(2);
+                        customer.LastName = reader.GetString(3);
+                        customer.Email = reader.GetString(4);
+                        customer.PhoneNumber = reader.GetString(5);
+                        // customer.Addresses = addresses;
+                        customerList.Add(customer);
+
+                        customer.LastPurchaseDate = reader.GetDateTime(11);
+                    }
+                }
+            }
+            return customerList;
         }
 
         public void InsertCustomer(Customer customer) // Metode til at tilføje Customer.
