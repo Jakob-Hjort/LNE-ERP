@@ -25,7 +25,6 @@ namespace LNE_ERP
 
         public List<Product> GetProducts()
         {
-
             List<Product> productList = new();
             using (SqlConnection conn = getConnection())
             {
@@ -47,15 +46,11 @@ namespace LNE_ERP
                             Units = (ProductUnits)reader.GetInt32(4),
                             Saleprice = reader.GetDecimal(5),
                             Purchaseprice = reader.GetDecimal(6)
-
                         };
 
-
                         productList.Add(product);
-
                     }
                 }
-
             }
 
             return productList;
@@ -67,7 +62,6 @@ namespace LNE_ERP
             {
                 return;
             }
-
 
             using (var conn = getConnection())
             {
@@ -96,12 +90,10 @@ namespace LNE_ERP
                 {
                     Console.WriteLine(ex.Message);
                 }
-
             }
 
             product.ProductId = products.Count + 1;
             products.Add(product);
-
         }
 
         public void UpdateProduct(Product product)
