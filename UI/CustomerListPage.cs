@@ -49,7 +49,6 @@ namespace LNE_ERP
                 listPage.Add(model);
             }
 
-
             //Enable selection of a company by using arrow keys
             var customer = listPage.Select();
             if (customer != null)
@@ -79,13 +78,11 @@ namespace LNE_ERP
                 Console.WriteLine($"Der er blevet fundet {customers.Count} Kunder");
                 foreach (var cust in customers)
                 {
-                   
                     Console.WriteLine($"\nCustomer: {cust.FirstName} {cust.LastName}");
-
                 }
                 Console.WriteLine("\nTryk Enter For at kom Videre");
                 Console.ReadLine();
-                Screen.Clear();
+                Clear();
             }
         }
         void createNewCustomer(Customer _)
