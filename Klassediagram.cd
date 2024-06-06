@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LNE_ERP.Company">
+    <Position X="11.75" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAIAAACIAAAIAAAACEIAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Company\Company.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.Database">
+    <Position X="5.5" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>EAAIAASBEQACAgAMFAQABAiAEIBCAAEAQABMBAADCQw=</HashCode>
+      <FileName>Company\CompanyDatabase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.CompanyDetails">
+    <Position X="11.75" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Company\CompanyDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.CompanyEditor">
+    <Position X="11.75" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Company\CompanyEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.Addresses">
+    <Position X="10" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAIAAAAAIAAAAACAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Customer\Addresses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.Customer">
+    <Position X="8" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACEAAAAAIAAACAAAEAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Customer\Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.CustomerDetails">
+    <Position X="8" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Customer\CustomerDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.CustomerEditor">
+    <Position X="8" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Customer\CustomerEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.Person">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QABAAEAAACAAAIAAAAAAQAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Customer\Person.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.Product">
+    <Position X="13.75" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAgQAAgAAAAAAJAAAQAAAAAAAAAEAgAgAAAAAA=</HashCode>
+      <FileName>Products\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.ProductEditor">
+    <Position X="13.75" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Products\ProductEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.ProductsDetails">
+    <Position X="13.75" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Products\ProductsDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.SalesOrderEditor">
+    <Position X="15.75" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAkAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sales\SalesOrderEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.SalesOrderHeader">
+    <Position X="15.75" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIEEAAAAAAABCAABAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sales\SalesOrderHeader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.Orderline">
+    <Position X="20.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAE=</HashCode>
+      <FileName>Sales\SalesOrderHeader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.SalesOrderHeaderDetails">
+    <Position X="15.75" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAsAAAAAAAABAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Sales\SalesOrderHeaderDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.SalesOrderLinesDetails">
+    <Position X="18" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAkAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sales\SalesOrderLinesDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.SalesOrderLinesEditor">
+    <Position X="18" Y="6.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAkAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sales\SalesOrderLinesEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.CompanyListPage">
+    <Position X="1.5" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABkAAAAAEAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\CompanyListPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.CustomerListPage">
+    <Position X="1.5" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAkAAAAIAAAAAAAAAAACAAQAAAAAACAA=</HashCode>
+      <FileName>UI\CustomerListPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.MainMenu">
+    <Position X="1.5" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.ProductsListPage">
+    <Position X="3.5" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAkAAAAAAAAAAAAAAAAQAAAAAIAAAAAA=</HashCode>
+      <FileName>UI\ProductsListPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.Salesorderlines">
+    <Position X="18" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQABAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Salesorderlines.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.SalesOrderListPage">
+    <Position X="3.5" Y="7.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAkAAAAAAAAAAAAgAwAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\SalesOrderListPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LNE_ERP.Program">
+    <Position X="1.5" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="LNE_ERP.ProductUnits">
+    <Position X="20.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAIAAAAA=</HashCode>
+      <FileName>Products\ProductUnits.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LNE_ERP.Currency">
+    <Position X="20.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAQAAAAAAgAAAAAAAAEA=</HashCode>
+      <FileName>Currency.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LNE_ERP.OrderStatus">
+    <Position X="20.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAgAAEAACA=</HashCode>
+      <FileName>OrderStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
