@@ -63,7 +63,11 @@ namespace LNE_ERP
             using (var conn = getConnection())
             {
                 conn.Open();
-                string sql = "INSERT INTO companies (CompanyName, StreetName, HouseNumber, ZipCode, City, Country, Currency) VALUES (@CompanyName, @StreetName, @HouseNumber, @ZipCode, @City, @Country, @Currency); SELECT SCOPE_IDENTITY()";
+
+                // SQL-forespørgsel til at indsætte en virksomhed
+                string sql = "INSERT INTO companies (CompanyName, StreetName, HouseNumber, ZipCode, City, Country, Currency) " +
+                             "VALUES (@CompanyName, @StreetName, @HouseNumber, @ZipCode, @City, @Country, @Currency); SELECT SCOPE_IDENTITY()";
+
                 SqlCommand command = new SqlCommand(sql, conn);
                 // Tilføjer parametre til forespørgslen
                 command.Parameters.AddWithValue("@CompanyName", company.CompanyName);
@@ -96,8 +100,11 @@ namespace LNE_ERP
             {
                 conn.Open();
 
-                // SQL-opdateringsforespørgsel
-                string sql = "UPDATE companies SET CompanyName = @CompanyName, StreetName = @StreetName, HouseNumber = @HouseNumber, ZipCode = @ZipCode, City = @City, Country = @Country, Currency = @Currency WHERE CompanyId = @CompanyId";
+                // SQL- Forforespørgsel til at opdatere en virksomhed
+                string sql = "UPDATE companies SET CompanyName = @CompanyName, StreetName = @StreetName, " +
+                             "HouseNumber = @HouseNumber, ZipCode = @ZipCode, City = @City, Country = @Country, Currency = @Currency " +
+                             "WHERE CompanyId = @CompanyId";
+
                 SqlCommand command = new SqlCommand(sql, conn);
 
                 // Tilføjer parametre til forespørgslen
@@ -143,6 +150,7 @@ namespace LNE_ERP
 
                 // SQL-sletningsforespørgsel
                 string sql = "DELETE FROM companies WHERE CompanyId = @CompanyId";
+
                 SqlCommand command = new SqlCommand(sql, conn);
                 command.Parameters.AddWithValue("@CompanyId", company.CompanyId);
 
