@@ -26,18 +26,34 @@ namespace LNE_ERP
 
         public decimal Quantity { get; set; }
 
-        public ProductUnits Units { get; set; } // Enhed er en begrænset muligt f.eks. styk, timer  eller meter.
+        public ProductUnits Units { get; set; } // Enhed er en begrænset muligt f.eks. styk, timer  eller meter
 
-        public decimal AvanceiProcent { get { 
+        public decimal AvanceiProcent
+        {
+            get
+            {
                 if (Saleprice == 0)
-                { return 0; } else return 100 * (this.Purchaseprice / this.Saleprice); } }
+                {
+                    return 0;
+                }
+                else
+                {
+                    decimal avance = 100 * (this.Saleprice / this.Purchaseprice);
+                    return Math.Round(avance, 2); // Begræns til to decimaler
+                }
+            }
+        }
+
+
+
+
         public decimal AvanceiKr
         {
             get
             {
                 if (Saleprice == 0)
                 { return 0; }
-                else return (this.Purchaseprice - this.Saleprice);
+                else return (this.Saleprice - this.Purchaseprice);
             }
         }
 

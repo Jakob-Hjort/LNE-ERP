@@ -12,6 +12,8 @@ namespace LNE_ERP
         //Set the title of this page
         public override string Title { get; set; } = "Produkter";
 
+      
+
         protected override void Draw()
         {
             ExitOnEscape();
