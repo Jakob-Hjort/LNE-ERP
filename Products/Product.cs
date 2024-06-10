@@ -43,10 +43,6 @@ namespace LNE_ERP
                 }
             }
         }
-
-
-
-
         public decimal AvanceiKr
         {
             get

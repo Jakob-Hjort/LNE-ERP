@@ -114,6 +114,7 @@ namespace LNE_ERP
                 command.Parameters.AddWithValue("@ProductUnits", product.Units);
                 command.Parameters.AddWithValue("@ProductSalesPrice", product.Saleprice);
                 command.Parameters.AddWithValue("@ProductPurchasePrice", product.Purchaseprice);
+                command.Parameters.AddWithValue("@ProductId", product.ProductId);
 
                 // Opdater Produktet i databasen
                 int rowsAffected = command.ExecuteNonQuery();
