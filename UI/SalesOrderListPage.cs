@@ -66,15 +66,5 @@ namespace LNE_ERP
             Screen.Clear(this);
             Draw();
         }
-
-        //void ShowSalesOrderLines(SalesOrderHeader salesOrder)
-        //{
-        //    Screen.Display(new SalesOrderLinesDetails(salesOrder));
-        //}
-        //void createNewSalesOrderLine(SalesOrderHeader _)
-        //{
-        //    SalesOrderHeader new_salesOrder = new();
-        //    Screen.Display(new SalesOrderLinesEditor(new_salesOrder));
-        //}
     }
 }

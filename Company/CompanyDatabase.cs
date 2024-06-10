@@ -95,7 +95,6 @@ namespace LNE_ERP
                 return;
             }
 
-            
             using (var conn = getConnection())
             {
                 conn.Open();

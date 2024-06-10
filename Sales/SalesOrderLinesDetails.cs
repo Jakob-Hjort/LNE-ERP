@@ -19,16 +19,10 @@ namespace LNE_ERP
         }
         protected override void Draw()
         {
-            //Console.WriteLine($"OrdreNummber: {SalesOrder.OrderNumber}");
-            //Console.WriteLine($"Gennemførelsestidspunkt: {SalesOrder.ImplementationTime}");
-            //Console.WriteLine($"CustomerID: {SalesOrder.CustomerId}");
-            //Console.WriteLine($"Tilstand: {SalesOrder.Status}");
-
             Console.WriteLine("Press F3 to go back");
             AddKey(ConsoleKey.F3, () =>
             {
-                // Gå tilbage til hovedsiden for salgsordre
-                //Screen.GoBack();
+
             });
             ExitOnEscape();
         }

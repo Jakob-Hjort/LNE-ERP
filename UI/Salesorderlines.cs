@@ -60,18 +60,6 @@ namespace LNE_ERP
             Orderline new_salesOrderLine = new();
             Screen.Display(new SalesOrderLinesEditor(new_salesOrderLine, header.OrderNumber));
         }
-
-        //void editSalesOrderLine(Orderline salesOrderLine)
-        //{
-        //    Screen.Display(new SalesOrderLineEditor(salesOrderLine));
-        //}
-
-        //void removeSalesOrderLine(Orderline salesOrderLine)
-        //{
-        //    Database.instance.DeleteSalesOrder(salesOrderLine);
-        //    Screen.Clear(this);
-        //    Draw();
-        //}
     }
 
 }

@@ -19,16 +19,6 @@ namespace LNE_ERP
         {
             OrderLines = new List<Orderline>();
         }
-        //public SalesOrderHeader(int ordernumber, DateOnly creationtime, DateTime implementationtime,
-        //    int customerid, OrderStatus status, List<Orderline> ordrelines)
-        //{
-        //    OrderNumber = ordernumber;
-        //    Creationstime = creationtime;
-        //    ImplementationTime = implementationtime;
-        //    CustomerId = customerid;
-        //    Status = status;
-        //    OrderLines = ordrelines;
-        //}
     }
     public class Orderline
     {
@@ -37,13 +27,6 @@ namespace LNE_ERP
         public decimal Pris { get; set; }
         public int Antal { get; set; }
         public Orderline() {}
-
-        //public Orderline(string vare, decimal pris, int antal)
-        //{
-        //    Vare = vare;
-        //    Pris = pris;
-        //    Antal = antal;
-        //}
     }
 
 }

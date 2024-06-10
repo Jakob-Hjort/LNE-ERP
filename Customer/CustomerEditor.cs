@@ -57,8 +57,6 @@ namespace LNE_ERP
             {
                 Console.WriteLine("Ingen ændringer");
             }
-
-
         }
     }
 }
