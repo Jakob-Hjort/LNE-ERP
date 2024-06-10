@@ -191,10 +191,9 @@ namespace LNE_ERP
             using (var conn = getConnection())
             {
                 conn.Open();
-                string sql = "INSERT INTO OrderLines (Vare, Pris, Antal, OrderNumber) VALUES (@Vare, @Pris, @Antal, @OrderNumber); SELECT SCOPE_IDENTITY()";
+                string sql = "INSERT INTO OrderLines (Vare, Pris, Antal, OrderNumber) VALUES (@Vare, (SELECT ProductSalesPrice FROM Products WHERE ProductName = @Vare), @Antal, @OrderNumber); SELECT SCOPE_IDENTITY()";
                 SqlCommand command = new SqlCommand(@sql, conn);
                 command.Parameters.AddWithValue("@vare", line.Vare);
-                command.Parameters.AddWithValue("@Pris", line.Pris);
                 command.Parameters.AddWithValue("@Antal", line.Antal);
                 command.Parameters.AddWithValue("@OrderNumber", OrderNumber);
 
@@ -213,11 +212,10 @@ namespace LNE_ERP
             using (var conn = getConnection())
             {
                 conn.Open();
-                string sql = "UPDATE OrderLines SET Vare = @Vare, Pris = @Pris , Antal = @Antal WHERE OrderLineID = @OrderLineID";
+                string sql = "UPDATE OrderLines SET Vare = @Vare, Antal = @Antal WHERE OrderLineID = @OrderLineID";
                 SqlCommand command = new SqlCommand(sql, conn);
                 command.Parameters.AddWithValue("@ImplementationTime", line.Vare);
                 command.Parameters.AddWithValue("@CustomerId", line.Antal);
-                command.Parameters.AddWithValue("@Status", line.Pris);
                 command.Parameters.AddWithValue("@OrderLineID", line.OrderLineID);
           
             }
