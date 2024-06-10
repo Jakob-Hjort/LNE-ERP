@@ -47,7 +47,6 @@ namespace LNE_ERP
                 listPage.Add(model);
             }
        
-
             //Enable selection of a company by using arrow keys
             var company = listPage.Select();
             if (company != null)

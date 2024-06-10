@@ -10,10 +10,8 @@ namespace LNE_ERP
 {
     public class CustomerEditor : Screen 
     {
-
         public override string Title { get; set; } = "Kunder"; // Properties
         Customer customer = new();
-
 
         public CustomerEditor(Customer customer) // Constructor
         {

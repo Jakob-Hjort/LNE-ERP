@@ -28,9 +28,6 @@ namespace LNE_ERP
             SqlConnection connection = new SqlConnection(connectionString);
             return connection;
         }
-
     }
-
-        
 }
 

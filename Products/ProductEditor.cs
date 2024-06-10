@@ -39,7 +39,6 @@ namespace LNE_ERP
             form.AddOption("Enhed", "Meter", ProductUnits.meter);
             form.AddOption("Enhed", "Timer", ProductUnits.timer);
 
-
             if (form.Edit(Products))
             {
                 if (Products.ProductId != 0)
@@ -56,8 +55,6 @@ namespace LNE_ERP
             {
                 Console.WriteLine("Ingen ændringer");
             }
-
-
         }
     }
 }

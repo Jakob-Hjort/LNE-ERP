@@ -9,7 +9,6 @@ namespace LNE_ERP
 {
     public class CustomerDetails : Screen // Arver fra screen
     {
-
         public override string Title { get; set; } = "Kunder"; // Properties
         Customer customer;
 

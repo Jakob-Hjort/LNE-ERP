@@ -35,7 +35,6 @@ namespace LNE_ERP
            // listPage.AddKey(ConsoleKey.F5, removeSalesOrderLine);
             Console.WriteLine("Tryk F5 for at slette ");
 
-
             listPage.AddColumn("Ordre Nummer", nameof(Orderline.Vare), 12);
             listPage.AddColumn("Kundenummer", nameof(Orderline.Antal), 11);
             listPage.AddColumn("Oprettelse", nameof(Orderline.Pris), 10);
@@ -61,6 +60,5 @@ namespace LNE_ERP
             Screen.Display(new SalesOrderLinesEditor(new_salesOrderLine, header.OrderNumber));
         }
     }
-
 }
 

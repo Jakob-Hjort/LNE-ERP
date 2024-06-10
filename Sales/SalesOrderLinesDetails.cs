@@ -17,6 +17,7 @@ namespace LNE_ERP
             Title = "Order Lines for " + orderline.Vare;
             this.orderline = orderline;
         }
+
         protected override void Draw()
         {
             Console.WriteLine("Press F3 to go back");

@@ -39,7 +39,6 @@ namespace LNE_ERP
 
         // --------------  SALES ORDER HEADER -------------------------//
 
-
         public List<SalesOrderHeader> GetSalesOrderHeader()
         {
             List<SalesOrderHeader> sales = new();
@@ -126,7 +125,6 @@ namespace LNE_ERP
             Sales.Add(salesorder);
         }
 
-
         public void DeleteSalesOrder(SalesOrderHeader salesorder)
         {
             if (salesorder.OrderNumber == 0)
@@ -151,7 +149,6 @@ namespace LNE_ERP
                 }
             }
         }
-
 
         // -------------------- SALES ORDER LINES ----------------------------- //
 
@@ -200,7 +197,6 @@ namespace LNE_ERP
                 conn.Close();
             }
         }
-        
 
         public void UpdateSalesOrderLine(Orderline line) 
         {
@@ -221,6 +217,7 @@ namespace LNE_ERP
           
             }
         }
+
         public void DeleteSalesOrderLine (Orderline line)
         {
             if (line.OrderLineID == 0)

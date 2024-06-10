@@ -55,6 +55,7 @@ namespace LNE_ERP
             }
             ExitOnEscape();
         }
+
         void createNewOrderLine(Orderline orderLine)
         {
             Orderline new_salesOrderLine = new();
@@ -65,6 +66,7 @@ namespace LNE_ERP
         {
             Screen.Display(new SalesOrderLinesEditor(orderLine, SalesOrder.OrderNumber));
         }
+
         void deleteOrderLine(Orderline orderLine)
         {
             Database.instance.DeleteSalesOrderLine(orderLine);

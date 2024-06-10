@@ -9,7 +9,6 @@ namespace LNE_ERP
 {
     internal class SalesOrderLinesEditor : Screen 
     {
-
         //Properties
         public override string Title { get; set; } = "Salgs ordrer linje";
 
@@ -24,6 +23,7 @@ namespace LNE_ERP
             this.OrderNumber = OrderNumber;
             
         }
+
         protected override void Draw()
         {
             ExitOnEscape();

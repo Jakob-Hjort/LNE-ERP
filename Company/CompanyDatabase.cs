@@ -15,6 +15,7 @@ namespace LNE_ERP
             }
             return null; // Returnerer null, hvis ingen virksomhed har det pågældende id
         }
+
         public List<Company> GetCompanies() // Metode til at hente alle virksomheder fra databasen
         {
             companyList = new();
@@ -42,12 +43,9 @@ namespace LNE_ERP
                         company.Country = reader.GetString(6);
                         company.Currency = (Currency)reader.GetInt32(7);
                         companyList.Add(company); // Tilføjer virksomheden til listen
-
                     }
                 }
-
             }
-
             return companyList; // Returnerer listen af virksomheder
         }
 
@@ -58,7 +56,6 @@ namespace LNE_ERP
             {
                 return;
             }
-
             
             using (var conn = getConnection())
             {

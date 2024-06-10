@@ -11,7 +11,6 @@ namespace LNE_ERP
     public class Product
 
     {
-
         public int ProductId { get; set; }
 
         public string ?Name { get; set; }
@@ -52,8 +51,6 @@ namespace LNE_ERP
                 else return (this.Saleprice - this.Purchaseprice);
             }
         }
-
     }
-
 }
 

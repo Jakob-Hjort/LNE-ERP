@@ -12,8 +12,6 @@ namespace LNE_ERP
         //Set the title of this page
         public override string Title { get; set; } = "Produkter";
 
-      
-
         protected override void Draw()
         {
             ExitOnEscape();
@@ -44,15 +42,12 @@ namespace LNE_ERP
             listPage.AddColumn("Avance i %", nameof(Product.AvanceiProcent));
             listPage.AddColumn("Avance i Kr", nameof(Product.AvanceiKr));
 
-
-
             //Get companies from the database and add them to the list
             var products = Database.instance.GetProducts();
             foreach (Product model in products)
             {
                 listPage.Add(model);
             }
-
 
             //Enable selection of a company by using arrow keys
             var product = listPage.Select();

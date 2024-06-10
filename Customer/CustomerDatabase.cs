@@ -64,6 +64,7 @@ namespace LNE_ERP
             }
             return customerList;
         }
+
         public List<Customer> SearchCustomer(string searchValue)
         {
             List<Customer> customerList = new();
@@ -170,12 +171,8 @@ namespace LNE_ERP
                     command.ExecuteNonQuery();
                 }
             }
-
             customers.Add(customer);
         }
-
-
-
 
         public void UpdateCustomer(Customer customer) // Metode til at opdatere Customer.
         {
@@ -224,7 +221,6 @@ namespace LNE_ERP
                         command.ExecuteNonQuery();
                     }
 
-                    
                     transaction.Commit();
 
                     // Opdater kunden i den interne liste
@@ -244,7 +240,6 @@ namespace LNE_ERP
                 }
             }
         }
-
 
         public void DeleteCustomer(Customer customer)
         {
