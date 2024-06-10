@@ -33,7 +33,12 @@ namespace LNE_ERP
             form.TextBox("Indkøbsspris", nameof(Product.Purchaseprice));
             form.TextBox("Lokation", nameof(Product.Location));
             form.TextBox("Antal på lager", nameof(Product.Quantity));
-            form.TextBox("Enhed", nameof(Product.Units));
+            form.SelectBox("Enhed", nameof(Product.Units));
+
+            form.AddOption("Enhed", "Stk", ProductUnits.stk);
+            form.AddOption("Enhed", "Meter", ProductUnits.meter);
+            form.AddOption("Enhed", "Timer", ProductUnits.timer);
+
 
             if (form.Edit(Products))
             {

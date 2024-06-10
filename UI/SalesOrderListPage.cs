@@ -32,7 +32,8 @@ namespace LNE_ERP
 
 
             listPage.AddColumn("Ordre Nummer", nameof(SalesOrderHeader.OrderNumber), 12);
-            listPage.AddColumn("Kundenummer", nameof(SalesOrderHeader.CustomerId), 11);
+            listPage.AddColumn("Kundenummer og navn", nameof(SalesOrderHeader.CustomerId), 11);
+            
             listPage.AddColumn("Produceret", nameof(SalesOrderHeader.ImplementationTime), 20);
             listPage.AddColumn("Tilstand", nameof(SalesOrderHeader.Status), 8);
 
