@@ -123,7 +123,6 @@ namespace LNE_ERP
                 conn.Close();
 
             }
-            //salesorder.OrderNumber = Sales.Count + 1;
             Sales.Add(salesorder);
         }
 
@@ -214,9 +213,11 @@ namespace LNE_ERP
                 conn.Open();
                 string sql = "UPDATE OrderLines SET Vare = @Vare, Antal = @Antal WHERE OrderLineID = @OrderLineID";
                 SqlCommand command = new SqlCommand(sql, conn);
-                command.Parameters.AddWithValue("@ImplementationTime", line.Vare);
-                command.Parameters.AddWithValue("@CustomerId", line.Antal);
+                command.Parameters.AddWithValue("@Vare", line.Vare);
+                command.Parameters.AddWithValue("@Antal", line.Antal);
                 command.Parameters.AddWithValue("@OrderLineID", line.OrderLineID);
+                                
+                command.ExecuteNonQuery();
           
             }
         }
