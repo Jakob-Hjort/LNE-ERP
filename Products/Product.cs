@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 namespace LNE_ERP
 {
     public class Product
-
     {
         public int ProductId { get; set; }
 

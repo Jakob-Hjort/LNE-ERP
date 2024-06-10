@@ -20,6 +20,7 @@ namespace LNE_ERP
             OrderLines = new List<Orderline>();
         }
     }
+
     public class Orderline
     {
         public int OrderLineID { get; set; }
@@ -28,5 +29,4 @@ namespace LNE_ERP
         public int Antal { get; set; }
         public Orderline() {}
     }
-
 }

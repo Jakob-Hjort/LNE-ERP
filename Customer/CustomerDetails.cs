@@ -54,6 +54,5 @@ namespace LNE_ERP
             ExitOnEscape();
         }
     }
-
 }
 
