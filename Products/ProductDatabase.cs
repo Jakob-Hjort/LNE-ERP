@@ -45,7 +45,8 @@ namespace LNE_ERP
                             Quantity = reader.GetInt32(3),
                             Units = (ProductUnits)reader.GetInt32(4),
                             Saleprice = reader.GetDecimal(5),
-                            Purchaseprice = reader.GetDecimal(6)
+                            Purchaseprice = reader.GetDecimal(6),
+                          
                         };
 
                         productList.Add(product);
@@ -66,7 +67,7 @@ namespace LNE_ERP
             using (var conn = getConnection())
             {
                 conn.Open();
-                string sql = "INSERT INTO Products (ProductName, ProductDescription, ProductQuantity, ProductUnits, ProductSalesPrice, ProductPurchasePrice) VALUES (@ProductName, @ProductDescription, @ProductQuantity, @ProductUnits, @ProductSalesPrice, @ProductPurchasePrice)";
+                string sql = "INSERT INTO Products (ProductName, ProductDescription, ProductQuantity, ProductUnits, ProductSalesPrice, ProductPurchasePrice, ProductLocation) VALUES (@ProductName, @ProductDescription, @ProductQuantity, @ProductUnits, @ProductSalesPrice, @ProductPurchasePrice, @ProductLocation)";
                 SqlCommand command = new SqlCommand(sql, conn);
                 command.Parameters.AddWithValue("@ProductName", product.Name);
                 command.Parameters.AddWithValue("@ProductDescription", product.Description);
@@ -74,7 +75,8 @@ namespace LNE_ERP
                 command.Parameters.AddWithValue("@ProductUnits", product.Units);
                 command.Parameters.AddWithValue("@ProductSalesPrice", product.Saleprice);
                 command.Parameters.AddWithValue("@ProductPurchasePrice", product.Purchaseprice);
- 
+                command.Parameters.AddWithValue("@ProductLocation", product.Location);
+
                 try
                 {
                     command.ExecuteNonQuery();
@@ -106,7 +108,7 @@ namespace LNE_ERP
             using (var conn = getConnection())
             {
                 conn.Open();
-                string sql = "UPDATE Products SET ProductName = @ProductName, ProductDescription = @ProductDescription, ProductQuantity = @ProductQuantity, ProductUnits = @ProductUnits, ProductSalesPrice = @ProductSalesPrice, ProductPurchasePrice = @ProductPurchasePrice WHERE ProductId = @ProductId";
+                string sql = "UPDATE Products SET ProductName = @ProductName, ProductDescription = @ProductDescription, ProductQuantity = @ProductQuantity, ProductUnits = @ProductUnits, ProductSalesPrice = @ProductSalesPrice, ProductPurchasePrice = @ProductPurchasePrice, ProductLocation = @ProductLocation WHERE ProductId = @ProductId";
                 SqlCommand command = new SqlCommand(sql, conn);
                 command.Parameters.AddWithValue("@ProductName", product.Name);
                 command.Parameters.AddWithValue("@ProductDescription", product.Description);
@@ -115,6 +117,7 @@ namespace LNE_ERP
                 command.Parameters.AddWithValue("@ProductSalesPrice", product.Saleprice);
                 command.Parameters.AddWithValue("@ProductPurchasePrice", product.Purchaseprice);
                 command.Parameters.AddWithValue("@ProductId", product.ProductId);
+                command.Parameters.AddWithValue("@ProductLocation", product.Location);
 
                 // Opdater Produktet i databasen
                 int rowsAffected = command.ExecuteNonQuery();
